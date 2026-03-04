@@ -4,173 +4,180 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MedStudy — Head to Toe</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#050b14; --card:#0d1a2a; --card2:#0f2035; --border:#1a2e45;
   --gold:#f5c842; --blue:#4a9eff; --green:#3dd68c; --red:#ff6b6b;
-  --purple:#c084fc; --orange:#ff9f43; --text:#e8f0fe; --muted:#5a7a99;
+  --purple:#c084fc; --text:#e8f0fe; --muted:#5a7a99;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow:hidden;}
 
-/* SCREENS */
 .screen{display:none;height:100dvh;flex-direction:column;overflow:hidden;}
 .screen.active{display:flex;}
 
 /* HOME */
-#home{
-  background:radial-gradient(ellipse at 30% 20%,rgba(74,158,255,.09) 0%,transparent 60%),
-             radial-gradient(ellipse at 80% 70%,rgba(245,200,66,.07) 0%,transparent 50%),var(--bg);
-  justify-content:center;align-items:center;padding:0 20px;
-}
+#home{background:radial-gradient(ellipse at 30% 20%,rgba(74,158,255,.09) 0%,transparent 60%),radial-gradient(ellipse at 80% 70%,rgba(245,200,66,.07) 0%,transparent 50%),var(--bg);justify-content:center;align-items:center;padding:0 20px;}
 .home-inner{width:100%;max-width:420px;}
-.logo-area{text-align:center;margin-bottom:30px;}
-.logo-icon{width:70px;height:70px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:22px;display:inline-flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:12px;box-shadow:0 0 40px rgba(74,158,255,.28);}
-.logo-area h1{font-family:'Syne',serif;font-size:2.1rem;font-weight:800;background:linear-gradient(135deg,#fff 40%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;}
-.logo-area p{color:var(--muted);font-size:.82rem;margin-top:5px;}
-.dev-tag{font-size:.68rem;color:var(--gold);background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.25);padding:3px 10px;border-radius:20px;margin-top:8px;display:inline-block;}
-
-.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
-.menu-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px 14px;text-align:center;cursor:pointer;transition:transform .15s,box-shadow .2s;position:relative;overflow:hidden;}
+.logo-area{text-align:center;margin-bottom:28px;}
+.logo-icon{width:68px;height:68px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:20px;display:inline-flex;align-items:center;justify-content:center;font-size:1.9rem;margin-bottom:11px;box-shadow:0 0 40px rgba(74,158,255,.28);}
+.logo-area h1{font-family:'Syne',serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#fff 40%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.logo-area p{color:var(--muted);font-size:.8rem;margin-top:4px;}
+.dev-tag{font-size:.85rem;font-weight:700;color:var(--gold);background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.4);padding:7px 18px;border-radius:20px;margin-top:10px;display:inline-block;letter-spacing:.3px;box-shadow:0 0 14px rgba(245,200,66,.15);}
+.app-footer{text-align:center;padding:8px 10px;font-size:.78rem;font-weight:600;color:var(--gold);flex-shrink:0;border-top:1px solid rgba(245,200,66,.2);background:rgba(245,200,66,.04);}
+.app-footer span{color:#fff;}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.menu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 13px;text-align:center;cursor:pointer;transition:transform .15s;}
 .menu-card:active{transform:scale(.95);}
 .menu-card[data-c="blue"]{border-color:rgba(74,158,255,.25);}
 .menu-card[data-c="gold"]{border-color:rgba(245,200,66,.25);}
 .menu-card[data-c="green"]{border-color:rgba(61,214,140,.25);}
 .menu-card[data-c="purple"]{border-color:rgba(192,132,252,.25);}
-.menu-icon{font-size:1.9rem;margin-bottom:9px;display:block;}
-.menu-title{font-family:'Syne',serif;font-size:.93rem;font-weight:700;}
-.menu-sub{font-size:.7rem;color:var(--muted);margin-top:3px;}
-
-.stats-row{display:flex;gap:10px;margin-top:14px;}
-.stat-box{flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px;text-align:center;}
-.stat-num{font-family:'Syne',serif;font-size:1.25rem;font-weight:800;color:var(--gold);}
-.stat-label{font-size:.65rem;color:var(--muted);margin-top:2px;}
+.menu-icon{font-size:1.8rem;margin-bottom:8px;display:block;}
+.menu-title{font-family:'Syne',serif;font-size:.9rem;font-weight:700;}
+.menu-sub{font-size:.68rem;color:var(--muted);margin-top:3px;}
+.stats-row{display:flex;gap:9px;margin-top:12px;}
+.stat-box{flex:1;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px;text-align:center;}
+.stat-num{font-family:'Syne',serif;font-size:1.2rem;font-weight:800;color:var(--gold);}
+.stat-label{font-size:.63rem;color:var(--muted);margin-top:2px;}
 
 /* TOPBAR */
-.topbar{display:flex;align-items:center;gap:10px;padding:13px 14px 9px;background:var(--card);border-bottom:1px solid var(--border);flex-shrink:0;}
-.back-btn{width:34px;height:34px;border-radius:9px;background:var(--card2);border:1px solid var(--border);color:var(--text);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
-.topbar-title{font-family:'Syne',serif;font-size:.95rem;font-weight:700;flex:1;}
-.topbar-badge{font-size:.68rem;color:var(--muted);background:var(--card2);border:1px solid var(--border);padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.topbar{display:flex;align-items:center;gap:10px;padding:12px 13px 9px;background:var(--card);border-bottom:1px solid var(--border);flex-shrink:0;}
+.back-btn{width:33px;height:33px;border-radius:9px;background:var(--card2);border:1px solid var(--border);color:var(--text);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.topbar-title{font-family:'Syne',serif;font-size:.92rem;font-weight:700;flex:1;}
+.topbar-badge{font-size:.67rem;color:var(--muted);background:var(--card2);border:1px solid var(--border);padding:3px 8px;border-radius:20px;white-space:nowrap;}
 
 /* REFERENCE */
 #reference{background:var(--bg);}
-.ref-scroll{flex:1;overflow-y:auto;padding:12px 12px 80px;}
-.ref-search{position:relative;margin-bottom:12px;}
-.ref-search input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px 10px 38px;border-radius:12px;font-size:.86rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.ref-scroll{flex:1;overflow-y:auto;padding:11px 11px 80px;}
+.ref-search{position:relative;margin-bottom:11px;}
+.ref-search input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 13px 10px 37px;border-radius:11px;font-size:.85rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
 .ref-search input:focus{border-color:var(--blue);}
 .ref-search input::placeholder{color:var(--muted);}
 .ref-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.4;}
-.ref-section{margin-bottom:12px;}
-.ref-sec-header{display:flex;align-items:center;gap:8px;padding:11px 13px;background:var(--card);border:1px solid var(--border);border-radius:12px;cursor:pointer;user-select:none;}
+.ref-section{margin-bottom:11px;}
+.ref-sec-header{display:flex;align-items:center;gap:7px;padding:11px 12px;background:var(--card);border:1px solid var(--border);border-radius:11px;cursor:pointer;user-select:none;}
 .ref-sec-icon{font-size:1.1rem;}
-.ref-sec-name{font-family:'Syne',serif;font-size:.87rem;font-weight:700;flex:1;}
-.ref-sec-count{font-size:.68rem;color:var(--muted);background:var(--card2);padding:2px 7px;border-radius:20px;}
-.ref-sec-arrow{color:var(--muted);font-size:.72rem;transition:transform .2s;}
+.ref-sec-name{font-family:'Syne',serif;font-size:.86rem;font-weight:700;flex:1;}
+.ref-sec-count{font-size:.67rem;color:var(--muted);background:var(--card2);padding:2px 7px;border-radius:20px;}
+.ref-sec-arrow{color:var(--muted);font-size:.7rem;transition:transform .2s;}
 .ref-section.closed .ref-sec-arrow{transform:rotate(-90deg);}
-.ref-disease-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:7px 2px 0;}
-.ref-section.closed .ref-disease-grid{display:none;}
-.ref-disease{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:8px 9px;text-decoration:none;transition:background .15s;}
-.ref-disease:active{background:var(--card2);}
-.ref-rank{font-size:.63rem;color:var(--muted);min-width:14px;text-align:right;font-weight:600;}
-.ref-name{font-size:.76rem;color:var(--blue);line-height:1.3;flex:1;}
-.ref-arrow{font-size:.58rem;color:var(--muted);}
-.ref-disease.hidden{display:none!important;}
-.ref-section.hidden{display:none!important;}
+.ref-disease-list{display:flex;flex-direction:column;gap:5px;padding:6px 2px 0;}
+.ref-section.closed .ref-disease-list{display:none;}
+
+/* Disease row with photo */
+.disease-row{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 10px;transition:background .15s;}
+.disease-row:active{background:var(--card2);}
+.ref-rank{font-size:.63rem;color:var(--muted);min-width:16px;text-align:right;font-weight:600;flex-shrink:0;}
+.ref-name-link{flex:1;color:var(--blue);text-decoration:none;font-size:.8rem;line-height:1.3;}
+.ref-name-link:active{color:var(--gold);}
+
+/* Photo button & thumbnail */
+.photo-area{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.photo-thumb{width:36px;height:36px;border-radius:7px;object-fit:cover;border:1px solid var(--border);cursor:pointer;}
+.photo-thumb.empty{display:none;}
+.add-photo-btn{width:32px;height:32px;border-radius:8px;background:var(--card2);border:1px dashed var(--border);color:var(--muted);font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:border-color .2s,color .2s;}
+.add-photo-btn:active{border-color:var(--gold);color:var(--gold);}
+.add-photo-btn.has-photo{border-style:solid;border-color:var(--green);color:var(--green);}
+
+/* Hidden file input */
+.file-input{display:none;}
+
+/* Photo viewer modal */
+.photo-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+.photo-modal.open{display:flex;}
+.modal-img{max-width:100%;max-height:75vh;border-radius:14px;object-fit:contain;}
+.modal-title{font-family:'Syne',serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:12px;text-align:center;}
+.modal-btns{display:flex;gap:10px;margin-top:16px;}
+.modal-btn{padding:11px 22px;border-radius:11px;border:none;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;}
+.modal-btn-del{background:rgba(255,107,107,.15);color:var(--red);border:1px solid rgba(255,107,107,.3);}
+.modal-btn-close{background:var(--card);color:var(--text);border:1px solid var(--border);}
 
 /* FLASHCARD */
 #flashcard{background:var(--bg);}
-.flash-content{flex:1;display:flex;flex-direction:column;align-items:center;padding:14px 14px 20px;gap:12px;overflow-y:auto;}
-.flash-progress{width:100%;max-width:400px;display:flex;align-items:center;gap:10px;}
+.flash-content{flex:1;display:flex;flex-direction:column;align-items:center;padding:13px 13px 18px;gap:11px;overflow-y:auto;}
+.flash-progress{width:100%;max-width:400px;display:flex;align-items:center;gap:9px;}
 .flash-prog-bar{flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden;}
-.flash-prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:4px;transition:width .4s ease;}
-.flash-prog-text{font-size:.76rem;color:var(--muted);white-space:nowrap;}
-.flash-score-row{display:flex;gap:8px;}
-.fscore{font-size:.75rem;padding:4px 11px;border-radius:20px;font-weight:600;}
+.flash-prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:4px;transition:width .4s;}
+.flash-prog-text{font-size:.74rem;color:var(--muted);white-space:nowrap;}
+.flash-score-row{display:flex;gap:7px;}
+.fscore{font-size:.73rem;padding:4px 10px;border-radius:20px;font-weight:600;}
 .fscore-knew{background:rgba(61,214,140,.1);color:var(--green);border:1px solid rgba(61,214,140,.2);}
 .fscore-skip{background:rgba(255,107,107,.1);color:var(--red);border:1px solid rgba(255,107,107,.2);}
-
 .card-3d-wrapper{width:100%;max-width:400px;perspective:1000px;cursor:pointer;flex-shrink:0;}
-.card-3d{width:100%;min-height:280px;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1);border-radius:20px;}
+.card-3d{width:100%;min-height:270px;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1);border-radius:19px;}
 .card-3d.flipped{transform:rotateY(180deg);}
-.card-face{position:absolute;inset:0;border-radius:20px;padding:20px 18px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.card-face{position:absolute;inset:0;border-radius:19px;padding:19px 17px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
 .card-front{background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);border:1px solid var(--border);}
 .card-back{background:linear-gradient(135deg,#0a1f10 0%,#0a1f35 100%);border:1px solid rgba(61,214,140,.25);transform:rotateY(180deg);justify-content:flex-start;overflow:hidden;}
-.card-hint{font-size:.65rem;color:var(--muted);margin-bottom:6px;letter-spacing:.5px;font-weight:600;text-transform:uppercase;}
-.card-emoji{font-size:2.3rem;margin-bottom:8px;}
-.card-question{font-family:'Syne',serif;font-size:1.2rem;font-weight:700;line-height:1.3;color:var(--text);}
-.card-sector{font-size:.72rem;color:var(--gold);margin-top:6px;font-weight:600;}
-.card-tap-hint{font-size:.67rem;color:var(--muted);margin-top:10px;}
-
-/* Back card info */
+.card-hint{font-size:.63rem;color:var(--muted);margin-bottom:5px;letter-spacing:.5px;font-weight:600;text-transform:uppercase;}
+.card-emoji{font-size:2.2rem;margin-bottom:7px;}
+.card-question{font-family:'Syne',serif;font-size:1.12rem;font-weight:700;line-height:1.3;}
+.card-sector{font-size:.7rem;color:var(--gold);margin-top:5px;font-weight:600;}
+.card-tap-hint{font-size:.65rem;color:var(--muted);margin-top:9px;}
 .card-back-content{width:100%;text-align:left;}
-.card-back-title{font-family:'Syne',serif;font-size:1rem;font-weight:800;color:var(--green);margin-bottom:10px;text-align:center;}
-.info-block{margin-bottom:8px;}
-.info-label{font-size:.65rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;padding:2px 8px;border-radius:5px;display:inline-block;}
+.card-back-title{font-family:'Syne',serif;font-size:.95rem;font-weight:800;color:var(--green);margin-bottom:9px;text-align:center;}
+.info-block{margin-bottom:7px;}
+.info-label{font-size:.63rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px;padding:2px 7px;border-radius:5px;display:inline-block;}
 .info-label.def{background:rgba(74,158,255,.15);color:var(--blue);}
 .info-label.signs{background:rgba(245,200,66,.12);color:var(--gold);}
 .info-label.tx{background:rgba(61,214,140,.12);color:var(--green);}
-.info-text{font-size:.78rem;color:var(--text);line-height:1.5;opacity:.9;}
-
-.flash-btns{display:flex;gap:9px;width:100%;max-width:400px;flex-shrink:0;}
-.flash-btn{flex:1;padding:13px;border-radius:13px;border:none;font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:transform .1s;}
+.info-text{font-size:.76rem;color:var(--text);line-height:1.5;opacity:.9;}
+.flash-btns{display:flex;gap:8px;width:100%;max-width:400px;flex-shrink:0;}
+.flash-btn{flex:1;padding:12px;border-radius:12px;border:none;font-family:'DM Sans',sans-serif;font-size:.81rem;font-weight:600;cursor:pointer;transition:transform .1s;}
 .flash-btn:active{transform:scale(.96);}
 .btn-skip{background:var(--card);color:var(--muted);border:1px solid var(--border);}
 .btn-knew{background:rgba(61,214,140,.15);color:var(--green);border:1px solid rgba(61,214,140,.3);}
 
 /* QUIZ */
 #quiz{background:var(--bg);}
-.quiz-content{flex:1;overflow-y:auto;padding:14px 12px 80px;display:flex;flex-direction:column;gap:12px;}
+.quiz-content{flex:1;overflow-y:auto;padding:13px 11px 80px;display:flex;flex-direction:column;gap:11px;}
 .quiz-header-info{display:flex;justify-content:space-between;align-items:center;}
-.quiz-qnum{font-family:'Syne',serif;font-size:.82rem;color:var(--muted);}
-.quiz-score-badge{font-size:.76rem;font-weight:600;padding:4px 11px;border-radius:20px;background:rgba(245,200,66,.1);color:var(--gold);border:1px solid rgba(245,200,66,.2);}
+.quiz-qnum{font-family:'Syne',serif;font-size:.8rem;color:var(--muted);}
+.quiz-score-badge{font-size:.74rem;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(245,200,66,.1);color:var(--gold);border:1px solid rgba(245,200,66,.2);}
 .quiz-prog-bar{height:3px;background:var(--border);border-radius:3px;overflow:hidden;}
 .quiz-prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));transition:width .4s;}
-.quiz-question{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 16px;}
-.quiz-q-sector{font-size:.68rem;color:var(--muted);margin-bottom:7px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
-.quiz-q-text{font-family:'Syne',serif;font-size:1rem;font-weight:700;line-height:1.4;}
-.quiz-options{display:flex;flex-direction:column;gap:8px;}
-.quiz-opt{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:border-color .2s,background .2s;font-size:.86rem;font-weight:500;}
+.quiz-question{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:18px 15px;}
+.quiz-q-sector{font-size:.67rem;color:var(--muted);margin-bottom:6px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;}
+.quiz-q-text{font-family:'Syne',serif;font-size:.98rem;font-weight:700;line-height:1.4;}
+.quiz-options{display:flex;flex-direction:column;gap:7px;}
+.quiz-opt{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px 13px;cursor:pointer;display:flex;align-items:center;gap:9px;font-size:.84rem;font-weight:500;transition:border-color .2s;}
 .quiz-opt:active{background:var(--card2);}
-.quiz-opt-letter{width:26px;height:26px;border-radius:7px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',serif;font-size:.76rem;font-weight:700;flex-shrink:0;transition:background .2s;}
+.quiz-opt-letter{width:25px;height:25px;border-radius:7px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',serif;font-size:.74rem;font-weight:700;flex-shrink:0;}
 .quiz-opt.correct{border-color:var(--green);background:rgba(61,214,140,.08);}
 .quiz-opt.correct .quiz-opt-letter{background:var(--green);color:#000;border-color:var(--green);}
 .quiz-opt.wrong{border-color:var(--red);background:rgba(255,107,107,.08);}
 .quiz-opt.wrong .quiz-opt-letter{background:var(--red);color:#fff;border-color:var(--red);}
 .quiz-opt.disabled{pointer-events:none;}
-.quiz-explanation{background:rgba(61,214,140,.06);border:1px solid rgba(61,214,140,.2);border-radius:12px;padding:13px 14px;font-size:.8rem;color:var(--green);line-height:1.5;display:none;}
+.quiz-explanation{background:rgba(61,214,140,.06);border:1px solid rgba(61,214,140,.2);border-radius:11px;padding:12px 13px;font-size:.79rem;color:var(--green);line-height:1.5;display:none;}
 .quiz-explanation.show{display:block;}
-.quiz-next-btn{background:var(--blue);color:#fff;border:none;border-radius:13px;padding:14px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;display:none;width:100%;}
+.quiz-next-btn{background:var(--blue);color:#fff;border:none;border-radius:12px;padding:13px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;display:none;width:100%;}
 .quiz-next-btn.show{display:block;}
 
-/* VIVA */
+/* VIVA OFFLINE */
 #viva{background:var(--bg);}
 .viva-content{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.viva-chat{flex:1;overflow-y:auto;padding:12px 12px 0;display:flex;flex-direction:column;gap:9px;}
-.viva-bubble{max-width:88%;padding:11px 14px;border-radius:16px;font-size:.85rem;line-height:1.5;animation:fadeUp .25s ease;}
+.viva-chat{flex:1;overflow-y:auto;padding:11px 11px 0;display:flex;flex-direction:column;gap:8px;}
+.viva-bubble{max-width:88%;padding:11px 13px;border-radius:15px;font-size:.84rem;line-height:1.5;animation:fadeUp .25s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.viva-bubble.ai{background:var(--card2);border:1px solid var(--border);border-radius:16px 16px 16px 3px;align-self:flex-start;}
-.viva-bubble.ai .bubble-label{font-size:.62rem;color:var(--purple);font-weight:700;margin-bottom:4px;letter-spacing:.5px;}
-.viva-bubble.user{background:linear-gradient(135deg,#1a3a6e,#0f2a50);border:1px solid rgba(74,158,255,.2);border-radius:16px 16px 3px 16px;align-self:flex-end;color:var(--text);}
-.viva-typing{align-self:flex-start;padding:11px 14px;background:var(--card2);border:1px solid var(--border);border-radius:16px 16px 16px 3px;display:none;}
-.viva-typing.show{display:flex;align-items:center;gap:4px;}
-.dot{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bounce 1.2s infinite;}
-.dot:nth-child(2){animation-delay:.2s;}
-.dot:nth-child(3){animation-delay:.4s;}
-@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
-.viva-quick-row{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px 0;}
-.viva-quick-btn{background:var(--card);border:1px solid var(--border);color:var(--text);font-size:.76rem;padding:7px 12px;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color .2s;}
-.viva-quick-btn:active{border-color:var(--purple);}
-.viva-input-area{padding:10px 12px 18px;display:flex;gap:8px;flex-shrink:0;}
-.viva-input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);padding:11px 13px;border-radius:13px;font-size:.86rem;font-family:'DM Sans',sans-serif;outline:none;resize:none;transition:border-color .2s;}
-.viva-input:focus{border-color:var(--purple);}
-.viva-send-btn{width:46px;height:46px;border-radius:13px;background:var(--purple);border:none;color:#fff;font-size:1.1rem;cursor:pointer;flex-shrink:0;}
-.viva-send-btn:active{opacity:.85;}
-.viva-error{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.2);border-radius:12px;padding:10px 13px;font-size:.78rem;color:var(--red);line-height:1.5;}
+.viva-bubble.ai{background:var(--card2);border:1px solid var(--border);border-radius:15px 15px 15px 3px;align-self:flex-start;}
+.viva-bubble.ai .bubble-label{font-size:.61rem;color:var(--purple);font-weight:700;margin-bottom:4px;letter-spacing:.5px;}
+.viva-bubble.user{background:linear-gradient(135deg,#1a3a6e,#0f2a50);border:1px solid rgba(74,158,255,.2);border-radius:15px 15px 3px 15px;align-self:flex-end;}
+.viva-bubble.feedback-correct{background:rgba(61,214,140,.08);border:1px solid rgba(61,214,140,.25);border-radius:13px;align-self:stretch;max-width:100%;font-size:.81rem;color:var(--green);}
+.viva-bubble.feedback-wrong{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.25);border-radius:13px;align-self:stretch;max-width:100%;font-size:.81rem;color:var(--red);}
+.viva-bubble.feedback-partial{background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.25);border-radius:13px;align-self:stretch;max-width:100%;font-size:.81rem;color:var(--gold);}
 
-/* FOOTER */
-.app-footer{text-align:center;padding:6px;font-size:.6rem;color:var(--muted);flex-shrink:0;border-top:1px solid var(--border);}
-.app-footer span{color:var(--gold);}
+.viva-quick-row{display:flex;flex-wrap:wrap;gap:6px;padding:7px 11px 0;}
+.viva-quick-btn{background:var(--card);border:1px solid var(--border);color:var(--text);font-size:.74rem;padding:7px 11px;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color .2s;}
+.viva-quick-btn:active{border-color:var(--purple);}
+.viva-input-area{padding:9px 11px 16px;display:flex;gap:7px;flex-shrink:0;}
+.viva-input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);padding:11px 12px;border-radius:12px;font-size:.84rem;font-family:'DM Sans',sans-serif;outline:none;resize:none;transition:border-color .2s;}
+.viva-input:focus{border-color:var(--purple);}
+.viva-send-btn{width:44px;height:44px;border-radius:12px;background:var(--purple);border:none;color:#fff;font-size:1.1rem;cursor:pointer;flex-shrink:0;}
+.viva-send-btn:active{opacity:.85;}
+
+
 
 ::-webkit-scrollbar{width:3px;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
@@ -178,20 +185,20 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
 </head>
 <body>
 
-<!-- ══ HOME ══ -->
+<!-- HOME -->
 <div class="screen active" id="home">
   <div class="home-inner">
     <div class="logo-area">
       <div class="logo-icon">🩺</div>
       <h1>MedStudy</h1>
       <p>Head-to-Toe · 100 Diseases · Exam Ready</p>
-      <div class="dev-tag">👨‍💻 Dev: Bayazid jmc-13</div>
+      <div class="dev-tag">👨‍💻 Developed by Bayazid jmc-13</div>
     </div>
     <div class="menu-grid">
       <div class="menu-card" data-c="blue" onclick="goTo('reference')">
         <span class="menu-icon">📋</span>
         <div class="menu-title">Reference</div>
-        <div class="menu-sub">All 100 diseases</div>
+        <div class="menu-sub">+ Add your photos</div>
       </div>
       <div class="menu-card" data-c="gold" onclick="goTo('flashcard')">
         <span class="menu-icon">🃏</span>
@@ -205,8 +212,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
       </div>
       <div class="menu-card" data-c="purple" onclick="goTo('viva')">
         <span class="menu-icon">🎤</span>
-        <div class="menu-title">Viva AI</div>
-        <div class="menu-sub">AI examiner</div>
+        <div class="menu-title">Viva</div>
+        <div class="menu-sub">Offline smart viva</div>
       </div>
     </div>
     <div class="stats-row">
@@ -217,12 +224,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
   </div>
 </div>
 
-<!-- ══ REFERENCE ══ -->
+<!-- REFERENCE -->
 <div class="screen" id="reference">
   <div class="topbar">
     <div class="back-btn" onclick="goTo('home')">←</div>
-    <div class="topbar-title">📋 Disease Reference</div>
-    <div class="topbar-badge">100 diseases</div>
+    <div class="topbar-title">📋 Reference + Photos</div>
+    <div class="topbar-badge">Tap 📷 to add photo</div>
   </div>
   <div class="ref-scroll">
     <div class="ref-search">
@@ -231,9 +238,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
     </div>
     <div id="refSections"></div>
   </div>
+  <div class="app-footer">🩺 MedStudy · Developed by <span>Bayazid jmc-13</span></div>
 </div>
 
-<!-- ══ FLASHCARD ══ -->
+<!-- FLASHCARD -->
 <div class="screen" id="flashcard">
   <div class="topbar">
     <div class="back-btn" onclick="goTo('home')">←</div>
@@ -252,27 +260,18 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
     <div class="card-3d-wrapper" onclick="flipCard()">
       <div class="card-3d" id="flashCard">
         <div class="card-face card-front">
-          <div class="card-hint">TAP TO REVEAL INFO</div>
+          <div class="card-hint">TAP TO REVEAL</div>
           <div class="card-emoji" id="fEmoji">🩺</div>
           <div class="card-question" id="fName">Loading...</div>
           <div class="card-sector" id="fSector">Sector</div>
           <div class="card-tap-hint">Tap card to see details →</div>
         </div>
         <div class="card-face card-back">
-          <div class="card-back-content" id="fBackContent">
-            <div class="card-back-title" id="fBackTitle">Disease Name</div>
-            <div class="info-block">
-              <div class="info-label def">📖 Definition</div>
-              <div class="info-text" id="fDef">—</div>
-            </div>
-            <div class="info-block">
-              <div class="info-label signs">🔍 Signs & Symptoms</div>
-              <div class="info-text" id="fSigns">—</div>
-            </div>
-            <div class="info-block">
-              <div class="info-label tx">💊 Treatment</div>
-              <div class="info-text" id="fTx">—</div>
-            </div>
+          <div class="card-back-content">
+            <div class="card-back-title" id="fBackTitle">—</div>
+            <div class="info-block"><div class="info-label def">📖 Definition</div><div class="info-text" id="fDef">—</div></div>
+            <div class="info-block"><div class="info-label signs">🔍 Signs & Symptoms</div><div class="info-text" id="fSigns">—</div></div>
+            <div class="info-block"><div class="info-label tx">💊 Treatment</div><div class="info-text" id="fTx">—</div></div>
           </div>
         </div>
       </div>
@@ -282,9 +281,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
       <button class="flash-btn btn-knew" onclick="flashAct('knew')">✓ Knew It!</button>
     </div>
   </div>
+  <div class="app-footer">🩺 MedStudy · Developed by <span>Bayazid jmc-13</span></div>
 </div>
 
-<!-- ══ QUIZ ══ -->
+<!-- QUIZ -->
 <div class="screen" id="quiz">
   <div class="topbar">
     <div class="back-btn" onclick="goTo('home')">←</div>
@@ -292,44 +292,55 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM San
     <div class="topbar-badge" id="quizBadge">10 Qs</div>
   </div>
   <div class="quiz-content" id="quizContent"></div>
+  <div class="app-footer">🩺 MedStudy · Developed by <span>Bayazid jmc-13</span></div>
 </div>
 
-<!-- ══ VIVA ══ -->
+<!-- VIVA OFFLINE -->
 <div class="screen" id="viva">
   <div class="topbar">
     <div class="back-btn" onclick="goTo('home')">←</div>
     <div class="topbar-title">🎤 Viva Examiner</div>
-    <div class="topbar-badge" id="vivaBadge">AI Powered</div>
+    <div class="topbar-badge">Offline ✅</div>
   </div>
   <div class="viva-content">
     <div class="viva-chat" id="vivaChat">
       <div class="viva-bubble ai">
-        <div class="bubble-label">🏥 EXAMINER · Bayazid jmc-13 App</div>
-        Assalamu Alaikum! I'm your AI Viva Examiner for Head-to-Toe clinical diseases. Choose a sector below or ask me anything. I'll question you and give detailed feedback!
+        <div class="bubble-label">🏥 EXAMINER · Developed by Bayazid jmc-13</div>
+        Assalamu Alaikum! I'm your offline Viva Examiner. Choose a sector or tap "Random" — I'll ask clinical questions and give instant feedback on your answers!
       </div>
     </div>
-    <div class="viva-typing" id="vivaTyping"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-    <div class="viva-quick-row" id="vivaQuick">
-      <button class="viva-quick-btn" onclick="vQuick('Ask me a viva question about Head & Scalp diseases')">🔴 Head</button>
-      <button class="viva-quick-btn" onclick="vQuick('Ask me about Eye diseases for viva')">👁️ Eye</button>
-      <button class="viva-quick-btn" onclick="vQuick('Quiz me on Lower Limb diseases')">🦵 Lower Limb</button>
-      <button class="viva-quick-btn" onclick="vQuick('Ask a random clinical viva question')">🎲 Random</button>
-      <button class="viva-quick-btn" onclick="vQuick('Ask about Oral Cavity diseases')">👄 Oral</button>
-      <button class="viva-quick-btn" onclick="vQuick('Ask about Neck swellings')">🧠 Neck</button>
+    <div class="viva-quick-row">
+      <button class="viva-quick-btn" onclick="vivaStart('Head & Scalp')">🔴 Head</button>
+      <button class="viva-quick-btn" onclick="vivaStart('Eye')">👁️ Eye</button>
+      <button class="viva-quick-btn" onclick="vivaStart('Ear')">👂 Ear</button>
+      <button class="viva-quick-btn" onclick="vivaStart('Neck')">🧠 Neck</button>
+      <button class="viva-quick-btn" onclick="vivaStart('Lower Limb')">🦵 Lower Limb</button>
+      <button class="viva-quick-btn" onclick="vivaStart('random')">🎲 Random</button>
+      <button class="viva-quick-btn" onclick="vivaNext()">⏭️ Next Q</button>
     </div>
     <div class="viva-input-area">
-      <textarea class="viva-input" id="vivaIn" placeholder="Type your answer here..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();vSend();}"></textarea>
-      <button class="viva-send-btn" onclick="vSend()">↑</button>
+      <textarea class="viva-input" id="vivaIn" placeholder="Type your answer..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();vivaAnswer();}"></textarea>
+      <button class="viva-send-btn" onclick="vivaAnswer()">↑</button>
     </div>
   </div>
-  <div class="app-footer">MedStudy · Developed by <span>Bayazid jmc-13</span></div>
+  <div class="app-footer">🩺 MedStudy App · Developed by <span>Bayazid jmc-13</span> · Offline ✅</div>
+</div>
+
+<!-- PHOTO MODAL -->
+<div class="photo-modal" id="photoModal">
+  <div class="modal-title" id="modalTitle">Disease Photo</div>
+  <img class="modal-img" id="modalImg" src="" alt="">
+  <div class="modal-btns">
+    <button class="modal-btn modal-btn-del" onclick="deletePhoto()">🗑️ Delete</button>
+    <button class="modal-btn modal-btn-close" onclick="closeModal()">✕ Close</button>
+  </div>
 </div>
 
 <script>
 // ══════════════════════════════════════════
 // DATA
 // ══════════════════════════════════════════
-const SECTORS = [
+const SECTORS=[
   {icon:'🔴',name:'Head & Scalp',diseases:['Seborrheic dermatitis','Tinea capitis','Pediculosis capitis','Acne vulgaris','Folliculitis','Furuncle','Alopecia areata','Scalp psoriasis','Carbuncle','Discoid lupus erythematosus','Traction alopecia']},
   {icon:'👁️',name:'Eye',diseases:['Conjunctivitis','Subconjunctival hemorrhage','Hordeolum','Chalazion','Blepharitis','Dacryocystitis','Pterygium',"Bitot's spot",'Cataract','Icterus']},
   {icon:'👂',name:'Ear',diseases:['Otitis externa','Impacted wax','Ear furuncle','CSOM','Perichondritis']},
@@ -342,105 +353,115 @@ const SECTORS = [
   {icon:'🌍',name:'General Skin',diseases:['Scabies','Tinea corporis','Drug eruption','Measles rash','Chickenpox','Dengue rash','SJS','Toxic epidermal necrolysis','Erythema multiforme','Pellagra dermatitis','Ichthyosis','Keloid','Skin tag','Molluscum contagiosum','Warts']}
 ];
 
-// FLASHCARD detailed info
-const DISEASE_INFO = {
-  'Seborrheic dermatitis':{def:'Chronic inflammatory skin condition caused by Malassezia yeast overgrowth on sebaceous gland-rich areas.',signs:'Greasy yellowish scales on scalp, face (nasolabial folds, eyebrows). Erythema, itching. Dandruff in mild form.',tx:'Ketoconazole or selenium sulfide shampoo. Mild topical corticosteroids. Zinc pyrithione. Antifungals for severe cases.'},
-  'Tinea capitis':{def:'Dermatophyte (fungal) infection of the scalp hair and follicles, mainly in children.',signs:'Circular patches of hair loss with scaling. Black dots (broken hairs). Kerion (boggy, tender mass). Cervical lymphadenopathy.',tx:'Oral griseofulvin 6–8 weeks (drug of choice). Terbinafine alternative. Selenium sulfide shampoo as adjunct.'},
-  'Pediculosis capitis':{def:'Infestation of scalp hair by head louse (Pediculus humanus capitis). Highly contagious.',signs:'Intense itching (especially nape of neck). Nits (eggs) on hair shafts. Excoriations. Secondary bacterial infection.',tx:'Permethrin 1% lotion (leave 10 min). Wet combing with fine-toothed comb. Treat all household contacts. Wash bedding.'},
-  'Acne vulgaris':{def:'Chronic inflammatory disorder of pilosebaceous unit involving Cutibacterium acnes, sebum, and follicular plugging.',signs:'Comedones (open/closed), papules, pustules, nodules, cysts. Face, chest, back. Scarring in severe cases.',tx:'Topical retinoids + benzoyl peroxide. Oral doxycycline for moderate. Isotretinoin for severe nodular acne.'},
-  'Folliculitis':{def:'Superficial infection of hair follicles, usually by Staphylococcus aureus.',signs:'Small pustules with erythematous base around follicles. Mild itching/pain. Scalp, beard area, thighs.',tx:'Topical mupirocin or clindamycin. Oral flucloxacillin for widespread. Chlorhexidine washes to prevent recurrence.'},
-  'Furuncle':{def:'Deep infection of a single hair follicle forming a painful abscess (boil). Caused by S. aureus.',signs:'Tender, erythematous nodule that becomes fluctuant. Central necrotic core. Fever in systemic cases.',tx:'Warm compresses. Incision and drainage when fluctuant. Oral flucloxacillin/dicloxacillin. MRSA: co-trimoxazole.'},
-  'Alopecia areata':{def:'Autoimmune condition causing non-scarring patchy hair loss due to T-cell attack on hair follicles.',signs:'Well-defined round/oval patches of hair loss. Exclamation mark hairs at periphery. Nail pitting may coexist.',tx:'Intralesional corticosteroid injections (triamcinolone). Topical minoxidil. Topical immunotherapy (DPCP) for extensive.'},
-  'Scalp psoriasis':{def:'Psoriasis affecting the scalp, causing thick silvery-white scales on erythematous plaques.',signs:'Thick adherent silvery scales beyond hairline. Pruritus. Auspitz sign (pinpoint bleeding on scale removal).',tx:'Coal tar or salicylic acid shampoos. Potent topical corticosteroids (betamethasone). Calcipotriol. UVB for refractory.'},
-  'Carbuncle':{def:'Deep infection involving multiple adjacent hair follicles forming a mass of interconnected abscesses.',signs:'Large, painful, indurated swelling with multiple discharging openings ("sieve-like"). Fever, malaise. Nape of neck common.',tx:'Incision and drainage. Systemic antibiotics (flucloxacillin). Screen for diabetes. MRSA cover if suspected.'},
-  'Discoid lupus erythematosus':{def:'Chronic autoimmune skin condition causing scarring plaques, mainly on sun-exposed areas. Not systemic.',signs:'Erythematous plaques with follicular plugging, scaling, central atrophy, scarring alopecia. Face, scalp, ears.',tx:'Sun protection (essential). Hydroxychloroquine (1st line systemic). Potent topical corticosteroids. Avoid sun triggers.'},
-  'Traction alopecia':{def:'Hair loss due to chronic mechanical tension on hair follicles from tight hairstyles.',signs:'Marginal hair loss along hairline/temples. Early: perifollicular erythema and scale. Late: permanent scarring.',tx:'Stop offending hairstyle immediately. Topical minoxidil early. Intralesional steroids for inflammation. Early reversal possible.'},
-  'Conjunctivitis':{def:'Inflammation of the conjunctiva. Can be bacterial, viral (most common), allergic, or chemical.',signs:'Red eye, discharge (purulent=bacterial, watery=viral), itching (allergic), crusting. Vision usually normal.',tx:'Bacterial: topical chloramphenicol/ciprofloxacin. Viral: self-limiting, lubricants. Allergic: antihistamine drops, mast cell stabilizers.'},
-  'Subconjunctival hemorrhage':{def:'Bleeding between conjunctiva and sclera, usually spontaneous or after Valsalva/trauma.',signs:'Bright red painless patch on white of eye. No visual disturbance. Spreads then resolves in 1–2 weeks.',tx:'Usually self-resolving in 2 weeks. Reassure patient. Check BP if recurrent. No treatment needed unless traumatic.'},
-  'Hordeolum':{def:'Acute purulent infection of eyelid gland — external (Zeis/Moll) = stye; internal (Meibomian) = internal hordeolum.',signs:'Painful, red, tender swelling on eyelid margin. Pointing pustule. May discharge spontaneously.',tx:'Warm compresses 4x daily. Topical antibiotics. Most resolve spontaneously. Incision if persistent.'},
-  'Chalazion':{def:'Chronic granulomatous inflammation of Meibomian gland due to retained secretions. Not infected.',signs:'Painless, firm, round lid swelling. No acute inflammation. May cause astigmatism if large.',tx:'Warm compresses. Often resolves in months. Intralesional triamcinolone injection. Surgical incision and curettage (I&C).'},
-  'Blepharitis':{def:'Chronic inflammation of the eyelid margins. Anterior (lash base) or posterior (Meibomian gland).',signs:'Crusting/scaling at lash bases. Burning, itching, redness of lid margins. Foam in tear film.',tx:'Lid hygiene (warm compress + lid scrubs) daily. Topical chloramphenicol. Oral doxycycline for Meibomian type.'},
-  'Dacryocystitis':{def:'Infection of the lacrimal sac due to obstruction of the nasolacrimal duct.',signs:'Painful swelling medial to inner canthus. Epiphora (watery eye). Purulent discharge. Preseptal cellulitis.',tx:'Oral/IV antibiotics (co-amoxiclav). Warm compresses. Dacryocystorhinostomy (DCR) after acute phase for drainage.'},
-  'Pterygium':{def:'Fleshy, vascularized triangular growth of conjunctiva extending onto cornea. Associated with UV exposure.',signs:'Wing-shaped growth from nasal conjunctiva toward cornea. Redness, irritation. Visual disturbance if covers pupil.',tx:'Lubricating eye drops for mild. Surgical excision with adjuvant mitomycin C or autologous conjunctival graft. Sun protection.'},
-  "Bitot's spot":{def:'Conjunctival lesion due to Vitamin A deficiency. Keratinized, foamy deposits on bulbar conjunctiva.',signs:"Triangular, foamy, cheese-like spots on temporal conjunctiva. Dry eyes (xerophthalmia). Night blindness (nyctalopia).",tx:'Oral Vitamin A (WHO protocol): 200,000 IU day 1, 2, and day 14. Treat malnutrition. Dietary counselling.'},
-  'Cataract':{def:'Opacification of the crystalline lens causing progressive painless visual impairment.',signs:'Painless blurring of vision. Glare/halos. White pupil (leukocoria in advanced). Grey/white lens on slit lamp.',tx:'Surgical: Phacoemulsification with IOL implantation (definitive). Glasses for mild. No proven medical treatment.'},
-  'Icterus':{def:'Yellow discoloration of sclera (and skin) due to bilirubin deposition. Detectable at serum bili >2.5 mg/dL.',signs:'Yellow sclera (first sign). Yellow skin. Dark urine, pale stools (obstructive). Pruritus. RUQ pain.',tx:'Treat underlying cause: haemolysis, hepatitis, obstruction. ERCP/surgery for biliary obstruction. Supportive care.'},
-  'Otitis externa':{def:'Inflammation of external auditory canal. Often bacterial (Pseudomonas) or fungal. "Swimmer\'s ear".',signs:'Ear pain (worse on tragus pressure), itching, discharge, canal oedema. Hearing loss. Fever in severe cases.',tx:'Aural toilet. Topical antibiotic + steroid drops (ciprofloxacin+hydrocortisone). Ear wick if canal swollen. Oral antibiotics if spreading.'},
-  'Impacted wax':{def:'Accumulation and hardening of cerumen in external auditory canal causing symptoms.',signs:'Hearing loss, ear fullness, tinnitus, earache, reflex cough. Hard brown/black wax on otoscopy.',tx:'Sodium bicarbonate ear drops (softening) for 5 days. Ear syringing with warm water. Manual removal with Jobson-Horne probe.'},
-  'Ear furuncle':{def:'Abscess of hair follicle in the outer third (cartilaginous) part of the external auditory canal.',signs:'Severe throbbing ear pain, exquisite tenderness on tragus/pinna movement. No discharge until rupture.',tx:'Oral antibiotics (flucloxacillin). Analgesia. I&D when fluctuant. Avoid water in ear. Treat underlying diabetes.'},
-  'CSOM':{def:'Chronic Suppurative Otitis Media — persistent middle ear infection with tympanic membrane perforation >6 weeks.',signs:'Painless mucopurulent ear discharge. Conductive hearing loss. Central TM perforation on otoscopy. No fever usually.',tx:'Aural toilet. Topical quinolone drops (ciprofloxacin). Treat acute flares with systemic antibiotics. Myringoplasty surgery for repair.'},
-  'Perichondritis':{def:'Infection of perichondrium of the auricular cartilage, often post-trauma or high ear piercing.',signs:'Diffuse erythema, swelling, tenderness of pinna. Spares lobule (no cartilage). Fever. Severe pain.',tx:'IV antibiotics (ciprofloxacin covers Pseudomonas — key). Drain abscess if formed. Prevent with proper wound care.'},
-  'Epistaxis':{def:'Bleeding from nasal mucosa. 90% anterior (Little\'s area / Kiesselbach\'s plexus). Can be posterior.',signs:'Nasal bleeding. Anterior: blood from nostril. Posterior: blood drips to throat. Hypertension common trigger.',tx:'Pinch soft part of nose 10–15 min (first aid). Cauterize with silver nitrate. Anterior packing (BIPP). Posterior: balloon pack.'},
-  'Allergic rhinitis':{def:'IgE-mediated type I hypersensitivity reaction of nasal mucosa to inhaled allergens.',signs:'Sneezing, watery rhinorrhoea, nasal obstruction, itching. Allergic salute. Pale boggy turbinates. Cobblestone pharynx.',tx:'Avoid allergens. Intranasal corticosteroids (1st line, e.g. fluticasone). Antihistamines (cetirizine). Saline irrigation. Immunotherapy.'},
-  'Nasal polyp':{def:'Non-neoplastic pedunculated mucosal outgrowths from nasal/sinus mucosa, associated with chronic inflammation.',signs:'Nasal obstruction (bilateral), anosmia, rhinorrhoea. Pale grape-like masses on exam. Associated with asthma, aspirin sensitivity.',tx:'Intranasal corticosteroids (first line). Short oral steroid course. FESS (Functional Endoscopic Sinus Surgery) for persistent/large polyps.'},
-  'Deviated nasal septum':{def:'Deviation of the nasal septum from midline, causing asymmetric nasal airway obstruction.',signs:'Unilateral or bilateral nasal obstruction. Recurrent sinusitis, epistaxis, snoring. Visible deviation on anterior rhinoscopy.',tx:'Medical: decongestants, antihistamines for symptoms. Surgical: Septoplasty (definitive) under GA.'},
-  'Sinusitis':{def:'Inflammation of paranasal sinuses, usually after viral URTI. Maxillary most commonly affected.',signs:'Facial pain/pressure (worse bending), nasal discharge (purulent), nasal congestion, hyposmia. Tenderness over sinus.',tx:'Acute viral: analgesia, saline irrigation, decongestants. Bacterial: amoxicillin. Chronic/recurrent: FESS.'},
-  'Aphthous ulcer':{def:'Painful recurrent oral ulcers of unknown aetiology. Most common oral mucosal lesion.',signs:'Round/oval painful ulcers with white/yellow base and red halo. Buccal mucosa, lips, tongue. 7–14 day healing.',tx:'Topical corticosteroids (triamcinolone paste). Chlorhexidine mouthwash. Topical anaesthetics (benzocaine). Avoid triggers.'},
-  'Gingivitis':{def:'Reversible inflammation of gingiva (gums) due to dental plaque accumulation. No bone loss.',signs:'Red, swollen, bleeding gums (on brushing). No pain usually. Halitosis. Plaque/calculus visible.',tx:'Professional scaling and root planing. Improved oral hygiene. Chlorhexidine mouthwash. Regular dental visits.'},
-  'Dental caries':{def:'Multifactorial bacterial disease causing progressive destruction of tooth structure (enamel → dentine → pulp).',signs:'White spot lesion initially. Cavity, discolouration. Toothache (sharp with cold/sweet → dull throbbing with pulpitis).',tx:'Fluoride for early lesions. Dental filling (GIC, composite). Root canal treatment for pulp involvement. Extraction if non-restorable.'},
-  'Angular cheilitis':{def:'Inflammation at corners of mouth (commissures). Caused by Candida, S. aureus, nutritional deficiency (B2, iron, B12).',signs:'Erythema, maceration, fissuring, crusting at mouth corners. Painful. Associated with ill-fitting dentures.',tx:'Topical antifungal (miconazole) ± antibacterial (fusidic acid). Correct nutritional deficiencies. Improve denture fit.'},
-  'Glossitis':{def:'Inflammation/atrophy of tongue papillae giving smooth, red, shiny appearance. Due to nutritional deficiencies.',signs:'Smooth beefy-red tongue (Hunter\'s glossitis in B12/folate deficiency). Pain, burning. Magenta in riboflavin deficiency.',tx:'Treat underlying cause: B12 IM injections, folic acid, iron supplementation. Good oral hygiene.'},
-  'Oral candidiasis':{def:'Fungal infection of oral mucosa by Candida albicans. Associated with immunosuppression, antibiotics, dentures.',signs:'White creamy plaques on tongue/buccal mucosa that can be wiped off leaving red, bleeding base. Pain, dysphagia.',tx:'Nystatin suspension or lozenges. Fluconazole for systemic/resistant cases. Treat predisposing factors.'},
-  'Leukoplakia':{def:'White patch on oral mucosa that cannot be scraped off and cannot be classified as any other lesion. Premalignant.',signs:'White, thickened non-removable plaques. Buccal mucosa, ventral tongue, floor of mouth. Painless usually.',tx:'Remove causative factors (smoking, alcohol, betel nut). Biopsy mandatory. Excision if dysplasia. 5% malignant transformation.'},
-  'Oral submucous fibrosis':{def:'Premalignant chronic fibrotic disease of oral submucosa due to areca nut (betel quid) use.',signs:'Burning sensation, progressive trismus (limited mouth opening), pale fibrous bands, blanching of mucosa.',tx:'Stop areca nut. Submucosal corticosteroid injections. Hyaluronidase injections. Physiotherapy. Surgery for severe trismus.'},
-  'Oral squamous cell carcinoma':{def:'Malignant tumour from oral epithelium. Risk factors: smoking, alcohol, HPV, betel nut, leukoplakia.',signs:'Non-healing ulcer with raised, indurated (rolled) edges. Hard on palpation. Cervical lymphadenopathy. Floor of mouth, tongue common.',tx:'Surgery (wide local excision ± neck dissection). Radiotherapy. Chemoradiotherapy for advanced. 5-year survival ~50%.'},
-  'Cervical lymphadenopathy':{def:'Enlargement of cervical lymph nodes >1cm. Can be reactive, infective, or malignant.',signs:'Enlarged neck nodes. Soft, tender = reactive/infective. Hard, fixed, non-tender = malignant. Generalised vs localised.',tx:'Treat underlying cause. Antibiotics for bacterial. Biopsy/FNAC if >2 weeks no resolution, or suspicious features.'},
-  'Reactive lymphadenitis':{def:'Benign lymph node enlargement in response to regional infection or inflammation.',signs:'Tender, soft, mobile enlarged nodes. Associated with URTI, dental infection, scalp infection. Usually bilateral.',tx:'Treat source of infection (antibiotics). Analgesics/NSAIDs. Resolves spontaneously. Monitor; biopsy if persistent >4 weeks.'},
-  'Tubercular lymphadenitis':{def:'Most common form of extrapulmonary TB. Mycobacterium tuberculosis infection of lymph nodes.',signs:'Painless, matted (adhered together) cervical nodes. May undergo caseation/collar-stud abscess. Night sweats, weight loss, fever.',tx:'Anti-TB therapy: 6 months (2HRZE + 4HR). Do not I&D (causes sinus formation). Needle aspiration only if tense.'},
-  'Goiter':{def:'Enlargement of the thyroid gland. Can be diffuse (iodine deficiency) or nodular. May be hypo/eu/hyperthyroid.',signs:'Visible neck swelling that moves up with swallowing. Pressure symptoms: dysphagia, stridor. Bruit (Graves\').',tx:'Iodine deficiency: iodine supplementation. Graves\': antithyroid drugs (carbimazole), radioiodine, surgery. Hypothyroid: levothyroxine.'},
-  'Thyroid nodule':{def:'Discrete lesion within thyroid gland. 95% benign. Malignancy risk: hard, fixed, solitary, male, cold nodule on scan.',signs:'Palpable nodule moving with swallowing. Usually asymptomatic. Hoarseness, dysphagia if malignant/large.',tx:'USS + FNAC for assessment. Benign: monitor. Indeterminate: hemi-thyroidectomy. Malignant: total thyroidectomy + radioiodine.'},
-  'Thyroglossal cyst':{def:'Cyst arising from remnant of thyroglossal duct. Midline neck swelling. Moves with tongue protrusion.',signs:'Smooth midline neck swelling, most common below hyoid. Moves on swallowing AND tongue protrusion (pathognomonic).',tx:'Surgical: Sistrunk operation (excision of cyst + central hyoid body to prevent recurrence).'},
-  'Branchial cyst':{def:'Remnant of 2nd branchial cleft. Lateral neck cyst appearing in young adults.',signs:'Smooth, fluctuant, non-tender swelling at anterior border of sternocleidomastoid (upper third). Often presents after URTI.',tx:'Surgical excision. Aspirate if infected first, then excise after settling. Recurrence if incompletely excised.'},
-  'Lipoma':{def:'Benign tumour of mature fat cells. Most common soft tissue tumour. Can occur anywhere.',signs:'Soft, lobulated, mobile, non-tender subcutaneous lump. Slips under fingers (slip sign). Fluctuates but not transilluminable.',tx:'Reassure if small and asymptomatic. Excision if cosmetically troublesome, large, or uncertain diagnosis.'},
-  'Sebaceous cyst':{def:'Epidermal inclusion cyst (not truly sebaceous). Keratin-filled cyst derived from hair follicle.',signs:'Smooth, firm, mobile subcutaneous swelling. Central punctum (black dot). Cheesy keratin content. Can get infected.',tx:'Excision with complete capsule (to prevent recurrence). If infected: drain first, excise later when settled.'},
-  'Lymphoma':{def:'Malignant lymphoid tumour. Hodgkin\'s (Reed-Sternberg cells) or Non-Hodgkin\'s lymphoma.',signs:'Painless rubbery lymphadenopathy. B symptoms: fever, night sweats, weight loss. Splenomegaly. Mediastinal mass (HL).',tx:'Hodgkin\'s: ABVD chemotherapy ± radiotherapy (highly curable). NHL: R-CHOP. Depends on stage and type.'},
-  'Breast abscess':{def:'Collection of pus in breast tissue. Lactational (S. aureus) or non-lactational (mixed organisms, periareolar).',signs:'Painful, fluctuant, erythematous breast swelling. Fever, malaise. Cellulitis around it. Cracked nipple may precede.',tx:'Needle aspiration (preferred over I&D) + antibiotics (flucloxacillin). Continue breastfeeding/pumping. Ultrasound guidance.'},
-  'Fibrocystic disease':{def:'Benign fibrocystic change in breast — most common benign breast condition in reproductive age women.',signs:'Cyclical breast pain, nodularity, tenderness. Worse premenstrually. Multiple bilateral lumps. Clear/green cyst aspirate.',tx:'Reassurance. Supportive bra. Evening primrose oil (GLA). NSAIDs. Danazol for severe. FNA for cysts causing pain.'},
-  'Carcinoma breast':{def:'Malignant tumour of breast epithelium. Invasive ductal carcinoma most common (75%). Risk: age, family Hx, BRCA.',signs:'Hard, irregular, painless lump. Skin dimpling, peau d\'orange, nipple retraction/discharge, axillary nodes.',tx:'Surgery (mastectomy/WLE) + radiotherapy + systemic therapy (hormone Rx/chemo/trastuzumab based on receptor status).'},
-  'Fibroadenoma':{def:'Most common benign breast tumour in young women (15–35). Overgrowth of stromal and glandular tissue.',signs:'"Breast mouse" — smooth, firm, very mobile, non-tender lump. Usually <3cm. No skin changes. Single usually.',tx:'USS + FNAC to confirm. Reassure if small (<3cm). Excision if large, growing, or patient anxious.'},
-  'Gynecomastia':{def:'Benign proliferation of glandular breast tissue in males. Due to oestrogen/androgen imbalance.',signs:'Palpable subareolar firm/rubbery disc of tissue. Usually bilateral. Tenderness. Must distinguish from pseudogynecomastia (fat).',tx:'Treat underlying cause (drugs, liver disease, hypogonadism). Tamoxifen/raloxifene for symptomatic. Surgical reduction (mastectomy) if established.'},
-  'Herpes zoster':{def:'Reactivation of latent varicella-zoster virus in dorsal root ganglion causing dermatomal vesicular rash.',signs:'Prodrome: burning/tingling in dermatome. Unilateral vesicular rash on erythematous base in dermatomal distribution. Severe pain.',tx:'Acyclovir/valacyclovir within 72 hours of rash. Analgesics (gabapentin for post-herpetic neuralgia). Amitriptyline for PHN.'},
-  'Intercostal neuralgia':{def:'Pain along intercostal nerve distribution, from compression, inflammation, or post-herpetic nerve damage.',signs:'Sharp, burning, stabbing pain following rib contour. Worse on breathing/movement. Allodynia along intercostal space.',tx:'NSAIDs, paracetamol. Gabapentin/pregabalin. Intercostal nerve block. Treat underlying cause (post-herpetic: amitriptyline).'},
-  'Tietze syndrome':{def:'Benign self-limiting inflammation of costal cartilages (usually 2nd/3rd rib). Distinct from costochondritis.',signs:'Localised painful swelling of costal cartilage junction. Single joint usually. Tenderness on palpation. No systemic symptoms.',tx:'Self-limiting. NSAIDs, local heat. Physiotherapy. Steroid injection for refractory. Reassure about benign nature.'},
-  'Cellulitis':{def:'Acute bacterial infection of dermis and subcutaneous tissue. Most commonly Streptococcus pyogenes/S. aureus.',signs:'Spreading erythema, warmth, swelling, tenderness. Indistinct borders. Fever, lymphangitis, lymphadenopathy.',tx:'Oral flucloxacillin or co-amoxiclav (mild). IV benzylpenicillin + flucloxacillin (severe). Elevate limb. Mark borders.'},
-  'Abscess':{def:'Localised collection of pus in a cavity formed by tissue disintegration. S. aureus most common.',signs:'Painful, fluctuant, erythematous swelling. Tender, hot. Pointing (about to discharge). Fever, lymphadenopathy.',tx:'Incision and drainage (definitive). Do not give antibiotics alone. Culture pus. Antibiotics if spreading cellulitis/systemic.'},
-  'Eczema':{def:'Chronic inflammatory skin disease characterised by itching, erythema, and epidermal changes. Atopic eczema most common.',signs:'Intense pruritus, erythema, vesicles (acute), lichenification (chronic). Flexural areas. Associated with asthma, rhinitis.',tx:'Emollients (cornerstone). Topical corticosteroids (mild-moderate). Tacrolimus/pimecrolimus. Antihistamines. Avoid triggers.'},
-  'Psoriasis':{def:'Chronic autoimmune skin disease with accelerated keratinocyte turnover causing thick scaly plaques.',signs:'Well-demarcated salmon-pink plaques with silvery-white scales. Extensor surfaces, scalp, nails. Auspitz sign. Koebner phenomenon.',tx:'Topical: corticosteroids + calcipotriol. Moderate-severe: phototherapy (NBUVB), methotrexate, biologics (adalimumab).'},
-  'Contact dermatitis':{def:'Skin inflammation from external substance. Irritant contact dermatitis (most common) or allergic (type IV hypersensitivity).',signs:'Erythema, vesicles, pruritus, weeping at site of contact. Allergic: spreads beyond contact area. Hands/face common.',tx:'Remove causative agent. Emollients. Topical corticosteroids. Patch testing for allergic type. Avoid allergen lifelong.'},
-  'Scabies':{def:'Infestation by Sarcoptes scabiei mite causing intense pruritus due to hypersensitivity to mite products.',signs:'Intense nocturnal itching. Burrows (pathognomonic) in web spaces, wrists, genitalia. Papules, excoriations. Affects household.',tx:'Permethrin 5% cream (whole body, leave 8–12 hours). Oral ivermectin alternative. Treat all household contacts simultaneously.'},
-  'Urticaria':{def:'Superficial dermal oedema causing transient itchy wheals (hives). IgE-mediated or non-immune. Acute or chronic.',signs:'Evanescent, itchy, pale-centred wheals with red flare. Individual lesion resolves <24h. Angioedema may coexist.',tx:'Identify and avoid trigger. Non-sedating antihistamines (cetirizine, loratadine) daily. Omalizumab for chronic refractory.'},
-  'Vitiligo':{def:'Autoimmune destruction of melanocytes causing depigmented patches. Associated with other autoimmune diseases.',signs:'Well-defined chalk-white patches (depigmented). Koebner phenomenon. Acrofacial, generalised types. Wood\'s lamp: bright white.',tx:'Topical tacrolimus or corticosteroids. NBUVB phototherapy. Surgical (melanocyte transplant). Camouflage. Sun protection.'},
-  'Clubbing':{def:'Bulbous enlargement of fingertips with loss of nail-bed angle. Associated with cyanotic HD, ILD, bronchiectasis, IBD.',signs:'Loss of Lovibond angle (>180°). Fluctuant nail bed (spongy). Schamroth\'s window sign positive. Drumstick appearance.',tx:'Treat underlying cause. No specific treatment for clubbing itself. Monitor for associated conditions.'},
-  "Dupuytren's contracture":{def:'Progressive fibrosis of palmar fascia causing fixed flexion contracture of fingers. Autosomal dominant tendency.',signs:'Nodules then cords in palmar fascia. Progressive flexion of ring > little finger at MCP/PIP joints. Cannot fully extend fingers.',tx:'Collagenase (Xiaflex) injection. Needle fasciotomy. Surgical fasciectomy. Recurrence common.'},
-  'Diabetic foot ulcer':{def:'Neuropathic/ischaemic ulcer in diabetic patient from sensory neuropathy + peripheral arterial disease + infection.',signs:'Painless plantar ulcer at pressure points (neuropathic). Deep, punched-out. Warm foot, bounding pulses (pure neuropathic). Callus surround.',tx:'Debridement. Offloading (total contact cast). Wound care. Treat infection (antibiotics). Control blood glucose. Vascular surgery if ischaemic.'},
-  'Varicose veins':{def:'Dilated, tortuous superficial veins due to valvular incompetence. Great saphenous vein most common.',signs:'Visible dilated tortuous veins (legs). Aching, heaviness, itching. Complications: varicose eczema, lipodermatosclerosis, ulcer.',tx:'Compression stockings. Endovenous ablation (laser/radiofrequency — 1st line). Foam sclerotherapy. Surgery (stripping).'},
-  'Venous ulcer':{def:'Chronic ulceration from chronic venous hypertension, usually in gaiter area (medial lower leg).',signs:'Shallow, irregular ulcer medial malleolus/gaiter. Sloughy base. Haemosiderin staining, lipodermatosclerosis, varicose eczema. Painless/mildly painful.',tx:'Compression bandaging (4-layer, cornerstone). Wound care. Treat infection. Pentoxifylline. Treat underlying venous disease.'},
-  'Arterial ulcer':{def:'Ischaemic ulcer from peripheral arterial disease (atherosclerosis) causing tissue hypoxia.',signs:'Painful, deep, punched-out ulcer on pressure points/toes/heel. Pale, cold foot. Absent pulses. ABI <0.8.',tx:'Revascularisation (angioplasty/bypass) if possible. Wound care. Pain management (opioids). Amputation if non-viable. Modify risk factors.'},
-  'Pressure sore':{def:'Localised skin/soft tissue injury over bony prominence from prolonged pressure. Graded I–IV.',signs:'Grade I: non-blanchable erythema. Grade II: partial thickness loss. Grade III: full thickness. Grade IV: bone/muscle exposed.',tx:'Relieve pressure (repositioning 2-hourly, special mattress). Wound debridement. Appropriate dressings. Nutritional support. Treat infection.'},
-  'Gangrene':{def:'Necrosis of tissue due to ischaemia or infection. Dry (ischaemic), wet (infected), or gas gangrene.',signs:'Dry: shrivelled black/brown demarcated tissue. Wet: moist, malodorous, spreading. Gas: crepitus, toxicity.',tx:'Dry: conservative/amputation. Wet: IV antibiotics + urgent surgical debridement/amputation. Gas gangrene: emergency surgery + benzylpenicillin.'},
-  'Onychomycosis':{def:'Fungal infection of nail plate. Dermatophytes (Trichophyton) most common. Affects toenails more than fingernails.',signs:'Thickened, discoloured (yellow/brown), brittle, crumbling nails. Subungual debris. Onycholysis (nail separation).',tx:'Topical amorolfine for mild. Oral terbinafine 3–6 months (fingernails 6 weeks, toenails 3 months) for moderate-severe.'},
-  'Paronychia':{def:'Infection of nail fold. Acute (bacterial, S. aureus) or chronic (Candida, in hands in water).',signs:'Acute: painful, red, swollen nail fold. Pus tracking under nail. Chronic: swollen, non-painful nail fold, nail ridging.',tx:'Acute: warm soaks, oral flucloxacillin, I&D if fluctuant. Chronic: topical antifungal (miconazole), keep dry.'},
-  'Ingrown toenail':{def:'Lateral nail edge pierces adjacent nail fold skin, causing inflammation and infection. Great toe most common.',signs:'Pain, erythema, swelling at nail margin. Granulation tissue (proud flesh). Seropurulent discharge. Walking painful.',tx:'Conservative: proper nail cutting, cotton wool under nail edge. Surgical: lateral nail avulsion + phenolisation of germinal matrix.'},
-  'Corn':{def:'Hard keratin plug in skin over bony prominence caused by repeated friction/pressure. Hard or soft corn.',signs:'Circular, painful, hard central core over pressure point (dorsal toes, sole). Pain on direct pressure. Distinct nucleus on paring.',tx:'Moleskin padding. Salicylic acid plasters. Podiatric debridement. Correct footwear. Treat underlying foot deformity if present.'},
-  'Callosity':{def:'Diffuse thickening of skin (hyperkeratosis) in response to chronic friction/pressure. No central core.',signs:'Diffuse, painless thickened skin over pressure areas (heel, ball of foot, palm). Yellow, hard. Less pain than corn.',tx:'Pumice stone or emery board. Urea-based creams (20–40%). Podiatric debridement. Proper footwear. Protective padding.'},
-  'Tinea pedis':{def:'Dermatophyte (fungal) infection of the foot. Most common dermatophytosis. Trichophyton rubrum most frequent.',signs:'Interdigital maceration, scaling, fissuring (web spaces). Moccasin pattern (dry scaling). Vesicular (inflammatory). Pruritus.',tx:'Topical antifungals: clotrimazole or terbinafine for 2–4 weeks. Oral terbinafine for resistant/moccasin. Keep feet dry.'},
-  'Lymphedema':{def:'Chronic oedema from lymphatic system dysfunction (primary) or obstruction/damage (secondary — filariasis, surgery).',signs:'Non-pitting (chronic), painless limb swelling. Stemmer sign positive (can\'t pinch skin on dorsum of toe). Skin thickening.',tx:'No cure. Complete decongestive therapy (CDT): manual lymphatic drainage + compression + exercises + skin care.'},
-  'Erysipelas':{def:'Superficial dermis and upper subcutaneous tissue infection (Streptococcus pyogenes). Distinct from cellulitis.',signs:'Well-demarcated raised, bright red, shiny, warm plaque. Clearly defined border (distinguishes from cellulitis). Fever, rigors.',tx:'Oral/IV benzylpenicillin (drug of choice — Streptococcus). Elevation. Prophylactic penicillin for recurrent cases.'},
-  'Tinea corporis':{def:'Ringworm — dermatophyte infection of the skin (not scalp/feet/groin). Trichophyton or Microsporum.',signs:'Annular (ring-shaped) plaque with clearing centre, raised scaly erythematous border. Pruritus. Spreads centrifugally.',tx:'Topical clotrimazole or terbinafine for 2–4 weeks. Oral terbinafine for extensive/resistant. Treat household contacts.'},
-  'Drug eruption':{def:'Adverse cutaneous reaction to a drug. Maculopapular (most common), urticarial, fixed drug, SJS spectrum.',signs:'Maculopapular rash 1–2 weeks after starting drug. Pruritus. Distribution: trunk first then spreads. Mucosae usually spared.',tx:'Identify and stop offending drug. Topical corticosteroids and antihistamines for symptom relief. Systemic steroids for severe.'},
-  'Measles rash':{def:'Exanthem of Rubeola virus (Paramyxovirus). Rash appears after prodrome on day 3–4.',signs:'Prodrome: 3 C\'s (Cough, Coryza, Conjunctivitis) + Koplik spots. Maculopapular rash: starts on face → trunk → extremities.',tx:'Supportive: fluids, antipyretics, Vitamin A (reduces complications). No antiviral. Prevention: MMR vaccine.'},
-  'Chickenpox':{def:'Primary infection with Varicella-Zoster Virus (VZV). Highly contagious. Respiratory and contact spread.',signs:'Pruritic rash: starts as macules → papules → vesicles → crusts ("dew drop on rose petal"). Multiple stages simultaneously. Fever.',tx:'Supportive: calamine lotion, antihistamines, paracetamol. Oral acyclovir within 24h for high-risk/severe. Vaccine prevention.'},
-  'Dengue rash':{def:'Exanthem of Dengue virus (Flavivirus, Aedes mosquito). Appears 3–5 days into febrile illness.',signs:'"Islands of white in sea of red" — erythematous rash with pale islands. Flushing face, Tourniquet test +ve. Thrombocytopenia.',tx:'Supportive: IV fluids, monitor platelets/haematocrit. Paracetamol (NOT NSAIDs/aspirin). No specific antiviral. Platelet transfusion if <10,000.'},
-  'SJS':{def:'Stevens-Johnson Syndrome: severe mucocutaneous drug reaction with <10% BSA epidermal detachment. Spectrum with TEN.',signs:'Targetoid lesions + mucosal erosions (mouth, eyes, genitalia) + skin detachment <10% BSA. Fever, pain. Drugs: sulfa, allopurinol, phenytoin.',tx:'Stop causative drug IMMEDIATELY. ICU/burns unit care. Supportive: fluids, wound care, ophthalmology. IV immunoglobulin/cyclosporin.'},
-  'Toxic epidermal necrolysis':{def:'TEN: most severe drug reaction with >30% BSA epidermal detachment. High mortality (25–35%).',signs:'Widespread skin detachment >30% BSA. Positive Nikolsky sign. Mucosal involvement (conjunctiva, oral, genital). Systemic sepsis.',tx:'Immediate drug cessation. Burns unit/ICU. IV fluids, nutritional support. Ophthalmology (prevents blindness). IVIG, cyclosporin.'},
-  'Erythema multiforme':{def:'Acute self-limiting immune-mediated reaction. Minor (HSV-triggered, acral) or Major (mucosae involved).',signs:'Target/iris lesions (3 concentric zones). Palms, soles, extensors. EM Minor: self-limiting. EM Major: mucosal involvement.',tx:'Treat underlying cause (acyclovir if HSV-triggered). Self-limiting. Supportive. Steroids controversial. Prevent recurrence: prophylactic acyclovir.'},
-  'Pellagra dermatitis':{def:'Niacin (Vitamin B3) deficiency causing the 4 D\'s: Dermatitis, Diarrhoea, Dementia, Death.',signs:'Casal\'s necklace — photosensitive, symmetrical dermatitis on sun-exposed areas (neck, hands, feet). Hyperpigmented, rough skin.',tx:'Nicotinamide (niacinamide) oral supplementation. Improve diet. Treat malabsorption. Dramatic response to treatment.'},
-  'Ichthyosis':{def:'Group of disorders causing generalised dry, scaly skin due to abnormal keratinisation. Mostly genetic.',signs:'Fish-scale-like generalised skin scaling. Ichthyosis vulgaris: fine scales, flexures spared. X-linked: dirty brown scales.',tx:'No cure. Emollients (urea, lactic acid creams) — cornerstone. Keratolytics. Oral retinoids (acitretin) for severe forms.'},
-  'Keloid':{def:'Excessive fibroblast proliferation beyond wound margins. Excess collagen deposition beyond original wound.',signs:'Firm, raised, shiny, hyperpigmented scar extending beyond original wound. Pruritus, pain. Earlobes, shoulders, sternum common.',tx:'Intralesional triamcinolone injections (1st line). Silicone gel/sheets. Pressure therapy. Surgery + steroid injection (recurrence common with surgery alone).'},
-  'Skin tag':{def:'Benign, pedunculated, soft fibroma of skin. Common in skin folds. No malignant potential.',signs:'Soft, flesh-coloured, pedunculated papule. Neck, axillae, groin, under breasts. Painless. May become pedunculated.',tx:'Reassure. Removal if cosmetically troublesome or irritated: snip excision, cryotherapy, electrocautery.'},
-  'Molluscum contagiosum':{def:'Poxvirus skin infection causing umbilicated papules. Spread by direct contact/autoinoculation. Common in children.',signs:'Pearly, flesh-coloured, dome-shaped, umbilicated (central dimple) papules. Multiple. Trunk, face, genitalia.',tx:'Often self-limiting (6–18 months). Cryotherapy, curettage, topical imiquimod. Treat HIV-associated (immune reconstitution).'},
-  'Warts':{def:'Benign epithelial tumours caused by Human Papillomavirus (HPV). Highly contagious by direct contact.',signs:'Common: rough hyperkeratotic papule on hands/feet. Plantar: deep, painful. Plane: flat, skin-coloured. Filiform: thread-like.',tx:'Topical salicylic acid (1st line). Cryotherapy with liquid nitrogen. Duct tape. Resolve spontaneously in 2 years.'}
+const DISEASE_INFO={
+  'Seborrheic dermatitis':{def:'Chronic inflammatory skin condition caused by Malassezia yeast on sebaceous areas.',signs:'Greasy yellowish scales on scalp/face, erythema, itching, dandruff.',tx:'Ketoconazole shampoo, selenium sulfide, mild topical corticosteroids, zinc pyrithione.'},
+  'Tinea capitis':{def:'Dermatophyte fungal infection of scalp hair follicles, mainly in children.',signs:'Circular hair loss patches with scaling, black dots, kerion, cervical lymphadenopathy.',tx:'Oral griseofulvin 6–8 weeks (DOC). Terbinafine alternative. Selenium sulfide shampoo adjunct.'},
+  'Pediculosis capitis':{def:'Infestation of scalp hair by head louse Pediculus humanus capitis.',signs:'Intense itching (nape of neck), nits on hair shafts, excoriations, secondary infection.',tx:'Permethrin 1% lotion, wet combing, treat all household contacts, wash bedding.'},
+  'Acne vulgaris':{def:'Chronic inflammatory disorder of pilosebaceous unit involving C. acnes, sebum, follicular plugging.',signs:'Comedones, papules, pustules, nodules, cysts on face/chest/back. Scarring in severe cases.',tx:'Topical retinoids + benzoyl peroxide. Oral doxycycline for moderate. Isotretinoin for severe.'},
+  'Folliculitis':{def:'Superficial infection of hair follicles, usually by Staphylococcus aureus.',signs:'Small pustules with erythematous base around follicles, mild itching/pain.',tx:'Topical mupirocin or clindamycin. Oral flucloxacillin for widespread. Chlorhexidine washes.'},
+  'Furuncle':{def:'Deep infection of single hair follicle forming a painful abscess (boil). Caused by S. aureus.',signs:'Tender erythematous nodule becomes fluctuant with central necrotic core. Fever.',tx:'Warm compresses. I&D when fluctuant. Oral flucloxacillin. MRSA: co-trimoxazole.'},
+  'Alopecia areata':{def:'Autoimmune non-scarring patchy hair loss from T-cell attack on hair follicles.',signs:'Well-defined round patches of hair loss, exclamation mark hairs, nail pitting.',tx:'Intralesional triamcinolone injections. Topical minoxidil. Topical immunotherapy (DPCP).'},
+  'Scalp psoriasis':{def:'Psoriasis affecting scalp causing thick silvery-white scales on erythematous plaques.',signs:'Thick adherent silvery scales beyond hairline, pruritus, Auspitz sign positive.',tx:'Coal tar/salicylic acid shampoos. Potent topical corticosteroids. Calcipotriol. NBUVB.'},
+  'Carbuncle':{def:'Deep infection of multiple adjacent hair follicles forming interconnected abscesses.',signs:'Large painful indurated swelling with multiple discharging openings. Fever, malaise.',tx:'I&D. Systemic antibiotics (flucloxacillin). Screen for diabetes. MRSA cover if suspected.'},
+  'Discoid lupus erythematosus':{def:'Chronic autoimmune scarring skin condition on sun-exposed areas. Not systemic.',signs:'Erythematous plaques with follicular plugging, scaling, central atrophy, scarring alopecia.',tx:'Sun protection (essential). Hydroxychloroquine 1st line. Potent topical corticosteroids.'},
+  'Traction alopecia':{def:'Hair loss from chronic mechanical tension on follicles from tight hairstyles.',signs:'Marginal hair loss along hairline/temples, perifollicular erythema early, scarring late.',tx:'Stop offending hairstyle. Topical minoxidil early. Intralesional steroids for inflammation.'},
+  'Conjunctivitis':{def:'Inflammation of conjunctiva — bacterial, viral (most common), allergic, or chemical.',signs:'Red eye, discharge (purulent=bacterial, watery=viral), itching (allergic), crusting.',tx:'Bacterial: topical chloramphenicol. Viral: self-limiting, lubricants. Allergic: antihistamine drops.'},
+  'Subconjunctival hemorrhage':{def:'Bleeding between conjunctiva and sclera, usually spontaneous or post-Valsalva/trauma.',signs:'Bright red painless patch on white of eye. No visual disturbance. Resolves in 1–2 weeks.',tx:'Self-resolving in 2 weeks. Reassure patient. Check BP if recurrent. No treatment needed.'},
+  'Hordeolum':{def:'Acute purulent infection of eyelid gland. External (stye) or internal (Meibomian).',signs:'Painful red tender swelling on eyelid margin. Pointing pustule, may discharge.',tx:'Warm compresses 4x daily. Topical antibiotics. Most resolve spontaneously. I&D if persistent.'},
+  'Chalazion':{def:'Chronic granulomatous inflammation of Meibomian gland due to retained secretions.',signs:'Painless firm round lid swelling. No acute inflammation. May cause astigmatism.',tx:'Warm compresses. Often resolves in months. Intralesional triamcinolone. Surgical I&C.'},
+  'Blepharitis':{def:'Chronic inflammation of eyelid margins. Anterior (lash base) or posterior (Meibomian).',signs:'Crusting/scaling at lash bases, burning, itching, redness of lid margins, foam in tears.',tx:'Lid hygiene (warm compress + lid scrubs) daily. Topical chloramphenicol. Oral doxycycline.'},
+  'Dacryocystitis':{def:'Infection of lacrimal sac due to obstruction of nasolacrimal duct.',signs:'Painful swelling medial to inner canthus, epiphora, purulent discharge, preseptal cellulitis.',tx:'Oral/IV antibiotics (co-amoxiclav). Warm compresses. DCR surgery after acute phase.'},
+  'Pterygium':{def:'Fleshy vascularized triangular conjunctival growth extending onto cornea. UV-related.',signs:'Wing-shaped nasal conjunctival growth toward cornea. Redness, irritation, visual disturbance.',tx:'Lubricating drops for mild. Surgical excision + mitomycin C/conjunctival autograft. Sun protection.'},
+  "Bitot's spot":{def:'Conjunctival lesion due to Vitamin A deficiency. Keratinized foamy deposits on conjunctiva.',signs:'Triangular foamy cheese-like spots on temporal conjunctiva. Dry eyes. Night blindness.',tx:'Vitamin A: 200,000 IU on day 1, 2, and 14 (WHO protocol). Treat malnutrition.'},
+  'Cataract':{def:'Opacification of crystalline lens causing progressive painless visual impairment.',signs:'Painless blurring, glare/halos, white pupil (advanced), grey/white lens on slit lamp.',tx:'Phacoemulsification with IOL implantation. Glasses for mild. No proven medical treatment.'},
+  'Icterus':{def:'Yellow sclera/skin discolouration from bilirubin >2.5 mg/dL deposition.',signs:'Yellow sclera (first sign), yellow skin, dark urine, pale stools, pruritus, RUQ pain.',tx:'Treat underlying cause: haemolysis/hepatitis/obstruction. ERCP/surgery for biliary obstruction.'},
+  'Otitis externa':{def:'Inflammation of external auditory canal. Bacterial (Pseudomonas) or fungal. Swimmer\'s ear.',signs:'Ear pain worse on tragus pressure, itching, discharge, canal oedema, hearing loss.',tx:'Aural toilet. Topical ciprofloxacin+hydrocortisone drops. Ear wick if swollen. Oral antibiotics if spreading.'},
+  'Impacted wax':{def:'Accumulation and hardening of cerumen in external auditory canal causing symptoms.',signs:'Hearing loss, ear fullness, tinnitus, earache, reflex cough. Hard brown/black wax on otoscopy.',tx:'Sodium bicarbonate drops 5 days (softening). Ear syringing with warm water. Manual removal.'},
+  'Ear furuncle':{def:'Abscess of hair follicle in outer third (cartilaginous) of external auditory canal.',signs:'Severe throbbing ear pain, exquisite tenderness on tragus/pinna movement. No discharge until rupture.',tx:'Oral flucloxacillin. Analgesia. I&D when fluctuant. Avoid water. Treat underlying diabetes.'},
+  'CSOM':{def:'Chronic Suppurative Otitis Media — persistent middle ear infection with TM perforation >6 weeks.',signs:'Painless mucopurulent discharge, conductive hearing loss, central TM perforation on otoscopy.',tx:'Aural toilet. Topical ciprofloxacin drops. Systemic antibiotics for flares. Myringoplasty surgery.'},
+  'Perichondritis':{def:'Infection of perichondrium of auricular cartilage, often post-trauma or high ear piercing.',signs:'Diffuse erythema, swelling, tenderness of pinna (spares lobule). Fever, severe pain.',tx:'IV ciprofloxacin (covers Pseudomonas — key). Drain abscess if formed. Prevent with wound care.'},
+  'Epistaxis':{def:'Nasal bleeding. 90% anterior from Little\'s area (Kiesselbach\'s plexus).',signs:'Anterior: blood from nostril. Posterior: blood drips to throat. HTN common trigger.',tx:'Pinch soft nose 10–15 min. Cauterise with silver nitrate. Anterior BIPP packing. Posterior: balloon.'},
+  'Allergic rhinitis':{def:'IgE-mediated type I hypersensitivity of nasal mucosa to inhaled allergens.',signs:'Sneezing, watery rhinorrhoea, nasal obstruction, itching. Pale boggy turbinates.',tx:'Intranasal corticosteroids (1st line). Antihistamines (cetirizine). Saline irrigation. Immunotherapy.'},
+  'Nasal polyp':{def:'Non-neoplastic mucosal outgrowths from nasal/sinus mucosa. Associated with chronic inflammation.',signs:'Bilateral nasal obstruction, anosmia, rhinorrhoea. Pale grape-like masses. Associated with asthma.',tx:'Intranasal corticosteroids. Short oral steroid course. FESS for persistent/large polyps.'},
+  'Deviated nasal septum':{def:'Deviation of nasal septum from midline causing asymmetric airway obstruction.',signs:'Unilateral/bilateral nasal obstruction, recurrent sinusitis, epistaxis, snoring.',tx:'Medical: decongestants, antihistamines. Surgical: Septoplasty (definitive) under GA.'},
+  'Sinusitis':{def:'Inflammation of paranasal sinuses, usually after viral URTI. Maxillary most commonly affected.',signs:'Facial pain/pressure, purulent nasal discharge, nasal congestion, hyposmia, sinus tenderness.',tx:'Viral: analgesia, saline, decongestants. Bacterial: amoxicillin. Chronic/recurrent: FESS.'},
+  'Aphthous ulcer':{def:'Painful recurrent oral ulcers of unknown aetiology. Most common oral mucosal lesion.',signs:'Round/oval painful ulcers with white/yellow base and red halo. 7–14 day healing.',tx:'Topical triamcinolone paste. Chlorhexidine mouthwash. Topical anaesthetics. Avoid triggers.'},
+  'Gingivitis':{def:'Reversible inflammation of gingiva due to dental plaque accumulation. No bone loss.',signs:'Red swollen bleeding gums on brushing, no pain usually, halitosis, visible plaque/calculus.',tx:'Professional scaling and root planing. Improved oral hygiene. Chlorhexidine mouthwash.'},
+  'Dental caries':{def:'Bacterial disease causing progressive tooth structure destruction (enamel→dentine→pulp).',signs:'White spot lesion initially, cavity, toothache (sharp with cold → dull throbbing with pulpitis).',tx:'Fluoride for early. Dental filling for cavities. Root canal for pulp involvement. Extraction if needed.'},
+  'Angular cheilitis':{def:'Inflammation at mouth corners caused by Candida, S. aureus, or nutritional deficiency (B2, iron).',signs:'Erythema, maceration, fissuring, crusting at mouth corners. Painful.',tx:'Topical miconazole ± fusidic acid. Correct nutritional deficiencies. Improve denture fit.'},
+  'Glossitis':{def:'Inflammation/atrophy of tongue papillae giving smooth red shiny appearance. Due to deficiencies.',signs:'Smooth beefy-red tongue (Hunter\'s glossitis in B12/folate deficiency). Pain, burning.',tx:'Treat underlying cause: B12 IM injections, folic acid, iron supplementation.'},
+  'Oral candidiasis':{def:'Fungal infection of oral mucosa by Candida albicans. Associated with immunosuppression.',signs:'White creamy plaques that can be wiped off leaving red bleeding base. Pain, dysphagia.',tx:'Nystatin suspension or lozenges. Fluconazole for systemic/resistant. Treat predisposing factors.'},
+  'Leukoplakia':{def:'White patch on oral mucosa that cannot be scraped off and not explained by another diagnosis. Premalignant.',signs:'White thickened non-removable plaques on buccal mucosa/ventral tongue. Usually painless.',tx:'Remove causative factors (smoking, alcohol). Biopsy mandatory. Excision if dysplasia present.'},
+  'Oral submucous fibrosis':{def:'Premalignant chronic fibrotic disease of oral submucosa due to areca nut use.',signs:'Burning sensation, progressive trismus, pale fibrous bands, blanching of mucosa.',tx:'Stop areca nut. Submucosal corticosteroid injections. Hyaluronidase injections. Surgery for trismus.'},
+  'Oral squamous cell carcinoma':{def:'Malignant tumour of oral epithelium. Risk: smoking, alcohol, HPV, betel nut.',signs:'Non-healing ulcer with raised indurated (rolled) edges. Hard, cervical lymphadenopathy.',tx:'Surgery (wide local excision ± neck dissection). Radiotherapy. Chemoradiotherapy for advanced.'},
+  'Cervical lymphadenopathy':{def:'Enlargement of cervical lymph nodes >1cm. Can be reactive, infective, or malignant.',signs:'Enlarged neck nodes. Soft tender=reactive. Hard fixed non-tender=malignant.',tx:'Treat underlying cause. Antibiotics for bacterial. FNAC/biopsy if >2 weeks or suspicious.'},
+  'Reactive lymphadenitis':{def:'Benign lymph node enlargement in response to regional infection or inflammation.',signs:'Tender soft mobile enlarged nodes. Associated with URTI, dental, scalp infection.',tx:'Treat source infection (antibiotics). Analgesics/NSAIDs. Resolves spontaneously. Monitor.'},
+  'Tubercular lymphadenitis':{def:'Most common extrapulmonary TB. M. tuberculosis infection of lymph nodes.',signs:'Painless matted cervical nodes. Caseation/collar-stud abscess. Night sweats, weight loss.',tx:'Anti-TB therapy 6 months (2HRZE + 4HR). Do NOT I&D. Needle aspiration only if tense.'},
+  'Goiter':{def:'Enlargement of thyroid gland. Diffuse (iodine deficiency) or nodular.',signs:'Visible neck swelling moving on swallowing. Pressure symptoms: dysphagia, stridor. Bruit (Graves\').',tx:'Iodine deficiency: supplementation. Graves\': carbimazole/radioiodine/surgery. Hypothyroid: levothyroxine.'},
+  'Thyroid nodule':{def:'Discrete lesion within thyroid gland. 95% benign. Malignancy: hard, fixed, solitary, cold nodule.',signs:'Palpable nodule moving with swallowing. Usually asymptomatic. Hoarseness if malignant.',tx:'USS + FNAC. Benign: monitor. Indeterminate: hemi-thyroidectomy. Malignant: total thyroidectomy.'},
+  'Thyroglossal cyst':{def:'Cyst from remnant of thyroglossal duct. Midline neck swelling. Moves with tongue protrusion.',signs:'Smooth midline swelling below hyoid. Moves on swallowing AND tongue protrusion (pathognomonic).',tx:'Sistrunk operation (excision of cyst + central hyoid body) to prevent recurrence.'},
+  'Branchial cyst':{def:'Remnant of 2nd branchial cleft. Lateral neck cyst appearing in young adults.',signs:'Smooth fluctuant non-tender swelling at anterior border of SCM (upper third).',tx:'Surgical excision. Aspirate if infected first. Recurrence if incompletely excised.'},
+  'Lipoma':{def:'Benign tumour of mature fat cells. Most common soft tissue tumour.',signs:'Soft lobulated mobile non-tender subcutaneous lump. Slip sign. Fluctuates.',tx:'Reassure if small and asymptomatic. Excision if large, cosmetically troublesome, or uncertain.'},
+  'Sebaceous cyst':{def:'Epidermal inclusion cyst (keratin-filled) derived from hair follicle.',signs:'Smooth firm mobile subcutaneous swelling with central punctum (black dot). Cheesy content.',tx:'Excision with complete capsule (prevents recurrence). If infected: drain first then excise later.'},
+  'Lymphoma':{def:'Malignant lymphoid tumour. Hodgkin\'s (Reed-Sternberg cells) or Non-Hodgkin\'s.',signs:'Painless rubbery lymphadenopathy, B symptoms (fever/night sweats/weight loss), splenomegaly.',tx:'Hodgkin\'s: ABVD chemo ± radiotherapy (highly curable). NHL: R-CHOP regimen.'},
+  'Breast abscess':{def:'Collection of pus in breast. Lactational (S. aureus) or non-lactational (mixed organisms).',signs:'Painful fluctuant erythematous breast swelling. Fever, malaise. Cracked nipple may precede.',tx:'Needle aspiration (preferred) + antibiotics (flucloxacillin). Continue breastfeeding/pumping.'},
+  'Fibrocystic disease':{def:'Benign fibrocystic change in breast — most common benign breast condition in reproductive age.',signs:'Cyclical breast pain, nodularity, tenderness (worse premenstrually). Multiple bilateral lumps.',tx:'Reassurance. Supportive bra. Evening primrose oil. NSAIDs. Danazol for severe.'},
+  'Carcinoma breast':{def:'Malignant breast epithelial tumour. Invasive ductal carcinoma most common (75%).',signs:'Hard irregular painless lump. Skin dimpling, peau d\'orange, nipple retraction/discharge, axillary nodes.',tx:'Surgery (mastectomy/WLE) + radiotherapy + systemic therapy (hormone/chemo/trastuzumab).'},
+  'Fibroadenoma':{def:'Most common benign breast tumour in young women (15–35). Overgrowth of stromal/glandular tissue.',signs:'"Breast mouse" — smooth firm very mobile non-tender lump. Usually <3cm. No skin changes.',tx:'USS + FNAC to confirm. Reassure if small. Excision if large, growing, or patient anxious.'},
+  'Gynecomastia':{def:'Benign proliferation of glandular breast tissue in males. Oestrogen/androgen imbalance.',signs:'Palpable subareolar firm/rubbery disc in males. Usually bilateral. Tenderness.',tx:'Treat underlying cause. Tamoxifen/raloxifene for symptomatic. Surgical reduction if established.'},
+  'Herpes zoster':{def:'Reactivation of latent VZV in dorsal root ganglion causing dermatomal vesicular rash.',signs:'Prodrome: burning/tingling. Unilateral vesicular rash on erythematous base in dermatome. Severe pain.',tx:'Acyclovir/valacyclovir within 72 hours. Analgesics. Gabapentin for post-herpetic neuralgia.'},
+  'Intercostal neuralgia':{def:'Pain along intercostal nerve from compression, inflammation, or post-herpetic damage.',signs:'Sharp burning pain following rib contour, worse on breathing/movement, allodynia.',tx:'NSAIDs, paracetamol. Gabapentin/pregabalin. Intercostal nerve block. Amitriptyline for PHN.'},
+  'Tietze syndrome':{def:'Benign self-limiting inflammation of costal cartilages (2nd/3rd rib usually).',signs:'Localised painful swelling of costal cartilage junction. Single joint, tender on palpation.',tx:'Self-limiting. NSAIDs, local heat. Physiotherapy. Steroid injection for refractory.'},
+  'Rib fracture':{def:'Break in rib bone from trauma. Multiple fractures = flail chest (paradoxical breathing).',signs:'Localised chest tenderness, crepitus on palpation, pain on breathing, visible deformity.',tx:'Analgesia (essential). Respiratory physiotherapy. Rib fixation for flail chest. Watch for pneumothorax.'},
+  'Cellulitis':{def:'Acute bacterial infection of dermis and subcutaneous tissue. S. pyogenes/S. aureus most common.',signs:'Spreading erythema, warmth, swelling, tenderness with indistinct borders. Fever, lymphangitis.',tx:'Oral flucloxacillin or co-amoxiclav (mild). IV benzylpenicillin + flucloxacillin (severe). Elevate limb.'},
+  'Abscess':{def:'Localised collection of pus in a cavity formed by tissue disintegration. S. aureus most common.',signs:'Painful fluctuant erythematous swelling. Hot, tender. Pointing. Fever, lymphadenopathy.',tx:'Incision and drainage (definitive). Culture pus. Antibiotics only if spreading cellulitis.'},
+  'Eczema':{def:'Chronic inflammatory skin disease with itching, erythema, and epidermal changes. Atopic most common.',signs:'Intense pruritus, erythema, vesicles (acute), lichenification (chronic). Flexural areas.',tx:'Emollients (cornerstone). Topical corticosteroids (mild-moderate). Tacrolimus. Antihistamines.'},
+  'Psoriasis':{def:'Chronic autoimmune skin disease with accelerated keratinocyte turnover causing thick scaly plaques.',signs:'Well-demarcated salmon-pink plaques with silvery-white scales. Extensor surfaces. Auspitz sign.',tx:'Topical: corticosteroids + calcipotriol. Moderate-severe: NBUVB, methotrexate, biologics.'},
+  'Contact dermatitis':{def:'Skin inflammation from external substance. Irritant (most common) or allergic (type IV hypersensitivity).',signs:'Erythema, vesicles, pruritus at contact site. Allergic: spreads beyond contact area.',tx:'Remove causative agent. Emollients. Topical corticosteroids. Patch testing for allergic type.'},
+  'Scabies':{def:'Infestation by Sarcoptes scabiei mite causing intense pruritus due to hypersensitivity.',signs:'Intense nocturnal itching. Burrows (pathognomonic) in web spaces, wrists, genitalia.',tx:'Permethrin 5% cream whole body 8–12 hours. Oral ivermectin alternative. Treat all contacts.'},
+  'Urticaria':{def:'Superficial dermal oedema causing transient itchy wheals (hives). IgE-mediated or non-immune.',signs:'Evanescent itchy pale-centred wheals with red flare. Individual lesion <24h. Angioedema may coexist.',tx:'Identify and avoid trigger. Non-sedating antihistamines (cetirizine) daily. Omalizumab for chronic.'},
+  'Vitiligo':{def:'Autoimmune destruction of melanocytes causing depigmented patches.',signs:'Well-defined chalk-white patches. Koebner phenomenon. Wood\'s lamp: bright white fluorescence.',tx:'Topical tacrolimus or corticosteroids. NBUVB phototherapy. Surgical melanocyte transplant.'},
+  'Clubbing':{def:'Bulbous fingertip enlargement with loss of nail-bed angle. Associated with cyanotic HD, ILD, bronchiectasis.',signs:'Loss of Lovibond angle >180°. Fluctuant nail bed. Schamroth\'s window sign positive.',tx:'Treat underlying cause. No specific treatment for clubbing itself.'},
+  "Dupuytren's contracture":{def:'Progressive fibrosis of palmar fascia causing fixed flexion contracture of fingers.',signs:'Nodules then cords in palmar fascia. Progressive flexion of ring > little finger. Cannot extend.',tx:'Collagenase (Xiaflex) injection. Needle fasciotomy. Surgical fasciectomy. Recurrence common.'},
+  'Diabetic foot ulcer':{def:'Neuropathic/ischaemic ulcer in diabetic patient from neuropathy + PAD + infection.',signs:'Painless plantar ulcer at pressure points. Deep punched-out. Warm foot, bounding pulses.',tx:'Debridement. Offloading (total contact cast). Wound care. Antibiotics. Control glucose.'},
+  'Varicose veins':{def:'Dilated tortuous superficial veins due to valvular incompetence. Great saphenous vein most common.',signs:'Visible dilated tortuous veins, aching, heaviness, itching. Complications: eczema, ulcer.',tx:'Compression stockings. Endovenous ablation (laser/RF — 1st line). Foam sclerotherapy. Surgery.'},
+  'Venous ulcer':{def:'Chronic ulceration from chronic venous hypertension in gaiter area (medial lower leg).',signs:'Shallow irregular ulcer medial malleolus. Haemosiderin staining, lipodermatosclerosis, varicose eczema.',tx:'4-layer compression bandaging (cornerstone). Wound care. Treat infection. Pentoxifylline.'},
+  'Arterial ulcer':{def:'Ischaemic ulcer from peripheral arterial disease (atherosclerosis) causing tissue hypoxia.',signs:'Painful deep punched-out ulcer on toes/heel. Pale cold foot. Absent pulses. ABI <0.8.',tx:'Revascularisation (angioplasty/bypass). Wound care. Pain management. Amputation if non-viable.'},
+  'Pressure sore':{def:'Localised skin/soft tissue injury over bony prominence from prolonged pressure. Graded I–IV.',signs:'Grade I: non-blanchable erythema. Grade II: partial thickness. Grade III: full thickness. Grade IV: bone/muscle.',tx:'Relieve pressure (reposition 2-hourly). Wound debridement. Appropriate dressings. Nutrition support.'},
+  'Gangrene':{def:'Necrosis of tissue due to ischaemia or infection. Dry (ischaemic), wet (infected), or gas gangrene.',signs:'Dry: shrivelled black/brown demarcated. Wet: moist malodorous spreading. Gas: crepitus, toxicity.',tx:'Dry: conservative/amputation. Wet: IV antibiotics + urgent surgical debridement. Gas: emergency surgery.'},
+  'Onychomycosis':{def:'Fungal infection of nail plate. Dermatophytes (Trichophyton) most common.',signs:'Thickened discoloured (yellow/brown) brittle crumbling nails. Subungual debris, onycholysis.',tx:'Topical amorolfine for mild. Oral terbinafine 3–6 months for moderate-severe.'},
+  'Paronychia':{def:'Infection of nail fold. Acute (S. aureus) or chronic (Candida, repeated water exposure).',signs:'Acute: painful red swollen nail fold with pus. Chronic: swollen nail fold, nail ridging.',tx:'Acute: warm soaks, flucloxacillin, I&D if fluctuant. Chronic: topical antifungal, keep dry.'},
+  'Ingrown toenail':{def:'Lateral nail edge piercing adjacent nail fold skin causing inflammation. Great toe most common.',signs:'Pain, erythema, swelling at nail margin. Granulation tissue. Seropurulent discharge.',tx:'Conservative: proper nail cutting, cotton wool under edge. Surgical: lateral nail avulsion + phenolisation.'},
+  'Corn':{def:'Hard keratin plug over bony prominence from repeated friction/pressure.',signs:'Circular painful hard central core over pressure point (dorsal toes, sole). Pain on pressure.',tx:'Moleskin padding. Salicylic acid plasters. Podiatric debridement. Correct footwear.'},
+  'Callosity':{def:'Diffuse thickening of skin (hyperkeratosis) from chronic friction/pressure. No central core.',signs:'Diffuse painless thickened skin over pressure areas (heel, ball of foot). Yellow, hard.',tx:'Pumice stone. Urea-based creams (20–40%). Podiatric debridement. Protective padding.'},
+  'Tinea pedis':{def:'Dermatophyte fungal infection of foot. Most common dermatophytosis. T. rubrum most frequent.',signs:'Interdigital maceration, scaling, fissuring (web spaces). Moccasin pattern. Vesicular type. Pruritus.',tx:'Topical clotrimazole or terbinafine 2–4 weeks. Oral terbinafine for resistant. Keep feet dry.'},
+  'Lymphedema':{def:'Chronic oedema from lymphatic dysfunction (primary) or obstruction/damage (secondary).',signs:'Non-pitting painless limb swelling. Stemmer sign positive. Skin thickening (chronic).',tx:'No cure. Complete decongestive therapy (CDT): manual lymphatic drainage + compression.'},
+  'Cellulitis leg':{def:'Acute bacterial skin infection of lower leg. S. pyogenes/S. aureus. Entry via skin breaks.',signs:'Spreading erythema, warmth, swelling, tenderness lower leg. Fever, lymphangitis. Indistinct border.',tx:'Oral flucloxacillin/co-amoxiclav. IV antibiotics if severe. Mark borders. Elevate limb.'},
+  'Erysipelas':{def:'Superficial dermis and upper subcutaneous tissue infection. Streptococcus pyogenes. Well-defined.',signs:'Well-demarcated raised bright red shiny warm plaque with clear border. Fever, rigors.',tx:'Benzylpenicillin IV/oral (DOC — Streptococcal). Elevation. Prophylactic penicillin if recurrent.'},
+  'Tinea corporis':{def:'Ringworm — dermatophyte infection of skin (not scalp/feet/groin). T. tonsurans or Microsporum.',signs:'Annular ring-shaped plaque with clearing centre, raised scaly erythematous border. Pruritus.',tx:'Topical clotrimazole or terbinafine 2–4 weeks. Oral terbinafine for extensive/resistant.'},
+  'Drug eruption':{def:'Adverse cutaneous reaction to drug. Maculopapular (most common), urticarial, fixed drug, SJS.',signs:'Maculopapular rash 1–2 weeks after starting drug. Pruritus. Trunk first then spreads.',tx:'Identify and stop offending drug. Topical corticosteroids + antihistamines. Systemic steroids if severe.'},
+  'Measles rash':{def:'Exanthem of Rubeola virus (Paramyxovirus). Rash appears after prodrome on day 3–4.',signs:'Prodrome: 3 C\'s (Cough, Coryza, Conjunctivitis) + Koplik spots. Maculopapular rash face→trunk→limbs.',tx:'Supportive: fluids, antipyretics, Vitamin A (reduces complications). Prevention: MMR vaccine.'},
+  'Chickenpox':{def:'Primary infection with Varicella-Zoster Virus (VZV). Highly contagious respiratory/contact spread.',signs:'Pruritic rash: macules→papules→vesicles→crusts ("dew drop on rose petal"). Multiple stages simultaneously.',tx:'Supportive: calamine lotion, antihistamines, paracetamol. Oral acyclovir for high-risk. Vaccine prevention.'},
+  'Dengue rash':{def:'Exanthem of Dengue virus (Flavivirus, Aedes mosquito). Appears day 3–5 of febrile illness.',signs:'"Islands of white in sea of red". Flushing face. Tourniquet test positive. Thrombocytopenia.',tx:'Supportive: IV fluids, monitor platelets/haematocrit. Paracetamol only (NOT NSAIDs/aspirin).'},
+  'SJS':{def:'Stevens-Johnson Syndrome: severe mucocutaneous drug reaction with <10% BSA epidermal detachment.',signs:'Targetoid lesions + mucosal erosions (mouth/eyes/genitalia) + skin detachment <10% BSA. Fever.',tx:'Stop causative drug IMMEDIATELY. ICU/burns unit. IV immunoglobulin/cyclosporin. Ophthalmology.'},
+  'Toxic epidermal necrolysis':{def:'TEN: most severe drug reaction with >30% BSA epidermal detachment. Mortality 25–35%.',signs:'Widespread skin detachment >30% BSA. Positive Nikolsky sign. Mucosal involvement. Sepsis.',tx:'Immediate drug cessation. Burns unit/ICU. IV fluids, nutrition. Ophthalmology. IVIG, cyclosporin.'},
+  'Erythema multiforme':{def:'Acute self-limiting immune-mediated reaction. Minor (HSV-triggered) or Major (mucosae involved).',signs:'Target/iris lesions (3 concentric zones). Palms, soles, extensors. EM Major: mucosal involvement.',tx:'Treat underlying cause (acyclovir if HSV). Self-limiting. Prophylactic acyclovir prevents recurrence.'},
+  'Pellagra dermatitis':{def:'Niacin (Vitamin B3) deficiency causing 4 D\'s: Dermatitis, Diarrhoea, Dementia, Death.',signs:'Casal\'s necklace — photosensitive symmetrical dermatitis on sun-exposed areas. Hyperpigmented rough skin.',tx:'Nicotinamide oral supplementation. Improve diet. Treat malabsorption. Dramatic response to treatment.'},
+  'Ichthyosis':{def:'Group of disorders with generalised dry scaly skin due to abnormal keratinisation. Mostly genetic.',signs:'Fish-scale-like generalised scaling. Ichthyosis vulgaris: fine scales flexures spared.',tx:'No cure. Emollients (urea, lactic acid creams) cornerstone. Keratolytics. Oral retinoids for severe.'},
+  'Keloid':{def:'Excessive fibroblast proliferation beyond wound margins with excess collagen deposition.',signs:'Firm raised shiny hyperpigmented scar extending BEYOND original wound. Pruritus, pain.',tx:'Intralesional triamcinolone injections (1st line). Silicone gel/sheets. Pressure therapy. Surgery + steroid.'},
+  'Skin tag':{def:'Benign pedunculated soft fibroma of skin. Common in skin folds. No malignant potential.',signs:'Soft flesh-coloured pedunculated papule in neck, axillae, groin. Painless.',tx:'Reassure. Snip excision, cryotherapy, or electrocautery if troublesome.'},
+  'Molluscum contagiosum':{def:'Poxvirus skin infection causing umbilicated papules. Spread by direct contact. Common in children.',signs:'Pearly flesh-coloured dome-shaped umbilicated (central dimple) papules. Multiple. Trunk, face.',tx:'Often self-limiting 6–18 months. Cryotherapy, curettage, topical imiquimod.'},
+  'Warts':{def:'Benign epithelial tumours caused by Human Papillomavirus (HPV). Highly contagious by contact.',signs:'Common: rough hyperkeratotic papule on hands/feet. Plantar: deep painful. Plane: flat skin-coloured.',tx:'Topical salicylic acid (1st line). Cryotherapy with liquid nitrogen. Resolve spontaneously in 2 years.'}
 };
+
+// ══════════════════════════════════════════
+// PHOTO STORAGE (localStorage)
+// ══════════════════════════════════════════
+function getPhotos(){try{return JSON.parse(localStorage.getItem('medPhotos')||'{}');}catch{return {};}}
+function savePhotos(p){try{localStorage.setItem('medPhotos',JSON.stringify(p));}catch(e){alert('Storage full! Delete some photos.');}}
+function getPhoto(name){return getPhotos()[name]||null;}
+function setPhoto(name,dataUrl){const p=getPhotos();p[name]=dataUrl;savePhotos(p);}
+function deletePhotoByName(name){const p=getPhotos();delete p[name];savePhotos(p);}
 
 // ══════════════════════════════════════════
 // NAVIGATION
@@ -451,42 +472,113 @@ function goTo(id){
   if(id==='reference') buildRef();
   if(id==='flashcard') initFlash();
   if(id==='quiz') initQuiz();
+  if(id==='viva') initViva();
 }
 
 // ══════════════════════════════════════════
-// REFERENCE
+// REFERENCE WITH PHOTO FEATURE
 // ══════════════════════════════════════════
 let refBuilt=false;
 function buildRef(){
-  if(refBuilt) return; refBuilt=true;
+  if(refBuilt)return; refBuilt=true;
   const c=document.getElementById('refSections');
-  c.innerHTML=SECTORS.map((s,i)=>`
-    <div class="ref-section" id="rs${i}">
-      <div class="ref-sec-header" onclick="toggleRef(${i})">
+  c.innerHTML=SECTORS.map((s,si)=>`
+    <div class="ref-section" id="rs${si}">
+      <div class="ref-sec-header" onclick="toggleRef(${si})">
         <span class="ref-sec-icon">${s.icon}</span>
         <span class="ref-sec-name">${s.name}</span>
         <span class="ref-sec-count">${s.diseases.length}</span>
         <span class="ref-sec-arrow">▼</span>
       </div>
-      <div class="ref-disease-grid">
-        ${s.diseases.map((d,j)=>`
-          <a class="ref-disease" href="https://www.google.com/search?q=${encodeURIComponent(d+' disease clinical')}" target="_blank">
-            <span class="ref-rank">${j+1}</span>
-            <span class="ref-name">${d}</span>
-            <span class="ref-arrow">↗</span>
-          </a>`).join('')}
+      <div class="ref-disease-list">
+        ${s.diseases.map((d,di)=>{
+          const key=d.replace(/[^a-z0-9]/gi,'_');
+          return `
+          <div class="disease-row" id="row_${key}">
+            <span class="ref-rank">${di+1}</span>
+            <a class="ref-name-link" href="https://www.google.com/search?q=${encodeURIComponent(d+' disease')}" target="_blank">${d} ↗</a>
+            <div class="photo-area">
+              <img class="photo-thumb" id="thumb_${key}" src="" alt="" onclick="viewPhoto('${d}','${key}')">
+              <div class="add-photo-btn" id="pbtn_${key}" onclick="triggerPhoto('${d}','${key}')">📷</div>
+              <input type="file" class="file-input" id="finput_${key}" accept="image/*" onchange="handlePhoto(this,'${d}','${key}')">
+            </div>
+          </div>`;
+        }).join('')}
       </div>
     </div>`).join('');
+  // Load saved photos
+  refreshAllThumbs();
 }
+
+function refreshAllThumbs(){
+  const photos=getPhotos();
+  Object.keys(photos).forEach(key=>{
+    const thumb=document.getElementById('thumb_'+key);
+    const btn=document.getElementById('pbtn_'+key);
+    if(thumb&&photos[key]){
+      thumb.src=photos[key];
+      thumb.classList.remove('empty');
+      thumb.style.display='block';
+      if(btn) btn.classList.add('has-photo');
+      if(btn) btn.textContent='✏️';
+    }
+  });
+}
+
+function triggerPhoto(name,key){
+  document.getElementById('finput_'+key).click();
+}
+
+function handlePhoto(input,name,key){
+  const file=input.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const dataUrl=e.target.result;
+    setPhoto(key,dataUrl);
+    const thumb=document.getElementById('thumb_'+key);
+    const btn=document.getElementById('pbtn_'+key);
+    if(thumb){thumb.src=dataUrl;thumb.style.display='block';thumb.classList.remove('empty');}
+    if(btn){btn.classList.add('has-photo');btn.textContent='✏️';}
+  };
+  reader.readAsDataURL(file);
+}
+
+let currentModalKey='';
+function viewPhoto(name,key){
+  const photo=getPhoto(key);
+  if(!photo)return;
+  document.getElementById('modalImg').src=photo;
+  document.getElementById('modalTitle').textContent=name;
+  currentModalKey=key;
+  document.getElementById('photoModal').classList.add('open');
+}
+
+function deletePhoto(){
+  if(!currentModalKey)return;
+  deletePhotoByName(currentModalKey);
+  const thumb=document.getElementById('thumb_'+currentModalKey);
+  const btn=document.getElementById('pbtn_'+currentModalKey);
+  if(thumb){thumb.src='';thumb.style.display='none';}
+  if(btn){btn.classList.remove('has-photo');btn.textContent='📷';}
+  closeModal();
+}
+
+function closeModal(){
+  document.getElementById('photoModal').classList.remove('open');
+  currentModalKey='';
+}
+
 function toggleRef(i){document.getElementById('rs'+i).classList.toggle('closed');}
+
 function refSearch(q){
   q=q.toLowerCase().trim();
   document.querySelectorAll('.ref-section').forEach(sec=>{
-    if(!q){sec.classList.remove('hidden','closed');sec.querySelectorAll('.ref-disease').forEach(d=>d.classList.remove('hidden'));return;}
+    if(!q){sec.classList.remove('hidden','closed');sec.querySelectorAll('.disease-row').forEach(d=>d.style.display='');return;}
     let any=false;
-    sec.querySelectorAll('.ref-disease').forEach(d=>{
-      const show=d.querySelector('.ref-name').textContent.toLowerCase().includes(q);
-      d.classList.toggle('hidden',!show);
+    sec.querySelectorAll('.disease-row').forEach(row=>{
+      const show=row.querySelector('.ref-name-link').textContent.toLowerCase().includes(q);
+      row.style.display=show?'':'none';
       if(show) any=true;
     });
     sec.classList.toggle('hidden',!any);
@@ -497,8 +589,7 @@ function refSearch(q){
 // ══════════════════════════════════════════
 // FLASHCARD
 // ══════════════════════════════════════════
-let fAll=[],fIdx=0,fKnewN=0,fSkipN=0,fFlipped=false;
-
+let fAll=[],fIdx=0,fKnewN=0,fSkipN=0;
 function initFlash(){
   fAll=[];
   SECTORS.forEach(s=>s.diseases.forEach(d=>fAll.push({name:d,sector:s.name,icon:s.icon})));
@@ -506,11 +597,10 @@ function initFlash(){
   fIdx=0;fKnewN=0;fSkipN=0;
   showCard();
 }
-
 function showCard(){
   if(fIdx>=fAll.length){fIdx=0;fAll.sort(()=>Math.random()-.5);}
   const d=fAll[fIdx];
-  const info=DISEASE_INFO[d.name]||{def:'Detailed info coming soon.',signs:'Key clinical features — refer to reference section.',tx:'Standard treatment protocols apply.'};
+  const info=DISEASE_INFO[d.name]||{def:'Refer to reference section.',signs:'Key clinical features.',tx:'Standard treatment protocols.'};
   document.getElementById('fEmoji').textContent=d.icon;
   document.getElementById('fName').textContent=d.name;
   document.getElementById('fSector').textContent=d.sector;
@@ -518,27 +608,15 @@ function showCard(){
   document.getElementById('fDef').textContent=info.def;
   document.getElementById('fSigns').textContent=info.signs;
   document.getElementById('fTx').textContent=info.tx;
-  const pct=((fIdx+1)/fAll.length*100);
-  document.getElementById('flashProg').style.width=pct+'%';
+  document.getElementById('flashProg').style.width=((fIdx+1)/fAll.length*100)+'%';
   document.getElementById('flashProgTxt').textContent=`${fIdx+1}/${fAll.length}`;
   document.getElementById('fKnew').textContent=`✓ ${fKnewN}`;
   document.getElementById('fSkip').textContent=`✗ ${fSkipN}`;
   document.getElementById('flashBadge').textContent=d.sector;
-  const card=document.getElementById('flashCard');
-  card.classList.remove('flipped');
-  fFlipped=false;
+  document.getElementById('flashCard').classList.remove('flipped');
 }
-
-function flipCard(){
-  document.getElementById('flashCard').classList.toggle('flipped');
-  fFlipped=!fFlipped;
-}
-
-function flashAct(t){
-  if(t==='knew') fKnewN++; else fSkipN++;
-  fIdx++;
-  showCard();
-}
+function flipCard(){document.getElementById('flashCard').classList.toggle('flipped');}
+function flashAct(t){if(t==='knew')fKnewN++;else fSkipN++;fIdx++;showCard();}
 
 // ══════════════════════════════════════════
 // QUIZ
@@ -546,37 +624,29 @@ function flashAct(t){
 const Qs=[
   {q:"Which disease causes 'cradle cap' in infants?",sec:"Head & Scalp",opts:["Tinea capitis","Seborrheic dermatitis","Scalp psoriasis","Pediculosis"],ans:1,exp:"Seborrheic dermatitis causes greasy scales (dandruff/cradle cap). Malassezia yeast is implicated."},
   {q:"Bitot's spots indicate deficiency of:",sec:"Eye",opts:["Vitamin D","Vitamin C","Vitamin A","Vitamin B12"],ans:2,exp:"Bitot's spots = foamy conjunctival deposits due to Vitamin A deficiency (xerophthalmia)."},
-  {q:"CSOM stands for:",sec:"Ear",opts:["Chronic Suppurative Otitis Media","Chronic Serous Otitis Media","Congenital Suppurative Otitis Media","Chronic Sympathetic Otitis Media"],ans:0,exp:"CSOM = Chronic Suppurative Otitis Media — persistent ear discharge > 6 weeks with TM perforation."},
-  {q:"90% of epistaxis originates from:",sec:"Nose",opts:["Posterior nasal cavity","Little's area (Kiesselbach's)","Sphenopalatine artery","Ethmoidal artery"],ans:1,exp:"Little's area (Kiesselbach's plexus) on nasal septum is the source of 90% of anterior epistaxis."},
-  {q:"Leukoplakia is best described as:",sec:"Oral Cavity",opts:["Red patch on mucosa","Removable white coating","White patch that cannot be scraped off","Brown ulceration"],ans:2,exp:"Leukoplakia = white patch that cannot be scraped off and not explained by another diagnosis. Premalignant."},
-  {q:"Thyroglossal cyst is distinguished from thyroid swelling by:",sec:"Neck",opts:["Its size","Moving on tongue protrusion","Fluctuancy","Midline position"],ans:1,exp:"Thyroglossal cyst moves on BOTH swallowing AND tongue protrusion — this is pathognomonic."},
-  {q:"Most common benign breast tumour in young women:",sec:"Chest & Breast",opts:["Fibrocystic disease","Fibroadenoma","Lipoma","Breast abscess"],ans:1,exp:"Fibroadenoma is the most common benign breast tumour, the classic 'breast mouse' in women aged 15–35."},
+  {q:"CSOM stands for:",sec:"Ear",opts:["Chronic Suppurative Otitis Media","Chronic Serous Otitis Media","Congenital Suppurative OM","Chronic Sympathetic OM"],ans:0,exp:"CSOM = Chronic Suppurative Otitis Media — persistent discharge >6 weeks with TM perforation."},
+  {q:"90% of epistaxis originates from:",sec:"Nose",opts:["Posterior nasal cavity","Little's area (Kiesselbach's)","Sphenopalatine artery","Ethmoidal artery"],ans:1,exp:"Little's area (Kiesselbach's plexus) on the nasal septum is the source of 90% of anterior epistaxis."},
+  {q:"Leukoplakia is best described as:",sec:"Oral Cavity",opts:["Red patch on mucosa","Removable white coating","White patch cannot be scraped off","Brown ulceration"],ans:2,exp:"Leukoplakia = white patch that CANNOT be scraped off and is not explained by another diagnosis. Premalignant."},
+  {q:"Thyroglossal cyst is distinguished from thyroid by:",sec:"Neck",opts:["Its size","Moving on tongue protrusion","Fluctuancy","Midline position"],ans:1,exp:"Thyroglossal cyst moves on BOTH swallowing AND tongue protrusion — this is pathognomonic."},
+  {q:"Most common benign breast tumour in young women:",sec:"Chest & Breast",opts:["Fibrocystic disease","Fibroadenoma","Lipoma","Breast abscess"],ans:1,exp:"Fibroadenoma is the most common benign breast tumour — the classic 'breast mouse' in women aged 15–35."},
   {q:"Dupuytren's contracture most commonly affects:",sec:"Upper Limb",opts:["Index finger","Middle finger","Ring finger","Little finger"],ans:2,exp:"Ring finger (then little finger) are most commonly affected in Dupuytren's contracture of palmar fascia."},
   {q:"Diabetic foot ulcers are typically located at:",sec:"Lower Limb",opts:["Lateral malleolus","Gaiter area","Pressure points (plantar)","Tips of toes"],ans:2,exp:"Neuropathic (diabetic) ulcers occur at pressure points: plantar aspect, metatarsal heads, heel."},
   {q:"SJS involves epidermal detachment of less than:",sec:"General Skin",opts:["10% BSA","20% BSA","30% BSA","50% BSA"],ans:0,exp:"SJS = <10% BSA skin detachment. TEN = >30%. Overlap syndrome = 10–30%."},
-  {q:"Drug of choice for Tinea capitis is:",sec:"Head & Scalp",opts:["Topical clotrimazole","Oral griseofulvin","Oral fluconazole","IV amphotericin"],ans:1,exp:"Oral griseofulvin for 6–8 weeks is the classic DOC for tinea capitis. Terbinafine is a newer alternative."},
-  {q:"Pterygium grows from which part of the eye?",sec:"Eye",opts:["Upper lid","Nasal conjunctiva toward cornea","Sclera temporally","Iris"],ans:1,exp:"Pterygium is a fleshy conjunctival growth typically from nasal side toward cornea. UV exposure related."},
-  {q:"Erysipelas is caused by:",sec:"Lower Limb",opts:["Staphylococcus aureus","Streptococcus pyogenes","Pseudomonas","Candida"],ans:1,exp:"Erysipelas is caused by Streptococcus pyogenes. Drug of choice is benzylpenicillin — unlike cellulitis."},
-  {q:"Scabies is caused by:",sec:"General Skin",opts:["Tinea rubrum","Pediculus capitis","Sarcoptes scabiei","Demodex folliculorum"],ans:2,exp:"Scabies = infestation by Sarcoptes scabiei mite. Characteristic burrows in web spaces. Treatment: permethrin 5%."},
-  {q:"Sistrunk operation is done for:",sec:"Neck",opts:["Branchial cyst","Thyroglossal cyst","Sebaceous cyst","Thyroid nodule"],ans:1,exp:"Sistrunk operation (cyst + central hyoid body excision) is the surgical treatment for thyroglossal cyst to prevent recurrence."}
+  {q:"Drug of choice for Tinea capitis:",sec:"Head & Scalp",opts:["Topical clotrimazole","Oral griseofulvin","Oral fluconazole","IV amphotericin"],ans:1,exp:"Oral griseofulvin for 6–8 weeks is the classic DOC for tinea capitis. Terbinafine is a newer alternative."},
+  {q:"Erysipelas drug of choice is:",sec:"Lower Limb",opts:["Flucloxacillin","Benzylpenicillin","Ciprofloxacin","Metronidazole"],ans:1,exp:"Erysipelas is caused by Streptococcus pyogenes. Benzylpenicillin is the DOC — unlike cellulitis."},
+  {q:"Sistrunk operation is done for:",sec:"Neck",opts:["Branchial cyst","Thyroglossal cyst","Sebaceous cyst","Thyroid nodule"],ans:1,exp:"Sistrunk operation (cyst + central hyoid body excision) treats thyroglossal cyst and prevents recurrence."},
+  {q:"Scabies is caused by:",sec:"General Skin",opts:["Tinea rubrum","Pediculus capitis","Sarcoptes scabiei","Demodex folliculorum"],ans:2,exp:"Scabies = infestation by Sarcoptes scabiei mite. Characteristic burrows in web spaces. Permethrin 5% is treatment."},
+  {q:"Venous ulcers are typically found at:",sec:"Lower Limb",opts:["Pressure points on heel","Tips of toes","Gaiter area (medial lower leg)","Lateral malleolus"],ans:2,exp:"Venous ulcers classically occur in the gaiter area with haemosiderin staining and lipodermatosclerosis."}
 ];
-
 let qList=[],qIdx=0,qScore=0,qAnswered=false;
-
-function initQuiz(){
-  qList=[...Qs].sort(()=>Math.random()-.5).slice(0,10);
-  qIdx=0;qScore=0;
-  renderQ();
-}
-
+function initQuiz(){qList=[...Qs].sort(()=>Math.random()-.5).slice(0,10);qIdx=0;qScore=0;renderQ();}
 function renderQ(){
-  const c=document.getElementById('quizContent');
   const q=qList[qIdx];
   document.getElementById('quizBadge').textContent=`${qIdx+1}/10`;
   qAnswered=false;
-  c.innerHTML=`
+  document.getElementById('quizContent').innerHTML=`
     <div class="quiz-header-info">
-      <div class="quiz-qnum">Question ${qIdx+1} of 10</div>
+      <div class="quiz-qnum">Q ${qIdx+1} of 10</div>
       <div class="quiz-score-badge">Score: ${qScore}</div>
     </div>
     <div class="quiz-prog-bar"><div class="quiz-prog-fill" style="width:${(qIdx/10)*100}%"></div></div>
@@ -585,126 +655,133 @@ function renderQ(){
       <div class="quiz-q-text">${q.q}</div>
     </div>
     <div class="quiz-options" id="qOpts">
-      ${q.opts.map((o,i)=>`
-        <div class="quiz-opt" onclick="answerQ(${i})" id="qo${i}">
-          <span class="quiz-opt-letter">${['A','B','C','D'][i]}</span>
-          <span>${o}</span>
-        </div>`).join('')}
+      ${q.opts.map((o,i)=>`<div class="quiz-opt" onclick="answerQ(${i})" id="qo${i}"><span class="quiz-opt-letter">${['A','B','C','D'][i]}</span><span>${o}</span></div>`).join('')}
     </div>
     <div class="quiz-explanation" id="qExp"></div>
-    <button class="quiz-next-btn" id="qNext" onclick="nextQ()">${qIdx<9?'Next →':'See Results 🏆'}</button>
-  `;
+    <button class="quiz-next-btn" id="qNext" onclick="nextQ()">${qIdx<9?'Next →':'Results 🏆'}</button>`;
 }
-
-function answerQ(chosen){
-  if(qAnswered) return;
-  qAnswered=true;
+function answerQ(c){
+  if(qAnswered)return; qAnswered=true;
   const q=qList[qIdx];
   document.querySelectorAll('.quiz-opt').forEach(o=>o.classList.add('disabled'));
-  document.getElementById('qo'+chosen).classList.add(chosen===q.ans?'correct':'wrong');
-  if(chosen!==q.ans) document.getElementById('qo'+q.ans).classList.add('correct');
-  if(chosen===q.ans) qScore++;
+  document.getElementById('qo'+c).classList.add(c===q.ans?'correct':'wrong');
+  if(c!==q.ans) document.getElementById('qo'+q.ans).classList.add('correct');
+  if(c===q.ans) qScore++;
   document.getElementById('qExp').textContent='💡 '+q.exp;
   document.getElementById('qExp').classList.add('show');
   document.getElementById('qNext').classList.add('show');
 }
-
-function nextQ(){
-  qIdx++;
-  if(qIdx>=qList.length){showResult();return;}
-  renderQ();
-}
-
+function nextQ(){qIdx++;if(qIdx>=qList.length){showResult();return;}renderQ();}
 function showResult(){
   document.getElementById('homeScore').textContent=qScore+'/10';
-  const msg=qScore>=8?'🏆 Excellent! Viva ready!':qScore>=5?'📚 Good! Keep revising.':'💪 Practice more, you got this!';
   document.getElementById('quizContent').innerHTML=`
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:18px;text-align:center;padding:30px;">
-      <div style="font-size:3.5rem">${qScore>=8?'🏆':qScore>=5?'📚':'💪'}</div>
-      <div style="font-family:'Syne',serif;font-size:2.2rem;font-weight:800;color:var(--gold)">${qScore}/10</div>
-      <div style="color:var(--muted);font-size:.9rem;">${msg}</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:-8px;">By Bayazid jmc-13</div>
-      <button onclick="initQuiz()" style="background:var(--blue);color:#fff;border:none;border-radius:13px;padding:14px 30px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;margin-top:8px;">Try Again →</button>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;text-align:center;padding:28px;">
+      <div style="font-size:3.2rem">${qScore>=8?'🏆':qScore>=5?'📚':'💪'}</div>
+      <div style="font-family:'Syne',serif;font-size:2rem;font-weight:800;color:var(--gold)">${qScore}/10</div>
+      <div style="color:var(--muted);font-size:.88rem;">${qScore>=8?'Excellent! Viva ready! 🎉':qScore>=5?'Good! Keep revising 📖':'Practice more! You got this 💪'}</div>
+      <div style="font-size:.82rem;font-weight:700;color:var(--gold);background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.3);padding:6px 16px;border-radius:20px;">👨‍💻 Developed by Bayazid jmc-13</div>
+      <button onclick="initQuiz()" style="background:var(--blue);color:#fff;border:none;border-radius:12px;padding:13px 28px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;margin-top:6px;">Try Again →</button>
     </div>`;
 }
 
 // ══════════════════════════════════════════
-// VIVA AI — Fixed with proper API call
+// VIVA — OFFLINE SMART ENGINE
 // ══════════════════════════════════════════
-let vivaHist=[];
-const VIVA_SYS=`You are a strict but encouraging medical viva examiner for MBBS students. The student is studying 100 clinical diseases organised head-to-toe: Head & Scalp, Eye, Ear, Nose, Oral Cavity, Neck, Chest & Breast, Upper Limb, Lower Limb, General Skin/Systemic. 
+const VIVA_BANK=[
+  {q:"What is the most common cause of nosebleed and where does it originate?",sector:"Nose",keywords:["kiesselbach","little","anterior","plexus","septum"],answer:"Little's area (Kiesselbach's plexus) on the anterior nasal septum causes 90% of epistaxis.",followup:"What is the first aid management of epistaxis?"},
+  {q:"A child presents with circular patches of hair loss on the scalp with scaling. What is your diagnosis and treatment?",sector:"Head & Scalp",keywords:["tinea capitis","griseofulvin","dermatophyte","fungal","ringworm"],answer:"Tinea capitis — dermatophyte infection. Treatment: oral griseofulvin for 6–8 weeks (DOC).",followup:"Why can't we use topical antifungals alone for tinea capitis?"},
+  {q:"What is the pathognomonic sign of thyroglossal cyst?",sector:"Neck",keywords:["tongue","protrusion","moves","swallowing","hyoid"],answer:"It moves upward on both swallowing AND tongue protrusion — this is pathognomonic of thyroglossal cyst.",followup:"What operation is done for thyroglossal cyst and why is the hyoid bone removed?"},
+  {q:"Describe the classic appearance of a venous ulcer and its location.",sector:"Lower Limb",keywords:["gaiter","medial","malleolus","haemosiderin","lipodermatosclerosis","shallow"],answer:"Shallow irregular ulcer in the gaiter area (medial lower leg), with haemosiderin staining and lipodermatosclerosis.",followup:"What is the cornerstone of treatment for venous ulcers?"},
+  {q:"What are Bitot's spots and what deficiency do they indicate?",sector:"Eye",keywords:["vitamin a","foamy","conjunctiva","xerophthalmia","night blindness"],answer:"Foamy/cheesy deposits on temporal conjunctiva due to Vitamin A deficiency (xerophthalmia).",followup:"What is the WHO treatment protocol for Vitamin A deficiency?"},
+  {q:"Differentiate between SJS and TEN.",sector:"General Skin",keywords:["10","30","bsa","skin detachment","mucosal","epidermal"],answer:"SJS: <10% BSA skin detachment. TEN: >30% BSA. Overlap syndrome: 10–30%. Both are drug reactions.",followup:"Name 3 common drugs causing SJS/TEN."},
+  {q:"What is CSOM and what are its clinical features?",sector:"Ear",keywords:["chronic suppurative","otitis media","discharge","perforation","conductive","hearing"],answer:"Chronic Suppurative Otitis Media — persistent middle ear infection with TM perforation >6 weeks, causing painless mucopurulent discharge and conductive hearing loss.",followup:"How do you differentiate safe CSOM from unsafe CSOM?"},
+  {q:"A young woman has a smooth, very mobile, non-tender breast lump. What is the most likely diagnosis?",sector:"Chest & Breast",keywords:["fibroadenoma","breast mouse","mobile","benign","young"],answer:"Fibroadenoma — the 'breast mouse'. Most common benign breast tumour in women aged 15–35.",followup:"What is the triple assessment for breast lumps?"},
+  {q:"What causes Angular Cheilitis and how do you treat it?",sector:"Oral Cavity",keywords:["candida","riboflavin","b2","fissure","commissure","miconazole"],answer:"Candida albicans and/or Riboflavin (B2) deficiency causes cracks at mouth corners. Treat with topical miconazole and correct nutritional deficiencies.",followup:"What systemic conditions predispose to angular cheilitis?"},
+  {q:"Describe the Sistrunk operation.",sector:"Neck",keywords:["thyroglossal","hyoid","sistrunk","excision","cyst","central"],answer:"Sistrunk operation involves excision of the thyroglossal cyst along with the central portion of the hyoid bone to prevent recurrence.",followup:"Why must the central hyoid bone be removed?"},
+  {q:"What is Dupuytren's contracture and which fingers are most commonly affected?",sector:"Upper Limb",keywords:["ring","little","palmar","fascia","contracture","fibrosis","flexion"],answer:"Progressive fibrosis of palmar fascia causing fixed flexion contracture. Ring finger most commonly affected, then little finger.",followup:"What is the treatment for Dupuytren's contracture?"},
+  {q:"What is the difference between erysipelas and cellulitis?",sector:"Lower Limb",keywords:["well demarcated","border","streptococcus","superficial","penicillin","raised","dermis"],answer:"Erysipelas: well-demarcated raised border, superficial dermis, S. pyogenes — treat with benzylpenicillin. Cellulitis: indistinct border, deeper dermis/subcutaneous, mixed organisms — treat with flucloxacillin.",followup:"What is the drug of choice for erysipelas?"},
+  {q:"What are the 4 D's of Pellagra?",sector:"General Skin",keywords:["dermatitis","diarrhoea","dementia","death","niacin","b3","casal"],answer:"Dermatitis, Diarrhoea, Dementia, Death — caused by Niacin (Vitamin B3) deficiency. Casal's necklace is the classic skin sign.",followup:"In which populations is pellagra most commonly seen?"},
+  {q:"Describe a diabetic foot ulcer vs an arterial ulcer.",sector:"Lower Limb",keywords:["pressure","plantar","painless","neuropathic","abi","cold","pulseless","punched"],answer:"Diabetic (neuropathic): painless, plantar surface, pressure points, warm foot. Arterial: painful, toes/heel, cold foot, absent pulses, ABI <0.8.",followup:"What is the Ankle-Brachial Index (ABI) and its significance?"},
+  {q:"What is leukoplakia? Is it premalignant?",sector:"Oral Cavity",keywords:["white","cannot be scraped","premalignant","biopsy","dysplasia","malignant"],answer:"White patch on oral mucosa that CANNOT be scraped off and is not explained by another diagnosis. YES — it is premalignant (5% malignant transformation).",followup:"What risk factors increase malignant transformation of leukoplakia?"},
+  {q:"How does Measles rash differ from Chickenpox rash?",sector:"General Skin",keywords:["maculopapular","cephalocaudal","koplik","vesicle","dew drop","simultaneous","stages"],answer:"Measles: maculopapular rash spreading cephalocaudally after Koplik spots + 3 C's prodrome. Chickenpox: vesicular 'dew drop on rose petal' with multiple stages simultaneously.",followup:"What is the significance of Koplik's spots?"}
+];
 
-Your role:
-1. Ask ONE clinical viva question at a time
-2. After the student answers: give brief feedback (correct/partial/incorrect) with a short explanation (2-3 sentences)
-3. Then ask another probing question or move to next topic
-4. Be concise - max 4 sentences per response
-5. Use clinical scenarios sometimes (e.g., "A 35 year old woman presents with...")
-6. This app was developed by Bayazid jmc-13`;
+let vivaCurrentQ=null,vivaAsked=[];
 
-async function vSend(){
+function initViva(){
+  // only init once
+  if(document.getElementById('vivaChat').children.length>1) return;
+}
+
+function vivaStart(sector){
+  let pool=sector==='random'?VIVA_BANK:VIVA_BANK.filter(q=>q.sector===sector||sector==='random');
+  if(pool.length===0) pool=VIVA_BANK;
+  const unused=pool.filter(q=>!vivaAsked.includes(q.q));
+  const bank=unused.length>0?unused:pool;
+  vivaCurrentQ=bank[Math.floor(Math.random()*bank.length)];
+  vivaAsked.push(vivaCurrentQ.q);
+  addVivaBubble('ai',`<div class="bubble-label">🏥 EXAMINER</div><strong>[${vivaCurrentQ.sector}]</strong><br><br>${vivaCurrentQ.q}`);
+  scrollVivaDown();
+}
+
+function vivaNext(){vivaStart('random');}
+
+function vivaAnswer(){
   const inp=document.getElementById('vivaIn');
   const txt=inp.value.trim();
-  if(!txt) return;
+  if(!txt)return;
   inp.value='';
-  addBubble('user',txt);
-  vivaHist.push({role:'user',content:txt});
-  await vivaAI();
+  addVivaBubble('user',txt);
+  setTimeout(()=>vivaRespond(txt),600);
 }
 
-function vQuick(t){
-  document.getElementById('vivaIn').value=t;
-  vSend();
+function vivaRespond(answer){
+  if(!vivaCurrentQ){
+    addVivaBubble('ai','<div class="bubble-label">🏥 EXAMINER</div>Please select a sector or tap "Random" to start a question first!');
+    scrollVivaDown();
+    return;
+  }
+  const a=answer.toLowerCase();
+  const keywords=vivaCurrentQ.keywords;
+  const matched=keywords.filter(k=>a.includes(k.toLowerCase())).length;
+  const total=keywords.length;
+  const score=matched/total;
+
+  let fbClass,fbIcon,fbText;
+  if(score>=0.5){
+    fbClass='feedback-correct';fbIcon='✅';
+    fbText=`${fbIcon} <strong>Good answer!</strong> ${vivaCurrentQ.answer}`;
+  } else if(score>=0.2){
+    fbClass='feedback-partial';fbIcon='⚡';
+    fbText=`${fbIcon} <strong>Partially correct.</strong> ${vivaCurrentQ.answer}`;
+  } else {
+    fbClass='feedback-wrong';fbIcon='❌';
+    fbText=`${fbIcon} <strong>Incorrect.</strong> ${vivaCurrentQ.answer}`;
+  }
+
+  addVivaBubble(fbClass,fbText);
+
+  // Follow-up question after 1s
+  setTimeout(()=>{
+    addVivaBubble('ai',`<div class="bubble-label">🏥 EXAMINER</div>🔁 <strong>Follow-up:</strong> ${vivaCurrentQ.followup}`);
+    vivaCurrentQ=null;
+    scrollVivaDown();
+  },1000);
 }
 
-function addBubble(role,text){
+function addVivaBubble(role,html){
   const chat=document.getElementById('vivaChat');
   const div=document.createElement('div');
-  div.className='viva-bubble '+role;
-  if(role==='ai') div.innerHTML=`<div class="bubble-label">🏥 EXAMINER</div>${text}`;
-  else div.textContent=text;
+  if(role==='user'){div.className='viva-bubble user';div.textContent=html;}
+  else if(role.startsWith('feedback')){div.className='viva-bubble '+role;div.innerHTML=html;}
+  else{div.className='viva-bubble ai';div.innerHTML=html;}
   chat.appendChild(div);
-  setTimeout(()=>chat.scrollTop=chat.scrollHeight,50);
+  scrollVivaDown();
 }
 
-async function vivaAI(){
-  const typing=document.getElementById('vivaTyping');
+function scrollVivaDown(){
   const chat=document.getElementById('vivaChat');
-  typing.classList.add('show');
-  chat.scrollTop=chat.scrollHeight;
-
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:350,
-        system:VIVA_SYS,
-        messages:vivaHist
-      })
-    });
-
-    if(!res.ok){
-      const err=await res.json().catch(()=>({}));
-      throw new Error(err.error?.message||'API error '+res.status);
-    }
-
-    const data=await res.json();
-    const reply=(data.content||[]).map(c=>c.text||'').join('').trim()||'Please try again.';
-    vivaHist.push({role:'assistant',content:reply});
-    typing.classList.remove('show');
-    addBubble('ai',reply);
-  }catch(e){
-    typing.classList.remove('show');
-    const div=document.createElement('div');
-    div.className='viva-error';
-    div.innerHTML=`⚠️ <strong>Connection issue:</strong> ${e.message||'Could not reach AI'}. Please check your internet and try again.`;
-    chat.appendChild(div);
-    chat.scrollTop=chat.scrollHeight;
-    // Remove failed message from history
-    if(vivaHist.length && vivaHist[vivaHist.length-1].role==='user') {}
-  }
+  setTimeout(()=>chat.scrollTop=chat.scrollHeight,100);
 }
 </script>
 </body>
