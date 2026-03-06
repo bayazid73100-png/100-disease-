@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>MedStudy — Head to Toe</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#050b14; --card:#0d1a2a; --card2:#0f2035; --border:#1a2e45;
+  --gold:#f5c842; --blue:#4a9eff; --green:#3dd68c; --red:#ff6b6b;
+  --purple:#c084fc; --text:#e8f0fe; --muted:#5a7a99;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow:hidden;}
+.screen{display:none;height:100dvh;flex-direction:column;overflow:hidden;}
+.screen.active{display:flex;}
+
+/* HOME */
+#home{background:radial-gradient(ellipse at 30% 20%,rgba(74,158,255,.09) 0%,transparent 60%),radial-gradient(ellipse at 80% 70%,rgba(245,200,66,.07) 0%,transparent 50%),var(--bg);}
+.home-inner{overflow-y:auto;width:100%;padding:20px 16px 30px;}
+.logo-area{text-align:center;margin-bottom:24px;}
+.logo-icon{width:68px;height:68px;background:linear-gradient(135deg,var(--blue),var(--gold));border-radius:20px;display:inline-flex;align-items:center;justify-content:center;font-size:1.9rem;margin-bottom:11px;box-shadow:0 0 40px rgba(74,158,255,.28);}
+.logo-area h1{font-family:'Syne',serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#fff 40%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.logo-area p{color:var(--muted);font-size:.8rem;margin-top:4px;}
+.dev-tag{font-size:.85rem;font-weight:700;color:var(--gold);background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.4);padding:7px 18px;border-radius:20px;margin-top:10px;display:inline-block;box-shadow:0 0 14px rgba(245,200,66,.15);}
+.app-footer{text-align:center;padding:8px 10px;font-size:.78rem;font-weight:600;color:var(--gold);flex-shrink:0;border-top:1px solid rgba(245,200,66,.2);background:rgba(245,200,66,.04);}
+.app-footer span{color:#fff;}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.menu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 13px;text-align:center;cursor:pointer;transition:transform .15s;}
+.menu-card:active{transform:scale(.95);}
+.menu-card[data-c="blue"]{border-color:rgba(74,158,255,.25);}
+.menu-card[data-c="gold"]{border-color:rgba(245,200,66,.25);}
+.menu-card[data-c="green"]{border-color:rgba(61,214,140,.25);}
+.menu-card[data-c="purple"]{border-color:rgba(192,132,252,.25);}
+.menu-icon{font-size:1.8rem;margin-bottom:8px;display:block;}
+.menu-title{font-family:'Syne',serif;font-size:.9rem;font-weight:700;}
+.menu-sub{font-size:.68rem;color:var(--muted);margin-top:3px;}
+.stats-row{display:flex;gap:9px;margin-top:12px;}
+.stat-box{flex:1;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px;text-align:center;}
+.stat-num{font-family:'Syne',serif;font-size:1.2rem;font-weight:800;color:var(--gold);}
+.stat-label{font-size:.63rem;color:var(--muted);margin-top:2px;}
+.menu-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:9px;}
+.menu-card-sm{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:13px 8px;text-align:center;cursor:pointer;transition:transform .15s;}
+.menu-card-sm:active{transform:scale(.95);}
+.menu-card-sm[data-c="orange"]{border-color:rgba(255,159,67,.25);}
+.menu-card-sm[data-c="teal"]{border-color:rgba(61,214,140,.25);}
+.menu-card-sm[data-c="pink"]{border-color:rgba(255,107,107,.25);}
+.menu-icon-sm{font-size:1.4rem;margin-bottom:5px;display:block;}
+.menu-title-sm{font-family:'Syne',serif;font-size:.75rem;font-weight:700;}
+.menu-sub-sm{font-size:.6rem;color:var(--muted);margin-top:2px;}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;gap:10px;padding:12px 13px 9px;background:var(--card);border-bottom:1px solid var(--border);flex-shrink:0;}
+.back-btn{width:38px;height:38px;border-radius:11px;background:var(--card2);border:1px solid var(--border);color:var(--text);font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.back-btn:active{background:var(--border);}
+.topbar-title{font-family:'Syne',serif;font-size:.92rem;font-weight:700;flex:1;}
+.topbar-badge{font-size:.67rem;color:var(--muted);background:var(--card2);border:1px solid var(--border);padding:3px 8px;border-radius:20px;white-space:nowrap;}
+
+/* REFERENCE */
+.ref-scroll{flex:1;overflow-y:auto;padding:11px 11px 80px;}
+.ref-search{position:relative;margin-bottom:11px;}
+.ref-search input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 13px 10px 37px;border-radius:11px;font-size:.85rem;font-family:'DM Sans',sans-serif;outline:none;}
+.ref-search input:focus{border-color:var(--blue);}
+.ref-search input::placeholder{color:var(--muted);}
+.ref-search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.4;}
+.ref-section{margin-bottom:11px;}
+.ref-sec-header{display:flex;align-items:center;gap:7px;padding:11px 12px;background:var(--card);border:1px solid var(--border);border-radius:11px;cursor:pointer;}
+.ref-sec-icon{font-size:1.1rem;}
+.ref-sec-name{font-family:'Syne',serif;font-size:.86rem;font-weight:700;flex:1;}
+.ref-sec-count{font-size:.67rem;color:var(--muted);background:var(--card2);padding:2px 7px;border-radius:20px;}
+.ref-sec-arrow{color:var(--muted);font-size:.7rem;transition:transform .2s;}
+.ref-section.closed .ref-sec-arrow{transform:rotate(-90deg);}
+.ref-section.closed .ref-disease-list{display:none;}
+.ref-disease-list{display:flex;flex-direction:column;gap:5px;padding:6px 2px 0;}
+.disease-row{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 10px;}
+.ref-rank{font-size:.63rem;color:var(--muted);min-width:16px;text-align:right;font-weight:600;}
+.ref-name-link{flex:1;color:var(--blue);text-decoration:none;font-size:.8rem;line-height:1.3;}
+.photo-area{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.photo-thumb{width:36px;height:36px;border-radius:7px;object-fit:cover;border:1px solid var(--border);cursor:pointer;display:none;}
+.add-photo-btn{width:32px;height:32px;border-radius:8px;background:var(--card2);border:1px dashed var(--border);color:var(--muted);font-size:.85rem;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.add-photo-btn.has-photo{border-style:solid;border-color:var(--green);color:var(--green);}
+.file-input{display:none;}
+
+/* PHOTO MODAL */
+.photo-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+.photo-modal.open{display:flex;}
+.modal-img{max-width:100%;max-height:75vh;border-radius:14px;object-fit:contain;}
+.modal-title{font-family:'Syne',serif;font-size:1rem;font-weight:700;margin-bottom:12px;text-align:center;}
+.modal-btns{display:flex;gap:10px;margin-top:16px;}
+.modal-btn{padding:11px 22px;border-radius:11px;border:none;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;}
+.modal-btn-del{background:rgba(255,107,107,.15);color:var(--red);border:1px solid rgba(255,107,107,.3);}
+.modal-btn-close{background:var(--card);color:var(--text);border:1px solid var(--border);}
+
+/* FLASHCARD */
+.flash-content{flex:1;display:flex;flex-direction:column;align-items:center;padding:13px 13px 18px;gap:11px;overflow-y:auto;}
+.flash-progress{width:100%;max-width:400px;display:flex;align-items:center;gap:9px;}
+.flash-prog-bar{flex:1;height:4px;background:var(--border);border-radius:4px;overflow:hidden;}
+.flash-prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:4px;transition:width .4s;}
+.flash-prog-text{font-size:.74rem;color:var(--muted);white-space:nowrap;}
+.flash-score-row{display:flex;gap:7px;}
+.fscore{font-size:.73rem;padding:4px 10px;border-radius:20px;font-weight:600;}
+.fscore-knew{background:rgba(61,214,140,.1);color:var(--green);border:1px solid rgba(61,214,140,.2);}
+.fscore-skip{background:rgba(255,107,107,.1);color:var(--red);border:1px solid rgba(255,107,107,.2);}
+.card-3d-wrapper{width:100%;max-width:400px;perspective:1000px;cursor:pointer;flex-shrink:0;}
+.card-3d{width:100%;min-height:270px;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1);border-radius:19px;}
+.card-3d.flipped{transform:rotateY(180deg);}
+.card-face{position:absolute;inset:0;border-radius:19px;padding:19px 17px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.card-front{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);}
+.card-back{background:linear-gradient(135deg,#0a1f10,#0a1f35);border:1px solid rgba(61,214,140,.25);transform:rotateY(180deg);justify-content:flex-start;overflow:hidden;}
+.card-hint{font-size:.63rem;color:var(--muted);margin-bottom:5px;letter-spacing:.5px;font-weight:600;text-transform:uppercase;}
+.card-emoji{font-size:2.2rem;margin-bottom:7px;}
+.card-question{font-family:'Syne',serif;font-size:1.12rem;font-weight:700;line-height:1.3;}
+.card-sector{font-size:.7rem;color:var(--gold);margin-top:5px;font-weight:600;}
+.card-tap-hint{font-size:.65rem;color:var(--muted);margin-top:9px;}
+.card-back-content{width:100%;text-align:left;}
+.card-back-title{font-family:'Syne',serif;font-size:.95rem;font-weight:800;color:var(--green);margin-bottom:9px;text-align:center;}
+.info-block{margin-bottom:7px;}
+.info-label{font-size:.63rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:2px;padding:2px 7px;border-radius:5px;display:inline-block;}
+.info-label.def{background:rgba(74,158,255,.15);color:var(--blue);}
+.info-label.signs{background:rgba(245,200,66,.12);color:var(--gold);}
+.info-label.tx{background:rgba(61,214,140,.12);color:var(--green);}
+.info-text{font-size:.76rem;color:var(--text);line-height:1.5;opacity:.9;}
+.flash-btns{display:flex;gap:8px;width:100%;max-width:400px;flex-shrink:0;}
+.flash-btn{flex:1;padding:12px;border-radius:12px;border:none;font-family:'DM Sans',sans-serif;font-size:.81rem;font-weight:600;cursor:pointer;}
+.btn-skip{background:var(--card);color:var(--muted);border:1px solid var(--border);}
+.btn-knew{background:rgba(61,214,140,.15);color:var(--green);border:1px solid rgba(61,214,140,.3);}
+
+/* QUIZ */
+.quiz-content{flex:1;overflow-y:auto;padding:13px 11px 80px;display:flex;flex-direction:column;gap:11px;}
+.quiz-question{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:18px 15px;}
+.quiz-q-sector{font-size:.67rem;color:var(--muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;}
+.quiz-q-text{font-family:'Syne',serif;font-size:.98rem;font-weight:700;line-height:1.4;}
+.quiz-options{display:flex;flex-direction:column;gap:7px;}
+.quiz-opt{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px 13px;cursor:pointer;display:flex;align-items:center;gap:9px;font-size:.84rem;}
+.quiz-opt-letter{width:25px;height:25px;border-radius:7px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',serif;font-size:.74rem;font-weight:700;flex-shrink:0;}
+.quiz-opt.correct{border-color:var(--green);background:rgba(61,214,140,.08);}
+.quiz-opt.correct .quiz-opt-letter{background:var(--green);color:#000;}
+.quiz-opt.wrong{border-color:var(--red);background:rgba(255,107,107,.08);}
+.quiz-opt.wrong .quiz-opt-letter{background:var(--red);color:#fff;}
+.quiz-opt.disabled{pointer-events:none;}
+.quiz-explanation{background:rgba(61,214,140,.06);border:1px solid rgba(61,214,140,.2);border-radius:11px;padding:12px 13px;font-size:.79rem;color:var(--green);line-height:1.5;display:none;}
+.quiz-explanation.show{display:block;}
+.quiz-next-btn{background:var(--blue);color:#fff;border:none;border-radius:12px;padding:13px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;display:none;width:100%;}
+.quiz-next-btn.show{display:block;}
+
+/* VIVA — V1 style + AI Online */
+.viva-content{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.viva-mode-bar{display:flex;gap:8px;padding:8px 11px;background:var(--card);border-bottom:1px solid var(--border);flex-shrink:0;}
+.viva-mode-btn{flex:1;padding:8px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--muted);font-size:.76rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:center;}
+.viva-mode-btn.active{background:rgba(192,132,252,.15);border-color:var(--purple);color:var(--purple);}
+.viva-chat{flex:1;overflow-y:auto;padding:11px 11px 0;display:flex;flex-direction:column;gap:8px;}
+.viva-bubble{max-width:88%;padding:11px 13px;border-radius:15px;font-size:.84rem;line-height:1.5;animation:fadeUp .25s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.viva-bubble.ai{background:var(--card2);border:1px solid var(--border);border-radius:15px 15px 15px 3px;align-self:flex-start;}
+.viva-bubble.ai .bubble-label{font-size:.61rem;color:var(--purple);font-weight:700;margin-bottom:4px;letter-spacing:.5px;}
+.viva-bubble.user{background:linear-gradient(135deg,#1a3a6e,#0f2a50);border:1px solid rgba(74,158,255,.2);border-radius:15px 15px 3px 15px;align-self:flex-end;}
+.viva-bubble.thinking{background:rgba(192,132,252,.08);border:1px solid rgba(192,132,252,.2);border-radius:13px;align-self:flex-start;font-size:.8rem;color:var(--purple);}
+.viva-bubble.feedback-correct{background:rgba(61,214,140,.08);border:1px solid rgba(61,214,140,.25);border-radius:13px;align-self:stretch;max-width:100%;font-size:.81rem;color:var(--green);}
+.viva-bubble.feedback-wrong{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.25);border-radius:13px;align-self:stretch;max-width:100%;font-size:.81rem;color:var(--red);}
+.viva-bubble.feedback-partial{background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.25);border-radius:13px;align-self:stretch;max-width:100%;font-size:.81rem;color:var(--gold);}
+.viva-quick-row{display:flex;flex-wrap:wrap;gap:6px;padding:7px 11px 0;}
+.viva-quick-btn{background:var(--card);border:1px solid var(--border);color:var(--text);font-size:.74rem;padding:7px 11px;border-radius:20px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.viva-quick-btn:active{border-color:var(--purple);}
+.viva-input-area{padding:9px 11px 16px;display:flex;gap:7px;flex-shrink:0;}
+.viva-input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);padding:11px 12px;border-radius:12px;font-size:.84rem;font-family:'DM Sans',sans-serif;outline:none;resize:none;}
+.viva-input:focus{border-color:var(--purple);}
+.viva-send-btn{width:44px;height:44px;border-radius:12px;background:var(--purple);border:none;color:#fff;font-size:1.1rem;cursor:pointer;flex-shrink:0;}
+
+/* PROGRESS */
+.prog-scroll{flex:1;overflow-y:auto;padding:12px 12px 80px;}
+.prog-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:16px;}
+.prog-sum-box{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:13px 10px;text-align:center;}
+.prog-sum-num{font-family:'Syne',serif;font-size:1.4rem;font-weight:800;}
+.prog-sum-label{font-size:.65rem;color:var(--muted);margin-top:3px;}
+.prog-sector{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:13px 14px;margin-bottom:10px;}
+.prog-sec-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.prog-bar-wrap{height:5px;background:var(--border);border-radius:5px;overflow:hidden;margin-bottom:10px;}
+.prog-bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--blue),var(--green));transition:width .5s;}
+.prog-disease-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+.prog-disease-item{display:flex;align-items:center;gap:7px;padding:7px 9px;background:var(--card2);border:1px solid var(--border);border-radius:8px;cursor:pointer;}
+.prog-disease-item.done{border-color:var(--green);background:rgba(61,214,140,.06);}
+.prog-check{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--muted);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7rem;}
+.prog-disease-item.done .prog-check{background:var(--green);border-color:var(--green);color:#000;}
+.prog-dname{font-size:.74rem;line-height:1.3;}
+
+/* BOOKMARKS */
+.bm-scroll{flex:1;overflow-y:auto;padding:12px 12px 80px;}
+.bm-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;gap:12px;text-align:center;}
+.bm-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:13px 14px;margin-bottom:9px;display:flex;align-items:center;gap:10px;}
+.bm-btn{width:32px;height:32px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+
+/* TIMER */
+.timer-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;gap:22px;}
+.timer-circle{width:200px;height:200px;border-radius:50%;background:var(--card);border:3px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(74,158,255,.1);}
+.timer-circle.running{border-color:var(--blue);box-shadow:0 0 40px rgba(74,158,255,.25);}
+.timer-display{font-family:'Syne',serif;font-size:2.8rem;font-weight:800;line-height:1;}
+.timer-btns{display:flex;gap:12px;}
+.timer-btn{padding:14px 28px;border-radius:14px;border:none;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;}
+.timer-session-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:9px 13px;margin-bottom:6px;display:flex;justify-content:space-between;font-size:.78rem;}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div class="screen active" id="home">
+  <div class="home-inner">
+    <div class="logo-area">
+      <div class="logo-icon">🩺</div>
+      <h1>MedStudy</h1>
+      <p>Head-to-Toe · 100 Diseases · Master App</p>
+      <div class="dev-tag">👨‍💻 Developed by Bayazid jmc-13</div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card" data-c="blue" onclick="goTo('reference')">
+        <span class="menu-icon">📋</span>
+        <div class="menu-title">Reference</div>
+        <div class="menu-sub">100 diseases + Photos</div>
+      </div>
+      <div class="menu-card" data-c="gold" onclick="goTo('flashcard')">
+        <span class="menu-icon">🃏</span>
+        <div class="menu-title">Flashcard</div>
+        <div class="menu-sub">Signs · Rx</div>
+      </div>
+      <div class="menu-card" data-c="green" onclick="goTo('quiz')">
+        <span class="menu-icon">✅</span>
+        <div class="menu-title">MCQ Quiz</div>
+        <div class="menu-sub">Test yourself</div>
+      </div>
+      <div class="menu-card" data-c="purple" onclick="goTo('viva')">
+        <span class="menu-icon">🎤</span>
+        <div class="menu-title">AI Viva</div>
+        <div class="menu-sub">Online 🌐 + Offline</div>
+      </div>
+    </div>
+    <div class="menu-grid-3">
+      <div class="menu-card-sm" data-c="orange" onclick="goTo('progress')">
+        <span class="menu-icon-sm">📊</span>
+        <div class="menu-title-sm">Progress</div>
+        <div class="menu-sub-sm">Track study</div>
+      </div>
+      <div class="menu-card-sm" data-c="pink" onclick="goTo('bookmarks')">
+        <span class="menu-icon-sm">🔖</span>
+        <div class="menu-title-sm">Bookmarks</div>
+        <div class="menu-sub-sm">Saved diseases</div>
+      </div>
+      <div class="menu-card-sm" data-c="teal" onclick="goTo('timer')">
+        <span class="menu-icon-sm">⏱️</span>
+        <div class="menu-title-sm">Timer</div>
+        <div class="menu-sub-sm">Study time</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-num" id="statRead">0</div><div class="stat-label">Read</div></div>
+      <div class="stat-box"><div class="stat-num" id="statBm">0</div><div class="stat-label">Saved</div></div>
+      <div class="stat-box"><div class="stat-num" id="homeScore">—</div><div class="stat-label">Quiz</div></div>
+      <div class="stat-box"><div class="stat-num" id="statTime">0h</div><div class="stat-label">Study</div></div>
+    </div>
+    <div style="text-align:center;padding:12px 0 4px;font-size:.7rem;color:var(--muted);">🩺 MedStudy · <span style="color:var(--gold);font-weight:700;">Bayazid jmc-13</span></div>
+  </div>
+</div>
+
+<!-- REFERENCE -->
+<div class="screen" id="reference">
+  <div class="topbar">
+    <div class="back-btn" onclick="goTo('home')">←</div>
+    <div class="topbar-title">📋 Reference + Photos</div>
+    <div class="topbar-badge">Tap 📷 to add photo</div>
+  </div>
+  <div class="ref-scroll">
+    <div class="ref-search">
+      <svg width="14" height="14" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search disease..." oninput="refSearch(this.value)">
+    </div>
+    <div id="refSections"></div>
+  </div>
+  <div class="app-footer">🩺 MedStudy · Developed by <span>Bayazid jmc-13</span></div>
+</div>
+
+<!-- FLASHCARD -->
+<div class="screen" id="flashcard">
+  <div class="topbar">
+    <div class="back-btn" onclick="goTo('home')">←</div>
+    <div class="topbar-title">🃏 Flashcards</div>
+    <div class="topbar-badge" id="flashBadge">Tap to flip</div>
+  </div>
+  <div class="flash-content">
+    <div class="flash-progress" style="width:100%;max-width:400px;">
+      <div class="flash-prog-bar"><div class="flash-prog-fill" id="flashProg" style="width:1%"></div></div>
+      <div class="flash-prog-text" id="flashProgTxt">1/100</div>
+    </div>
+    <div class="flash-score-row">
+      <span class="fscore fscore-knew" id="fKnew">✓ 0</span>
+      <span class="fscore fscore-skip" id="fSkip">✗ 0</span>
+    </div>
+    <div class="card-3d-wrapper" onclick="flipCard()">
+      <div class="card-3d" id="flashCard">
+        <div class="card-face card-front">
+          <div class="card-hint">TAP TO REVEAL</div>
+          <div class="card-emoji" id="fEmoji">🩺</div>
+          <div class="card-question" id="fName">Loading...</div>
+          <div class="card-sector" id="fSector">Sector</div>
+          <div class="card-tap-hint">Tap card to see details →</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-back-content">
+            <div class="card-back-title" id="fBackTitle">—</div>
+            <div class="info-block"><div class="info-label def">📖 Definition</div><div class="info-text" id="fDef">—</div></div>
+            <div class="info-block"><div class="info-label signs">🔍 Signs & Symptoms</div><div class="info-text" id="fSigns">—</div></div>
+            <div class="info-block"><div class="info-label tx">💊 Treatment</div><div class="info-text" id="fTx">—</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flash-btns" style="width:100%;max-width:400px;">
+      <button class="flash-btn btn-skip" onclick="flashAct('skip')">✗ Didn't Know</button>
+      <button class="flash-btn btn-knew" onclick="flashAct('knew')">✓ Knew It!</button>
+    </div>
+  </div>
+  <div class="app-footer">🩺 MedStudy · Developed by <span>Bayazid jmc-13</span></div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="quiz">
+  <div class="topbar">
+    <div class="back-btn" onclick="goTo('home')">←</div>
+    <div class="topbar-title">✅ MCQ Quiz</div>
+    <div class="topbar-badge" id="quizBadge">15 Qs</div>
+  </div>
+  <div class="quiz-content" id="quizContent"></div>
+  <div class="app-footer">🩺 MedStudy · Developed by <span>Bayazid jmc-13</span></div>
+</div>
+
+<!-- VIVA — V1 design + Online AI -->
+<div class="screen" id="viva">
+  <div class="topbar">
+    <div class="back-btn" onclick="goTo('home')">←</div>
+    <div class="topbar-title">🎤 Viva Examiner</div>
+    <div class="topbar-badge" id="vivaBadge">🌐 Online AI</div>
+  </div>
+  <div class="viva-content">
+    <!-- Mode toggle — V1 style -->
+    <div class="viva-mode-bar">
+      <button class="viva-mode-btn active" id="modeOnline" onclick="setVivaMode('online')">🤖 Online AI</button>
+      <button class="viva-mode-btn" id="modeOffline" onclick="setVivaMode('offline')">📴 Offline</button>
+    </div>
+    <div class="viva-chat" id="vivaChat">
+      <div class="viva-bubble ai">
+        <div class="bubble-label">🏥 EXAMINER · Bayazid jmc-13</div>
+        Assalamu Alaikum! I'm your AI Viva Examiner 🤖<br><br>
+        <strong>Online mode:</strong> Claude AI দিয়ে real-time clinical questions + detailed feedback<br>
+        <strong>Offline mode:</strong> Internet ছাড়া built-in questions<br><br>
+        Topic select করো অথবা যেকোনো question করো!
+      </div>
+    </div>
+    <div class="viva-quick-row">
+      <button class="viva-quick-btn" onclick="vivaQuick('Head and Scalp diseases')">🔴 Head</button>
+      <button class="viva-quick-btn" onclick="vivaQuick('Eye diseases')">👁️ Eye</button>
+      <button class="viva-quick-btn" onclick="vivaQuick('Ear diseases')">👂 Ear</button>
+      <button class="viva-quick-btn" onclick="vivaQuick('Neck pathology')">🧠 Neck</button>
+      <button class="viva-quick-btn" onclick="vivaQuick('Skin diseases')">🌍 Skin</button>
+      <button class="viva-quick-btn" onclick="vivaQuick('Lower limb')">🦵 Limb</button>
+      <button class="viva-quick-btn" onclick="vivaQuick('random clinical viva question')">🎲 Random</button>
+      <button class="viva-quick-btn" onclick="vivaClear()">🗑️ Clear</button>
+    </div>
+    <div class="viva-input-area">
+      <textarea class="viva-input" id="vivaIn" placeholder="Type your answer..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();vivaAnswer();}"></textarea>
+      <button class="viva-send-btn" onclick="vivaAnswer()">↑</button>
+    </div>
+  </div>
+  <div class="app-footer">🩺 MedStudy · Developed by <span>Bayazid jmc-13</span></div>
+</div>
+
+<!-- PROGRESS -->
+<div class="screen" id="progress">
+  <div class="topbar">
+    <div class="back-btn" onclick="goTo('home')">←</div>
+    <div class="topbar-title">📊 Progress Tracker</div>
+    <div class="topbar-badge" id="progBadge">0/100</div>
+  </div>
+  <div class="prog-scroll" id="progScroll"></div>
+</div>
+
+<!-- BOOKMARKS -->
+<div class="screen" id="bookmarks">
+  <div class="topbar">
+    <div class="back-btn" onclick="goTo('home')">←</div>
+    <div class="topbar-title">🔖 Bookmarks</div>
+    <div class="topbar-badge" id="bmBadge">0 saved</div>
+  </div>
+  <div class="bm-scroll" id="bmScroll"></div>
+</div>
+
+<!-- TIMER -->
+<div class="screen" id="timer">
+  <div class="topbar">
+    <div class="back-btn" onclick="goTo('home')">←</div>
+    <div class="topbar-title">⏱️ Study Timer</div>
+    <div class="topbar-badge" id="timerBadge">0h total</div>
+  </div>
+  <div class="timer-content">
+    <div class="timer-circle" id="timerCircle">
+      <div class="timer-display" id="timerDisp">00:00</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:5px;">SESSION</div>
+    </div>
+    <div style="font-size:.8rem;color:var(--green);font-weight:600;" id="timerTotal">Total: 0 min</div>
+    <div class="timer-btns">
+      <button class="timer-btn" style="background:var(--green);color:#000;" onclick="timerStart()">▶ Start</button>
+      <button class="timer-btn" style="background:rgba(255,107,107,.15);color:var(--red);border:1px solid rgba(255,107,107,.3);" onclick="timerStop()">■ Stop</button>
+    </div>
+    <div style="width:100%;max-width:360px;" id="timerSessions"></div>
+  </div>
+  <div class="app-footer">🩺 MedStudy · Developed by <span>Bayazid jmc-13</span></div>
+</div>
+
+<!-- PHOTO MODAL -->
+<div class="photo-modal" id="photoModal">
+  <div class="modal-title" id="modalTitle">Disease Photo</div>
+  <img class="modal-img" id="modalImg" src="" alt="">
+  <div class="modal-btns">
+    <button class="modal-btn modal-btn-del" onclick="deletePhoto()">🗑️ Delete</button>
+    <button class="modal-btn modal-btn-close" onclick="closeModal()">✕ Close</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════
+const SECTORS=[
+  {icon:'🔴',name:'Head & Scalp',diseases:['Seborrheic dermatitis','Tinea capitis','Pediculosis capitis','Acne vulgaris','Folliculitis','Furuncle','Alopecia areata','Scalp psoriasis','Carbuncle','Discoid lupus erythematosus','Traction alopecia']},
+  {icon:'👁️',name:'Eye',diseases:['Conjunctivitis','Subconjunctival hemorrhage','Hordeolum','Chalazion','Blepharitis','Dacryocystitis','Pterygium',"Bitot's spot",'Cataract','Icterus']},
+  {icon:'👂',name:'Ear',diseases:['Otitis externa','Impacted wax','Ear furuncle','CSOM','Perichondritis']},
+  {icon:'👃',name:'Nose',diseases:['Epistaxis','Allergic rhinitis','Nasal polyp','Deviated nasal septum','Sinusitis']},
+  {icon:'👄',name:'Oral Cavity',diseases:['Aphthous ulcer','Gingivitis','Dental caries','Angular cheilitis','Glossitis','Oral candidiasis','Leukoplakia','Oral submucous fibrosis','Oral squamous cell carcinoma']},
+  {icon:'🧠',name:'Neck',diseases:['Cervical lymphadenopathy','Reactive lymphadenitis','Tubercular lymphadenitis','Goiter','Thyroid nodule','Thyroglossal cyst','Branchial cyst','Lipoma','Sebaceous cyst','Lymphoma']},
+  {icon:'🫀',name:'Chest & Breast',diseases:['Breast abscess','Fibrocystic disease','Carcinoma breast','Fibroadenoma','Gynecomastia','Herpes zoster','Intercostal neuralgia','Tietze syndrome','Chest wall cellulitis','Rib fracture']},
+  {icon:'🖐️',name:'Upper Limb',diseases:['Cellulitis','Abscess','Eczema','Psoriasis','Contact dermatitis','Scabies','Urticaria','Vitiligo','Clubbing',"Dupuytren's contracture"]},
+  {icon:'🦵',name:'Lower Limb',diseases:['Diabetic foot ulcer','Varicose veins','Venous ulcer','Arterial ulcer','Pressure sore','Gangrene','Onychomycosis','Paronychia','Ingrown toenail','Corn','Callosity','Tinea pedis','Lymphedema','Cellulitis leg','Erysipelas']},
+  {icon:'🌍',name:'General Skin',diseases:['Tinea corporis','Drug eruption','Measles rash','Chickenpox','Dengue rash','SJS','Toxic epidermal necrolysis','Erythema multiforme','Pellagra dermatitis','Ichthyosis','Keloid','Skin tag','Molluscum contagiosum','Warts']}
+];
+
+const DIS_INFO={
+  'Seborrheic dermatitis':{def:'Chronic inflammatory skin condition caused by Malassezia yeast on sebaceous areas.',signs:'Greasy yellowish scales on scalp/face, erythema, pruritus, dandruff.',tx:'Ketoconazole shampoo, selenium sulfide, mild topical corticosteroids.'},
+  'Tinea capitis':{def:'Dermatophyte fungal infection of scalp hair follicles, mainly in children.',signs:'Circular hair loss patches with scaling, black dots (broken hairs), kerion, cervical lymphadenopathy.',tx:'Oral griseofulvin 6–8 weeks (DOC). Terbinafine alternative. Selenium sulfide shampoo adjunct.'},
+  'Acne vulgaris':{def:'Chronic inflammatory disorder of pilosebaceous unit. C. acnes, sebum, follicular plugging.',signs:'Comedones, papules, pustules, nodules, cysts on face/chest/back.',tx:'Topical retinoids + benzoyl peroxide. Moderate: oral doxycycline. Severe: isotretinoin.'},
+  'Folliculitis':{def:'Superficial infection of hair follicles, usually by Staphylococcus aureus.',signs:'Small erythematous pustules centered on follicles. Mild itching or pain.',tx:'Topical mupirocin or clindamycin. Oral flucloxacillin for widespread.'},
+  'Furuncle':{def:'Deep infection of single hair follicle forming a painful abscess. S. aureus.',signs:'Tender erythematous nodule, fluctuant centre with necrotic core. Fever.',tx:'Warm compresses. I&D when fluctuant. Oral flucloxacillin.'},
+  'Alopecia areata':{def:'Autoimmune non-scarring patchy hair loss from T-cell attack on hair follicles.',signs:'Well-defined round patches, exclamation mark hairs, nail pitting.',tx:'Intralesional triamcinolone (1st line). Topical minoxidil.'},
+  'Scalp psoriasis':{def:'Psoriasis affecting scalp causing thick silvery-white scales on erythematous base.',signs:'Thick adherent silvery scales extending beyond hairline, pruritus, Auspitz sign positive.',tx:'Coal tar/salicylic acid shampoos. Potent topical corticosteroids.'},
+  'Carbuncle':{def:'Deep infection of multiple adjacent follicles forming interconnected abscesses.',signs:'Large painful indurated swelling, multiple discharging openings. Fever.',tx:'I&D. Systemic flucloxacillin. Screen for diabetes.'},
+  'Discoid lupus erythematosus':{def:'Chronic autoimmune scarring skin condition on sun-exposed areas.',signs:'Erythematous plaques with follicular plugging, scaling, central atrophy, scarring alopecia.',tx:'Sun protection (essential). Hydroxychloroquine 1st line. Potent topical corticosteroids.'},
+  'Traction alopecia':{def:'Hair loss from chronic mechanical tension on follicles from tight hairstyles.',signs:'Marginal hair loss along hairline/temples, perifollicular erythema.',tx:'Stop offending hairstyle. Topical minoxidil early stages.'},
+  'Conjunctivitis':{def:'Inflammation of conjunctiva. Bacterial, viral, allergic, or chemical cause.',signs:'Red eye, discharge (purulent=bacterial, watery=viral), itching (allergic).',tx:'Bacterial: topical chloramphenicol. Viral: lubricants. Allergic: topical antihistamine.'},
+  "Bitot's spot":{def:'Conjunctival lesion due to Vitamin A deficiency (xerophthalmia).',signs:'Foamy cheese-like spots on temporal conjunctiva. Dry eyes, night blindness.',tx:'Vitamin A 200,000 IU on day 1, 2, and 14 (WHO protocol).'},
+  'Cataract':{def:'Opacification of crystalline lens causing progressive painless visual impairment.',signs:'Painless progressive visual blur, glare/halos, white/grey pupil in advanced cases.',tx:'Phacoemulsification with IOL implantation (definitive).'},
+  'Otitis externa':{def:"Infection of external auditory canal. Bacterial (Pseudomonas, S. aureus) or fungal. Swimmer's ear.",signs:'Ear pain worse on tragus/pinna traction, itching, discharge, canal oedema.',tx:'Aural toilet. Topical ciprofloxacin+hydrocortisone drops. Ear wick if swollen.'},
+  'CSOM':{def:'Chronic Suppurative Otitis Media — persistent middle ear infection with TM perforation >6 weeks.',signs:'Painless mucopurulent ear discharge, conductive hearing loss, central TM perforation.',tx:'Aural toilet. Topical ciprofloxacin drops. Myringoplasty surgery (definitive).'},
+  'Epistaxis':{def:"Nasal bleeding. 90% anterior from Little's area (Kiesselbach's plexus).",signs:'Anterior: blood from nostril. Posterior: blood flows to throat, bilateral.',tx:"Pinch soft nose 10–15 min. Silver nitrate cautery. BIPP packing if persistent."},
+  'Allergic rhinitis':{def:'IgE-mediated type I hypersensitivity of nasal mucosa to inhaled allergens.',signs:'Sneezing, watery rhinorrhoea, bilateral nasal obstruction, pruritus. Pale boggy turbinates.',tx:'Intranasal corticosteroids (1st line). 2nd gen antihistamines. Saline irrigation.'},
+  'Aphthous ulcer':{def:'Painful recurrent oral ulcers of unknown aetiology. Most common oral ulceration.',signs:'Round/oval painful ulcers, white/yellow base with red halo. 3–5mm. Heal in 7–14 days.',tx:'Topical triamcinolone paste. Chlorhexidine mouthwash. Topical benzocaine for pain.'},
+  'Leukoplakia':{def:'White patch on oral mucosa that CANNOT be scraped off. Premalignant lesion.',signs:'White thickened non-removable plaque. Usually painless.',tx:'Remove causative factors. Biopsy mandatory. Excision if dysplastic.'},
+  'Thyroglossal cyst':{def:'Cyst from remnant of thyroglossal duct. Commonest congenital neck swelling.',signs:'Smooth midline swelling at or below hyoid. Moves on SWALLOWING AND tongue protrusion (pathognomonic).',tx:'Sistrunk operation: excision of cyst + central portion of hyoid body.'},
+  'Tubercular lymphadenitis':{def:'Most common extrapulmonary TB. M. tuberculosis infection of lymph nodes.',signs:'Painless matted cervical lymph nodes. Caseation → collar-stud abscess. Night sweats, weight loss.',tx:'Anti-TB therapy 6 months: 2HRZE + 4HR. Do NOT perform I&D.'},
+  'Fibroadenoma':{def:'Most common benign breast tumour in women aged 15–35. Oestrogen-dependent.',signs:'"Breast mouse" — smooth firm very mobile non-tender lump. Well-defined. Usually <3cm.',tx:'Triple assessment. Reassure if <3cm and all benign. Excision if large/growing.'},
+  'Carcinoma breast':{def:'Malignant breast epithelial tumour. Invasive ductal carcinoma = 75%.',signs:"Hard irregular painless lump. Skin dimpling, peau d'orange, nipple retraction.",tx:'Surgery + radiotherapy + systemic therapy (hormone/chemo/targeted).'},
+  'Herpes zoster':{def:'Reactivation of latent VZV in dorsal root ganglion.',signs:'Prodrome: burning/tingling 2–3 days. Unilateral vesicular rash in dermatomal distribution.',tx:'Acyclovir/valacyclovir within 72 hours. Gabapentin for post-herpetic neuralgia.'},
+  'Cellulitis':{def:'Acute bacterial infection of dermis and subcutaneous tissue. S. pyogenes, S. aureus.',signs:'Spreading erythema with indistinct edges, warmth, swelling, tenderness. Fever.',tx:'Oral flucloxacillin or co-amoxiclav. IV if severe. Elevate limb. Mark border.'},
+  'Scabies':{def:'Infestation by Sarcoptes scabiei mite. Transmitted by prolonged skin contact.',signs:'Intense NOCTURNAL pruritus. Burrows (pathognomonic) in web spaces, wrists, genitalia.',tx:'Permethrin 5% cream whole body for 8–12h. Repeat in 7 days. Treat ALL contacts.'},
+  'Psoriasis':{def:'Chronic autoimmune disease with accelerated keratinocyte turnover.',signs:'Well-demarcated salmon-pink plaques with silvery-white scales. Extensor surfaces.',tx:'Mild: topical corticosteroids + calcipotriol. Moderate: NBUVB. Severe: methotrexate/biologics.'},
+  'Diabetic foot ulcer':{def:'Neuropathic/ischaemic ulcer in diabetic patient due to neuropathy ± PAD.',signs:'Painless plantar ulcer at pressure points. Deep punched-out edges. Warm foot (neuropathic).',tx:'Debridement. Offloading. IV antibiotics if infected. Tight glucose control.'},
+  'Varicose veins':{def:'Dilated tortuous superficial veins due to incompetent venous valves.',signs:'Visible tortuous veins, aching, heaviness, itching. Worse on standing.',tx:'Compression stockings. Endovenous ablation EVLA/RFA (1st line). Foam sclerotherapy.'},
+  'Venous ulcer':{def:'Chronic ulceration from chronic venous hypertension. Most common leg ulcer (70%).',signs:'Shallow irregular ulcer in GAITER AREA. Haemosiderin staining, lipodermatosclerosis.',tx:'4-layer compression bandaging (cornerstone if ABI >0.8). Wound debridement.'},
+  'Erysipelas':{def:'Superficial dermis infection by Streptococcus pyogenes. Affects upper dermis + lymphatics.',signs:'WELL-DEMARCATED raised bright red shiny plaque with CLEAR BORDER. Rapid onset. Fever.',tx:'Benzylpenicillin IV/oral (DOC). Elevation. Prophylactic penicillin if recurrent.'},
+  'SJS':{def:'Stevens-Johnson Syndrome — severe mucocutaneous drug reaction with <10% BSA skin detachment.',signs:'Targetoid lesions + mucosal erosions (2+ sites) + skin detachment <10% BSA.',tx:'STOP causative drug immediately. ICU/burns unit. IVIG. Cyclosporin.'},
+  'Keloid':{def:'Excessive fibroblast proliferation extending BEYOND original wound margins.',signs:'Firm raised shiny hyperpigmented scar BEYOND wound margins. Grows progressively.',tx:'Intralesional triamcinolone injections (1st line). Silicone gel. Surgical excision + post-op steroid.'},
+  'Chickenpox':{def:'Primary infection with Varicella-Zoster Virus (VZV). Highly contagious.',signs:"Pruritic rash: macules → papules → vesicles ('dew drop on rose petal') → crusts. All stages simultaneously.",tx:'Supportive: calamine, antihistamines. Acyclovir for immunocompromised/adults.'},
+  'Dengue rash':{def:'Exanthem of Dengue virus (Flavivirus). Vector: Aedes aegypti mosquito.',signs:'"Islands of white in sea of red." Tourniquet test positive. Thrombocytopenia.',tx:'Supportive: IV fluids, monitor platelets. Paracetamol ONLY (AVOID NSAIDs).'},
+  'Tinea corporis':{def:'Ringworm — dermatophyte fungal infection of glabrous skin.',signs:'Annular ring-shaped plaque with CLEARING CENTRE and raised scaly border. Pruritus.',tx:'Topical clotrimazole or terbinafine 2–4 weeks. Oral terbinafine if extensive.'},
+  'Warts':{def:'Benign epithelial tumours caused by Human Papillomavirus (HPV).',signs:'Common: rough hyperkeratotic papule on hands/feet. Plantar: deep painful.',tx:'Topical salicylic acid (1st line). Cryotherapy. Electrocautery.'},
+};
+
+const ALL_FLAT=[];
+SECTORS.forEach(s=>s.diseases.forEach(d=>ALL_FLAT.push({name:d,sector:s.name,icon:s.icon})));
+
+// ═══════════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════════
+const S={
+  get:(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d));}catch{return d;}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+};
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const map={reference:buildRef,flashcard:initFlash,quiz:initQuiz,progress:initProgress,bookmarks:initBookmarks,timer:renderTimer,home:updateHomeStats};
+  if(map[id]) map[id]();
+  if(id!=='home') try{history.pushState({s:id},'','#'+id);}catch(e){}
+}
+window.addEventListener('popstate',()=>{
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('home').classList.add('active');
+  updateHomeStats();
+});
+function updateHomeStats(){
+  const p=S.get('medProg',{}),bms=S.get('medBm',[]),td=S.get('medTimer',{total:0});
+  document.getElementById('statRead').textContent=Object.values(p).filter(v=>v).length;
+  document.getElementById('statBm').textContent=bms.length;
+  document.getElementById('statTime').textContent=Math.floor(td.total/3600)+'h';
+}
+
+// ═══════════════════════════════════════════
+// REFERENCE
+// ═══════════════════════════════════════════
+let refBuilt=false;
+function buildRef(){
+  if(refBuilt)return; refBuilt=true;
+  const c=document.getElementById('refSections');
+  c.innerHTML=SECTORS.map((s,si)=>`
+    <div class="ref-section" id="rs${si}">
+      <div class="ref-sec-header" onclick="toggleRefSec(${si})">
+        <span class="ref-sec-icon">${s.icon}</span>
+        <span class="ref-sec-name">${s.name}</span>
+        <span class="ref-sec-count">${s.diseases.length}</span>
+        <span class="ref-sec-arrow">▼</span>
+      </div>
+      <div class="ref-disease-list">${s.diseases.map((d,di)=>{
+        const k=d.replace(/[^a-z0-9]/gi,'_');
+        return`<div class="disease-row">
+          <span class="ref-rank">${di+1}</span>
+          <a class="ref-name-link" href="https://www.google.com/search?q=${encodeURIComponent(d+' disease')}" target="_blank">${d} ↗</a>
+          <div class="photo-area">
+            <img class="photo-thumb" id="pt_${k}" onclick="viewPhoto('${d}','${k}')">
+            <div class="add-photo-btn" id="pb_${k}" onclick="triggerPhoto('${k}')">📷</div>
+            <input type="file" class="file-input" id="fi_${k}" accept="image/*" onchange="handlePhoto(this,'${k}')">
+          </div>
+        </div>`;}).join('')}</div>
+    </div>`).join('');
+  refreshThumbs();
+}
+function toggleRefSec(i){document.getElementById('rs'+i).classList.toggle('closed');}
+function refSearch(q){
+  q=q.toLowerCase().trim();
+  document.querySelectorAll('.ref-section').forEach(sec=>{
+    if(!q){sec.style.display='';sec.querySelectorAll('.disease-row').forEach(r=>r.style.display='');return;}
+    let any=false;
+    sec.querySelectorAll('.disease-row').forEach(r=>{
+      const show=r.querySelector('.ref-name-link').textContent.toLowerCase().includes(q);
+      r.style.display=show?'':'none'; if(show)any=true;
+    });
+    sec.style.display=any?'':'none';
+    if(any)sec.classList.remove('closed');
+  });
+}
+function triggerPhoto(k){document.getElementById('fi_'+k).click();}
+function handlePhoto(inp,k){
+  const f=inp.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const p=S.get('medPhotos',{}); p[k]=e.target.result; S.set('medPhotos',p);
+    const t=document.getElementById('pt_'+k),b=document.getElementById('pb_'+k);
+    if(t){t.src=e.target.result;t.style.display='block';}
+    if(b){b.classList.add('has-photo');b.textContent='✏️';}
+  };
+  r.readAsDataURL(f);
+}
+function refreshThumbs(){
+  const photos=S.get('medPhotos',{});
+  Object.keys(photos).forEach(k=>{
+    const t=document.getElementById('pt_'+k),b=document.getElementById('pb_'+k);
+    if(t&&photos[k]){t.src=photos[k];t.style.display='block';}
+    if(b&&photos[k]){b.classList.add('has-photo');b.textContent='✏️';}
+  });
+}
+let curModalKey='';
+function viewPhoto(name,k){
+  const p=S.get('medPhotos',{}); if(!p[k])return;
+  document.getElementById('modalImg').src=p[k];
+  document.getElementById('modalTitle').textContent=name;
+  curModalKey=k;
+  document.getElementById('photoModal').classList.add('open');
+}
+function deletePhoto(){
+  if(!curModalKey)return;
+  const p=S.get('medPhotos',{}); delete p[curModalKey]; S.set('medPhotos',p);
+  const t=document.getElementById('pt_'+curModalKey),b=document.getElementById('pb_'+curModalKey);
+  if(t){t.src='';t.style.display='none';}
+  if(b){b.classList.remove('has-photo');b.textContent='📷';}
+  closeModal();
+}
+function closeModal(){document.getElementById('photoModal').classList.remove('open');curModalKey='';}
+
+// ═══════════════════════════════════════════
+// FLASHCARD
+// ═══════════════════════════════════════════
+let fAll=[],fIdx=0,fKnewN=0,fSkipN=0;
+function initFlash(){
+  fAll=[...ALL_FLAT].sort(()=>Math.random()-.5);
+  fIdx=0;fKnewN=0;fSkipN=0; showCard();
+}
+function showCard(){
+  if(fIdx>=fAll.length){fIdx=0;fAll=[...ALL_FLAT].sort(()=>Math.random()-.5);}
+  const d=fAll[fIdx];
+  const info=DIS_INFO[d.name]||{def:'See reference.',signs:'Key clinical features.',tx:'Standard treatment.'};
+  document.getElementById('fEmoji').textContent=d.icon;
+  document.getElementById('fName').textContent=d.name;
+  document.getElementById('fSector').textContent=d.sector;
+  document.getElementById('fBackTitle').textContent=d.name;
+  document.getElementById('fDef').textContent=info.def;
+  document.getElementById('fSigns').textContent=info.signs;
+  document.getElementById('fTx').textContent=info.tx;
+  document.getElementById('flashProg').style.width=((fIdx+1)/fAll.length*100)+'%';
+  document.getElementById('flashProgTxt').textContent=`${fIdx+1}/${fAll.length}`;
+  document.getElementById('fKnew').textContent=`✓ ${fKnewN}`;
+  document.getElementById('fSkip').textContent=`✗ ${fSkipN}`;
+  document.getElementById('flashBadge').textContent=d.sector;
+  document.getElementById('flashCard').classList.remove('flipped');
+}
+function flipCard(){document.getElementById('flashCard').classList.toggle('flipped');}
+function flashAct(t){
+  if(t==='knew')fKnewN++; else fSkipN++;
+  fIdx++; showCard();
+}
+
+// ═══════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════
+const Qs=[
+  {q:"Which disease causes 'cradle cap' in infants?",sec:"Head & Scalp",opts:["Tinea capitis","Seborrheic dermatitis","Scalp psoriasis","Pediculosis capitis"],ans:1,exp:"Seborrheic dermatitis causes greasy scales (dandruff/cradle cap). Malassezia yeast is implicated."},
+  {q:"Bitot's spots indicate deficiency of:",sec:"Eye",opts:["Vitamin D","Vitamin C","Vitamin A","Vitamin B12"],ans:2,exp:"Bitot's spots = foamy conjunctival deposits due to Vitamin A deficiency (xerophthalmia)."},
+  {q:"Tragus tenderness on pressure is a feature of:",sec:"Ear",opts:["CSOM","Otitis media","Otitis externa","Mastoiditis"],ans:2,exp:"Otitis externa — pain on tragus pressure/pinna traction is pathognomonic."},
+  {q:"90% of epistaxis originates from:",sec:"Nose",opts:["Posterior nasal cavity","Little's area (Kiesselbach's)","Sphenopalatine artery","Ethmoidal artery"],ans:1,exp:"Little's area (Kiesselbach's plexus) on anterior nasal septum = 90% of epistaxis."},
+  {q:"White patch on oral mucosa that CANNOT be scraped off is:",sec:"Oral Cavity",opts:["Oral candidiasis","Leukoplakia","Aphthous ulcer","Lichen planus"],ans:1,exp:"Leukoplakia = white patch that cannot be scraped off. Premalignant — BIOPSY mandatory."},
+  {q:"Thyroglossal cyst moves on:",sec:"Neck",opts:["Swallowing only","Tongue protrusion only","Both swallowing AND tongue protrusion","Neither"],ans:2,exp:"Moves on BOTH swallowing AND tongue protrusion — pathognomonic of thyroglossal cyst."},
+  {q:"Most common benign breast tumour in young women (15–35):",sec:"Chest & Breast",opts:["Fibrocystic disease","Fibroadenoma","Lipoma","Intraductal papilloma"],ans:1,exp:"Fibroadenoma — 'breast mouse'. Very mobile, smooth, non-tender. Triple assessment confirms."},
+  {q:"Diabetic neuropathic ulcers are characteristically:",sec:"Lower Limb",opts:["Painful, dorsum of foot","Painless, plantar surface","Painful, lateral malleolus","Painless, tip of toe"],ans:1,exp:"Neuropathic diabetic ulcer = PAINLESS, at PRESSURE POINTS (plantar surface). Warm foot."},
+  {q:"SJS is defined as epidermal detachment of less than:",sec:"General Skin",opts:["10% BSA","20% BSA","30% BSA","50% BSA"],ans:0,exp:"SJS = <10% BSA. Overlap = 10–30%. TEN = >30% BSA."},
+  {q:"Drug of choice for Tinea capitis is:",sec:"Head & Scalp",opts:["Topical clotrimazole","Topical miconazole","Oral griseofulvin","Oral fluconazole"],ans:2,exp:"Oral griseofulvin (6–8 weeks) is DOC for tinea capitis. Topical antifungals alone fail."},
+  {q:"Erysipelas is caused by which organism?",sec:"Lower Limb",opts:["Staphylococcus aureus","Streptococcus pyogenes","Pseudomonas aeruginosa","E. coli"],ans:1,exp:"Erysipelas = S. pyogenes. Well-demarcated raised edge. DOC = benzylpenicillin."},
+  {q:"Sistrunk operation treats:",sec:"Neck",opts:["Branchial cyst","Thyroglossal cyst","Sebaceous cyst","Dermoid cyst"],ans:1,exp:"Sistrunk operation: excision of thyroglossal cyst + central portion of hyoid bone (prevents recurrence)."},
+  {q:"Scabies is caused by:",sec:"General Skin",opts:["Tinea rubrum","Pediculus capitis","Sarcoptes scabiei","Demodex folliculorum"],ans:2,exp:"Scabies = Sarcoptes scabiei mite. Burrows in web spaces. Nocturnal itch. Treat with Permethrin 5%."},
+  {q:"Venous ulcers are typically found in the:",sec:"Lower Limb",opts:["Pressure points on sole","Tips of toes","Gaiter area (medial lower leg)","Lateral malleolus"],ans:2,exp:"Venous ulcers = gaiter area (medial lower leg) with haemosiderin staining."},
+  {q:"Auspitz sign is seen in:",sec:"Upper Limb",opts:["Eczema","Scabies","Psoriasis","Tinea corporis"],ans:2,exp:"Auspitz sign = pinpoint bleeding on scale removal = pathognomonic of psoriasis."}
+];
+let qList=[],qIdx=0,qScore=0,qAnswered=false;
+function initQuiz(){qList=[...Qs].sort(()=>Math.random()-.5);qIdx=0;qScore=0;renderQ();}
+function renderQ(){
+  qAnswered=false;
+  const q=qList[qIdx];
+  document.getElementById('quizBadge').textContent=`${qIdx+1}/15`;
+  document.getElementById('quizContent').innerHTML=`
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div style="font-size:.8rem;color:var(--muted);">Q ${qIdx+1} of ${qList.length}</div>
+      <div style="font-size:.74rem;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(245,200,66,.1);color:var(--gold);border:1px solid rgba(245,200,66,.2);">Score: ${qScore}</div>
+    </div>
+    <div style="height:3px;background:var(--border);border-radius:3px;overflow:hidden;"><div style="height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));width:${(qIdx/qList.length)*100}%;"></div></div>
+    <div class="quiz-question"><div class="quiz-q-sector">${q.sec}</div><div class="quiz-q-text">${q.q}</div></div>
+    <div class="quiz-options">${q.opts.map((o,i)=>`<div class="quiz-opt" id="qo${i}" onclick="answerQ(${i})"><span class="quiz-opt-letter">${['A','B','C','D'][i]}</span><span>${o}</span></div>`).join('')}</div>
+    <div class="quiz-explanation" id="qExp"></div>
+    <button class="quiz-next-btn" id="qNext" onclick="nextQ()">${qIdx<qList.length-1?'Next →':'Results 🏆'}</button>`;
+}
+function answerQ(c){
+  if(qAnswered)return; qAnswered=true;
+  const q=qList[qIdx];
+  document.querySelectorAll('.quiz-opt').forEach(o=>o.classList.add('disabled'));
+  document.getElementById('qo'+c).classList.add(c===q.ans?'correct':'wrong');
+  if(c!==q.ans)document.getElementById('qo'+q.ans).classList.add('correct');
+  if(c===q.ans)qScore++;
+  document.getElementById('qExp').textContent='💡 '+q.exp;
+  document.getElementById('qExp').classList.add('show');
+  document.getElementById('qNext').classList.add('show');
+}
+function nextQ(){
+  qIdx++;
+  if(qIdx>=qList.length){
+    S.set('medQuizScore',qScore+'/'+qList.length);
+    document.getElementById('homeScore').textContent=qScore+'/'+qList.length;
+    document.getElementById('quizContent').innerHTML=`
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;text-align:center;padding:28px;">
+        <div style="font-size:3rem;">${qScore>=12?'🏆':qScore>=9?'📚':'💪'}</div>
+        <div style="font-family:'Syne',serif;font-size:2rem;font-weight:800;color:var(--gold);">${qScore}/${qList.length}</div>
+        <div style="color:var(--muted);font-size:.88rem;">${qScore>=12?'Excellent! Viva ready! 🎉':qScore>=9?'Good! Keep revising 📖':'Practice more! 💪'}</div>
+        <div class="dev-tag">👨‍💻 Bayazid jmc-13</div>
+        <button onclick="initQuiz()" style="background:var(--blue);color:#fff;border:none;border-radius:12px;padding:13px 28px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;">Try Again →</button>
+      </div>`;
+    return;
+  }
+  renderQ();
+}
+
+// ═══════════════════════════════════════════
+// AI VIVA — ONLINE + OFFLINE
+// ═══════════════════════════════════════════
+let vivaMode='online', vivaMessages=[], vivaLoading=false;
+
+const VIVA_SYSTEM=`You are an expert Medical Viva Examiner for MBBS/MD students in Bangladesh. You examine students on clinical medicine and surgery — head to toe diseases, dermatology, general surgery, ENT, ophthalmology.
+
+Rules:
+1. Ask ONE focused clinical viva question at a time
+2. Evaluate the student's answer — what was correct, what was missing
+3. Give the complete model answer
+4. Then ask a follow-up or new question
+5. Professional but encouraging tone
+6. Focus on: definitions, clinical features, investigations, treatment, complications, clinical pearls
+7. When student names a topic, ask a specific question about it
+8. Keep responses concise. Always end with the next question.`;
+
+const OFFLINE_QS=[
+  {q:"What is the pathognomonic sign of thyroglossal cyst?",kw:["tongue","protrusion","moves","swallowing"],ans:"Moves on BOTH swallowing AND tongue protrusion — pathognomonic because attached to tongue base via thyroglossal duct.",fu:"What operation is done and why must the hyoid bone be removed?"},
+  {q:"A patient has burrows in finger web spaces with intense nocturnal itching. Family members also affected. What is the diagnosis?",kw:["scabies","sarcoptes","mite","permethrin","burrow"],ans:"Scabies — caused by Sarcoptes scabiei mite. Burrows are pathognomonic. Treat with Permethrin 5%.",fu:"Why must ALL household contacts be treated simultaneously?"},
+  {q:"Differentiate between SJS and TEN.",kw:["10","30","bsa","skin detachment","<10",">30"],ans:"SJS: <10% BSA skin detachment. TEN: >30% BSA. Both are severe drug reactions with mucosal involvement.",fu:"Name 3 common drugs that cause SJS/TEN."},
+  {q:"What is CSOM? Differentiate safe vs unsafe CSOM.",kw:["central","cholesteatoma","attic","marginal","safe","unsafe"],ans:"CSOM: chronic middle ear infection >6 weeks with TM perforation. Safe: central perforation, tubotympanic. Unsafe: attic/marginal perforation + cholesteatoma = URGENT surgery.",fu:"What are the dangerous intracranial complications of unsafe CSOM?"},
+  {q:"Describe venous ulcer — site, appearance, and treatment.",kw:["gaiter","medial","haemosiderin","compression","abi"],ans:"Gaiter area (medial lower leg). Shallow irregular ulcer, haemosiderin staining, lipodermatosclerosis. Treatment: 4-layer compression bandaging (only if ABI >0.8).",fu:"Why is compression bandaging contraindicated if ABI <0.8?"},
+  {q:"What are the clinical features of diabetic neuropathic foot ulcer?",kw:["painless","plantar","warm","pressure","neuropathy"],ans:"Painless ulcer at pressure points (plantar surface). Warm foot with bounding pulses. Deep punched-out edges. Surrounded by callus.",fu:"How does this differ from an arterial (ischaemic) ulcer?"},
+  {q:"A 7-year-old boy has circular patches of hair loss on his scalp with broken hair stubs. What is the diagnosis and DOC?",kw:["tinea","capitis","griseofulvin","fungal","oral"],ans:"Tinea capitis. DOC: Oral griseofulvin for 6–8 weeks. Topical antifungals alone are INSUFFICIENT.",fu:"Why do topical antifungals fail in tinea capitis?"},
+];
+let offlineIdx=0;
+
+function setVivaMode(mode){
+  vivaMode=mode;
+  document.getElementById('modeOnline').classList.toggle('active',mode==='online');
+  document.getElementById('modeOffline').classList.toggle('active',mode==='offline');
+  document.getElementById('vivaBadge').textContent=mode==='online'?'🌐 Online AI':'📴 Offline';
+  addVivaBub('ai',`<div class="bubble-label">${mode==='online'?'🤖 AI EXAMINER':'🏥 OFFLINE EXAMINER'} · Bayazid jmc-13</div>${mode==='online'?'Switched to <strong>Online AI mode</strong> 🌐<br>Claude AI will evaluate your answers in real-time!':'Switched to <strong>Offline mode</strong> 📴<br>Built-in question bank. Works without internet!'}`);
+}
+
+function vivaQuick(topic){
+  document.getElementById('vivaIn').value=`Ask me a viva question about ${topic}`;
+  vivaAnswer();
+}
+
+function vivaClear(){
+  document.getElementById('vivaChat').innerHTML='';
+  vivaMessages=[];
+  addVivaBub('ai','<div class="bubble-label">🤖 AI EXAMINER · Bayazid jmc-13</div>Chat cleared! Ready for a new viva session. Select a topic or type your answer.');
+}
+
+async function vivaAnswer(){
+  if(vivaLoading)return;
+  const inp=document.getElementById('vivaIn');
+  const txt=inp.value.trim(); if(!txt)return;
+  inp.value=''; inp.style.height='auto';
+  addVivaBub('user',txt);
+
+  if(vivaMode==='offline'){offlineRespond(txt);return;}
+
+  // ONLINE AI via Claude API
+  vivaLoading=true;
+  const thinkId='think_'+Date.now();
+  addVivaBubId('thinking','<div class="bubble-label">🤖 AI EXAMINER</div>🧠 Thinking...',thinkId);
+
+  vivaMessages.push({role:'user',content:txt});
+  if(vivaMessages.length>20)vivaMessages=vivaMessages.slice(-20);
+
+  // Check Gemini API key
+  const apiKey=S.get('medApiKey','');
+  if(!apiKey){
+    removeBub(thinkId);
+    vivaLoading=false;
+    showApiKeyModal();
+    return;
+  }
+
+  // Build Gemini conversation history
+  const geminiMsgs=vivaMessages.map(m=>({
+    role:m.role==='assistant'?'model':'user',
+    parts:[{text:m.content}]
+  }));
+
+  try{
+    const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    const res=await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        systemInstruction:{parts:[{text:VIVA_SYSTEM}]},
+        contents:geminiMsgs,
+        generationConfig:{maxOutputTokens:700,temperature:0.7}
+      })
+    });
+    const data=await res.json();
+    if(data.error){
+      removeBub(thinkId);
+      const msg=data.error.message||'Unknown error';
+      if(msg.includes('API_KEY_INVALID')||msg.includes('API key')){
+        S.set('medApiKey','');
+        addVivaBub('ai','<div class="bubble-label">🤖 AI EXAMINER</div>❌ Invalid API Key! Re-enter your Gemini key.');
+        setTimeout(showApiKeyModal,800);
+      } else {
+        addVivaBub('ai',`<div class="bubble-label">🤖 AI EXAMINER</div>❌ ${msg}. Try Offline mode.`);
+      }
+      vivaLoading=false; return;
+    }
+    const reply=data.candidates?.[0]?.content?.parts?.[0]?.text||'No response received.';
+    vivaMessages.push({role:'assistant',content:reply});
+    removeBub(thinkId);
+    addVivaBub('ai',`<div class="bubble-label">🤖 AI EXAMINER · Bayazid jmc-13</div>${reply.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>')}`);
+  }catch(e){
+    removeBub(thinkId);
+    addVivaBub('ai','<div class="bubble-label">🤖 AI EXAMINER</div>❌ Network error. Check internet or switch to Offline mode.');
+  }
+  vivaLoading=false;
+}
+
+function showApiKeyModal(){
+  const old=document.getElementById('apiModal');if(old)old.remove();
+  const m=document.createElement('div');
+  m.id='apiModal';
+  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;';
+  m.innerHTML=`
+    <div style="width:100%;max-width:380px;background:#0d1a2a;border:1px solid #1a2e45;border-radius:18px;padding:22px;">
+      <div style="font-family:Syne,serif;font-size:1.1rem;font-weight:800;margin-bottom:8px;">🔑 Google Gemini API Key</div>
+      <div style="font-size:.78rem;color:#5a7a99;margin-bottom:14px;line-height:1.7;">
+        ✅ <strong style="color:#3dd68c;">সম্পূর্ণ FREE!</strong> কোনো payment লাগবে না।<br><br>
+        <strong style="color:#e8f0fe;">Step 1:</strong> নিচের link এ যাও 👇<br>
+        <a href="https://aistudio.google.com/app/apikey" target="_blank"
+          style="color:#4a9eff;font-weight:700;font-size:.82rem;">
+          🔗 aistudio.google.com/app/apikey
+        </a><br><br>
+        <strong style="color:#e8f0fe;">Step 2:</strong> <span style="color:#f5c842;">"Create API Key"</span> button এ click করো<br>
+        <strong style="color:#e8f0fe;">Step 3:</strong> Key copy করে নিচে paste করো
+      </div>
+      <input id="apiKeyInp" type="password"
+        style="width:100%;background:#0f2035;border:1px solid #1a2e45;color:#e8f0fe;padding:12px;border-radius:11px;font-size:.85rem;font-family:DM Sans,sans-serif;outline:none;margin-bottom:12px;"
+        placeholder="AIzaSy...">
+      <div style="display:flex;gap:9px;">
+        <button onclick="saveApiKey()"
+          style="flex:2;background:#3dd68c;color:#000;border:none;border-radius:11px;padding:13px;font-family:DM Sans,sans-serif;font-size:.88rem;font-weight:800;cursor:pointer;">
+          ✅ Save & Connect
+        </button>
+        <button onclick="document.getElementById('apiModal').remove();setVivaMode('offline');"
+          style="flex:1;background:#0f2035;color:#5a7a99;border:1px solid #1a2e45;border-radius:11px;padding:13px;font-family:DM Sans,sans-serif;font-size:.88rem;cursor:pointer;">
+          📴 Offline
+        </button>
+      </div>
+      <div style="margin-top:11px;font-size:.68rem;color:#5a7a99;text-align:center;">🔒 Key শুধু তোমার device এ থাকে · কোথাও share হয় না</div>
+    </div>`;
+  document.body.appendChild(m);
+  setTimeout(()=>document.getElementById('apiKeyInp')?.focus(),100);
+}
+
+function saveApiKey(){
+  const key=(document.getElementById('apiKeyInp')?.value||'').trim();
+  if(!key||!key.startsWith('AIza')){
+    alert('Invalid key! Gemini key starts with: AIza...');return;
+  }
+  S.set('medApiKey',key);
+  document.getElementById('apiModal')?.remove();
+  addVivaBub('ai','<div class="bubble-label">🤖 AI EXAMINER · Bayazid jmc-13</div>✅ Gemini API Key saved! Gemini 2.5 Flash ready 🎉 Which topic shall we start?');
+}
+
+function offlineRespond(ans){
+  const q=OFFLINE_QS[offlineIdx%OFFLINE_QS.length];
+  const a=ans.toLowerCase();
+  const matched=q.kw.filter(k=>a.includes(k)).length;
+  const score=matched/q.kw.length;
+  let cls,fb;
+  if(score>=0.5){cls='feedback-correct';fb=`✅ Good answer! ${q.ans}`;}
+  else if(score>=0.2){cls='feedback-partial';fb=`⚡ Partially correct. Complete answer: ${q.ans}`;}
+  else{cls='feedback-wrong';fb=`❌ Incorrect. Correct answer: ${q.ans}`;}
+  setTimeout(()=>{
+    addVivaBub(cls,fb);
+    offlineIdx++;
+    const nxt=OFFLINE_QS[offlineIdx%OFFLINE_QS.length];
+    setTimeout(()=>addVivaBub('ai',`<div class="bubble-label">🏥 EXAMINER · Bayazid jmc-13</div>🔁 <strong>Follow-up:</strong> ${q.fu}<br><br>📌 <strong>Next Question:</strong><br>${nxt.q}`),700);
+  },350);
+}
+
+function addVivaBub(role,html){
+  const chat=document.getElementById('vivaChat');
+  const d=document.createElement('div');
+  d.className='viva-bubble '+role;
+  if(role==='user')d.textContent=html; else d.innerHTML=html;
+  chat.appendChild(d);
+  setTimeout(()=>chat.scrollTop=chat.scrollHeight,80);
+}
+function addVivaBubId(role,html,id){
+  const chat=document.getElementById('vivaChat');
+  const d=document.createElement('div');
+  d.className='viva-bubble '+role; d.id=id; d.innerHTML=html;
+  chat.appendChild(d);
+  setTimeout(()=>chat.scrollTop=chat.scrollHeight,80);
+}
+function removeBub(id){const el=document.getElementById(id);if(el)el.remove();}
+
+// ═══════════════════════════════════════════
+// PROGRESS
+// ═══════════════════════════════════════════
+function initProgress(){
+  const prog=S.get('medProg',{});
+  const done=Object.values(prog).filter(v=>v).length;
+  const total=ALL_FLAT.length;
+  document.getElementById('progBadge').textContent=`${done}/${total}`;
+  document.getElementById('progScroll').innerHTML=`
+    <div class="prog-summary">
+      <div class="prog-sum-box"><div class="prog-sum-num" style="color:var(--green);">${done}</div><div class="prog-sum-label">Done</div></div>
+      <div class="prog-sum-box"><div class="prog-sum-num" style="color:var(--red);">${total-done}</div><div class="prog-sum-label">Remaining</div></div>
+      <div class="prog-sum-box"><div class="prog-sum-num" style="color:var(--gold);">${Math.round(done/total*100)}%</div><div class="prog-sum-label">Progress</div></div>
+    </div>
+    ${SECTORS.map(s=>{
+      const sd=s.diseases.filter(d=>prog[d]).length;
+      return`<div class="prog-sector">
+        <div class="prog-sec-header">
+          <span style="font-size:1.1rem;">${s.icon}</span>
+          <span style="font-family:'Syne',serif;font-size:.88rem;font-weight:700;flex:1;">${s.name}</span>
+          <span style="font-size:.75rem;font-weight:700;color:var(--gold);">${sd}/${s.diseases.length}</span>
+        </div>
+        <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:${Math.round(sd/s.diseases.length*100)}%"></div></div>
+        <div class="prog-disease-grid">${s.diseases.map(d=>`
+          <div class="prog-disease-item ${prog[d]?'done':''}" onclick="toggleProg('${d.replace(/'/g,"\\'")}')">
+            <div class="prog-check">${prog[d]?'✓':''}</div>
+            <div class="prog-dname">${d}</div>
+          </div>`).join('')}</div>
+      </div>`;
+    }).join('')}
+    <div style="text-align:center;padding:10px;font-size:.72rem;font-weight:600;color:var(--gold);">🩺 MedStudy · Developed by Bayazid jmc-13</div>`;
+}
+function toggleProg(name){
+  const p=S.get('medProg',{}); p[name]=!p[name]; S.set('medProg',p);
+  initProgress(); updateHomeStats();
+}
+
+// ═══════════════════════════════════════════
+// BOOKMARKS
+// ═══════════════════════════════════════════
+function initBookmarks(){
+  const bms=S.get('medBm',[]);
+  document.getElementById('bmBadge').textContent=bms.length+' saved';
+  const sc=document.getElementById('bmScroll');
+  if(!bms.length){
+    sc.innerHTML='<div class="bm-empty"><div style="font-size:3rem;">🔖</div><div style="color:var(--muted);font-size:.88rem;">No bookmarks yet!<br>Open Reference → tap a disease → bookmark it</div></div>';
+    return;
+  }
+  sc.innerHTML=bms.map(d=>{
+    const sec=SECTORS.find(s=>s.diseases.includes(d));
+    return`<div class="bm-card">
+      <div style="font-size:1.3rem;">${sec?sec.icon:'🩺'}</div>
+      <div style="flex:1;"><div style="font-family:'Syne',serif;font-size:.9rem;font-weight:700;">${d}</div><div style="font-size:.7rem;color:var(--muted);margin-top:2px;">${sec?sec.name:'General'}</div></div>
+      <button class="bm-btn" style="background:rgba(74,158,255,.15);color:var(--blue);" onclick="window.open('https://www.google.com/search?q=${encodeURIComponent(d+' disease')}','_blank')">↗</button>
+      <button class="bm-btn" style="background:rgba(255,107,107,.12);color:var(--red);margin-left:4px;" onclick="removeBm('${d.replace(/'/g,"\\'")}')">🗑️</button>
+    </div>`;
+  }).join('');
+}
+function removeBm(name){
+  let b=S.get('medBm',[]); b=b.filter(x=>x!==name); S.set('medBm',b);
+  initBookmarks(); updateHomeStats();
+}
+
+// ═══════════════════════════════════════════
+// AUTO TIMER — app খুললে start, বন্ধ হলে save
+// ═══════════════════════════════════════════
+let timerInt=null, timerSec=0, timerRunning=false;
+let autoSessionStart=null;
+
+// App খোলার সাথে সাথে auto start
+function autoTimerStart(){
+  if(timerRunning)return;
+  timerRunning=true;
+  autoSessionStart=Date.now();
+  timerInt=setInterval(()=>{
+    timerSec++;
+    // Timer screen এ display update
+    const disp=document.getElementById('timerDisp');
+    if(disp) disp.textContent=fmtTime(timerSec);
+    // Home stats badge
+    updateTimerBadge();
+  },1000);
+  // Timer screen circle
+  const circle=document.getElementById('timerCircle');
+  if(circle) circle.classList.add('running');
+}
+
+// Session save করে stop
+function autoTimerStop(){
+  if(!timerRunning||timerSec<5)return; // 5 সেকেন্ডের কম হলে save করব না
+  clearInterval(timerInt);
+  timerRunning=false;
+  const td=S.get('medTimer',{total:0,sessions:[]});
+  td.total+=timerSec;
+  const now=new Date();
+  td.sessions.unshift({
+    date:now.toLocaleDateString('en-GB'),
+    time:now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),
+    dur:timerSec
+  });
+  if(td.sessions.length>20) td.sessions=td.sessions.slice(0,20);
+  S.set('medTimer',td);
+  timerSec=0;
+  const disp=document.getElementById('timerDisp');
+  if(disp) disp.textContent='00:00';
+  const circle=document.getElementById('timerCircle');
+  if(circle) circle.classList.remove('running');
+  updateHomeStats();
+}
+
+function fmtTime(s){
+  const h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60;
+  if(h>0) return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
+
+function updateTimerBadge(){
+  const td=S.get('medTimer',{total:0});
+  const totalNow=td.total+timerSec;
+  const hrs=(totalNow/3600).toFixed(1);
+  const el=document.getElementById('timerBadge');
+  if(el) el.textContent=hrs+'h total';
+  const st=document.getElementById('statTime');
+  if(st) st.textContent=Math.floor(totalNow/3600)+'h';
+}
+
+// Manual buttons (Timer screen এ)
+function timerStart(){autoTimerStart();}
+function timerStop(){autoTimerStop();}
+
+function renderTimer(){
+  const td=S.get('medTimer',{total:0,sessions:[]});
+  const totalNow=td.total+timerSec;
+  const hrs=(totalNow/3600).toFixed(1);
+  const avgMin=td.sessions.length?Math.round(td.sessions.reduce((a,s)=>a+s.dur,0)/td.sessions.length/60):0;
+
+  document.getElementById('timerBadge').textContent=hrs+'h total';
+
+  const disp=document.getElementById('timerDisp');
+  if(disp) disp.textContent=fmtTime(timerSec);
+  if(timerRunning){
+    const circle=document.getElementById('timerCircle');
+    if(circle) circle.classList.add('running');
+  }
+
+  document.getElementById('timerTotal').innerHTML=
+    `<span style="color:var(--green);">Total: ${Math.floor(totalNow/60)}m (${hrs}h)</span>` +
+    (avgMin?` &nbsp;·&nbsp; <span style="color:var(--gold);">Avg: ${avgMin}m/session</span>`:'');
+
+  const sc=document.getElementById('timerSessions');
+  if(!td.sessions.length){
+    sc.innerHTML=`<div style="text-align:center;color:var(--muted);font-size:.8rem;padding:10px;">🟢 Auto timer চালু আছে — app বন্ধ করলে session save হবে</div>`;
+    return;
+  }
+  // Today's total
+  const today=new Date().toLocaleDateString('en-GB');
+  const todayMin=Math.round(td.sessions.filter(s=>s.date===today).reduce((a,s)=>a+s.dur,0)/60);
+
+  sc.innerHTML=
+    (todayMin?`<div style="background:rgba(61,214,140,.1);border:1px solid rgba(61,214,140,.3);border-radius:10px;padding:9px 13px;margin-bottom:10px;display:flex;justify-content:space-between;"><span style="color:var(--muted);font-size:.78rem;">📅 আজকের মোট</span><span style="color:var(--green);font-weight:800;font-family:'Syne',serif;">${todayMin} min</span></div>`:'') +
+    `<div style="font-family:'Syne',serif;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:7px;text-align:center;text-transform:uppercase;letter-spacing:.5px;">Sessions</div>`+
+    td.sessions.slice(0,10).map(s=>`
+      <div class="timer-session-item">
+        <div><div style="color:var(--muted);font-size:.75rem;">${s.date}${s.time?' · '+s.time:''}</div></div>
+        <span style="color:var(--green);font-weight:700;font-family:'Syne',serif;">${Math.floor(s.dur/60)}m ${s.dur%60}s</span>
+      </div>`).join('');
+}
+
+// ═══════════════════════════════════════════
+// INIT — app load হলে auto timer start
+// ═══════════════════════════════════════════
+window.addEventListener('load',()=>{
+  updateHomeStats();
+  autoTimerStart(); // ← app খুলতেই start
+});
+
+// App বন্ধ / tab switch / screen off হলে save
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){
+    autoTimerStop();
+  } else {
+    // ফিরে এলে আবার start
+    if(!timerRunning) autoTimerStart();
+  }
+});
+
+// Browser/tab বন্ধ হলে save
+window.addEventListener('beforeunload',()=>autoTimerStop());
+</script>
+</body>
+</html>
